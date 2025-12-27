@@ -57,7 +57,7 @@ template<class T, class U> std::shared_ptr<T> reinterpret_pointer_cast(const std
 {
     (void) reinterpret_cast< T* >( static_cast< U* >( 0 ) );
 
-    typedef typename std::shared_ptr<T>::element_type E;
+    using E = typename std::shared_ptr<T>::element_type;
 
     E * p = reinterpret_cast< E* >( r.get() );
     return std::shared_ptr<T>( r, p );
@@ -68,7 +68,7 @@ template<class T, class U> std::unique_ptr<T> static_pointer_cast( std::unique_p
 {
     (void) static_cast< T* >( static_cast< U* >( 0 ) );
 
-    typedef typename std::unique_ptr<T>::element_type E;
+    using E = typename std::unique_ptr<T>::element_type;
 
     return std::unique_ptr<T>( static_cast<E*>( r.release() ) );
 }
@@ -90,7 +90,7 @@ template<class T, class U> std::unique_ptr<T> const_pointer_cast( std::unique_pt
 {
     (void) const_cast< T* >( static_cast< U* >( 0 ) );
 
-    typedef typename std::unique_ptr<T>::element_type E;
+    using E = typename std::unique_ptr<T>::element_type;
 
     return std::unique_ptr<T>( const_cast<E*>( r.release() ) );
 }
@@ -100,7 +100,7 @@ template<class T, class U> std::unique_ptr<T> reinterpret_pointer_cast( std::uni
 {
     (void) reinterpret_cast< T* >( static_cast< U* >( 0 ) );
 
-    typedef typename std::unique_ptr<T>::element_type E;
+    using E = typename std::unique_ptr<T>::element_type;
 
     return std::unique_ptr<T>( reinterpret_cast<E*>( r.release() ) );
 }
