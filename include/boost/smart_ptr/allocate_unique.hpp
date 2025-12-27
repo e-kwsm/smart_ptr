@@ -278,13 +278,13 @@ template<class T, class A>
 class alloc_deleter
     : empty_value<typename allocator_rebind<A,
         typename detail::sp_alloc_value<T>::type>::type> {
-    typedef typename allocator_rebind<A,
-        typename detail::sp_alloc_value<T>::type>::type allocator;
-    typedef empty_value<allocator> base;
+    using allocator = typename allocator_rebind<A,
+        typename detail::sp_alloc_value<T>::type>::type;
+    using base = empty_value<allocator>;
 
 public:
-    typedef detail::sp_alloc_ptr<T,
-        typename allocator_pointer<allocator>::type> pointer;
+    using pointer = detail::sp_alloc_ptr<T,
+        typename allocator_pointer<allocator>::type>;
 
     explicit alloc_deleter(const allocator& a) noexcept
         : base(empty_init_t(), a) { }
@@ -303,8 +303,8 @@ namespace detail {
 template<class T, class A>
 class sp_alloc_make {
 public:
-    typedef typename boost::allocator_rebind<A,
-        typename sp_alloc_value<T>::type>::type allocator;
+    using allocator = typename boost::allocator_rebind<A,
+        typename sp_alloc_value<T>::type>::type;
 
 private:
     using deleter = boost::alloc_deleter<T, A>;
