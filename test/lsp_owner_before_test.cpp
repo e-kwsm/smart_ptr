@@ -26,7 +26,7 @@ int main()
 
         BOOST_TEST( p4.owner_before( p3 ) || p3.owner_before( p4 ) );
 
-        boost::local_shared_ptr<int> p6( static_cast<int*>(0) );
+        boost::local_shared_ptr<int> p6( static_cast<int*>(nullptr) );
 
         BOOST_TEST( p4.owner_before( p6 ) || p6.owner_before( p4 ) );
 

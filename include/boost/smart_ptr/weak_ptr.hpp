@@ -32,7 +32,7 @@ public:
 
     typedef typename boost::detail::sp_element< T >::type element_type;
 
-    constexpr weak_ptr() noexcept : px(0), pn()
+    constexpr weak_ptr() noexcept : px(nullptr), pn()
     {
     }
 
@@ -79,14 +79,14 @@ public:
     noexcept : px( r.lock().get() ), pn( static_cast< boost::detail::weak_count && >( r.pn ) )
     {
         boost::detail::sp_assert_convertible< Y, T >();
-        r.px = 0;
+        r.px = nullptr;
     }
 
     // for better efficiency in the T == Y case
     weak_ptr( weak_ptr && r )
     noexcept : px( r.px ), pn( static_cast< boost::detail::weak_count && >( r.pn ) )
     {
-        r.px = 0;
+        r.px = nullptr;
     }
 
     // for better efficiency in the T == Y case

@@ -44,7 +44,7 @@ int main()
     {
         boost::shared_ptr<void> p( nullptr );
 
-        BOOST_TEST( p.get() == 0 );
+        BOOST_TEST( p.get() == nullptr );
         BOOST_TEST( p.use_count() == 0 );
 
         BOOST_TEST( p == nullptr );
@@ -56,7 +56,7 @@ int main()
     {
         boost::shared_ptr<int> p( nullptr, f );
 
-        BOOST_TEST( p.get() == 0 );
+        BOOST_TEST( p.get() == nullptr );
         BOOST_TEST( p.use_count() == 1 );
 
         BOOST_TEST( p == nullptr );
@@ -68,7 +68,7 @@ int main()
     {
         boost::shared_ptr<int> p( nullptr, f, std::allocator<int>() );
 
-        BOOST_TEST( p.get() == 0 );
+        BOOST_TEST( p.get() == nullptr );
         BOOST_TEST( p.use_count() == 1 );
 
         BOOST_TEST( p == nullptr );
@@ -80,7 +80,7 @@ int main()
     {
         boost::shared_ptr<int> p( new int );
 
-        BOOST_TEST( p.get() != 0 );
+        BOOST_TEST( p.get() != nullptr );
         BOOST_TEST( p.use_count() == 1 );
 
         BOOST_TEST( p != nullptr );
@@ -90,7 +90,7 @@ int main()
 
         p = nullptr;
 
-        BOOST_TEST( p.get() == 0 );
+        BOOST_TEST( p.get() == nullptr );
         BOOST_TEST( p.use_count() == 0 );
 
         BOOST_TEST( p == nullptr );
@@ -105,7 +105,7 @@ int main()
         boost::shared_ptr<X> p( new X );
         BOOST_TEST( X::instances == 1 );
 
-        BOOST_TEST( p.get() != 0 );
+        BOOST_TEST( p.get() != nullptr );
         BOOST_TEST( p.use_count() == 1 );
 
         BOOST_TEST( p != nullptr );
@@ -116,7 +116,7 @@ int main()
         p = nullptr;
         BOOST_TEST( X::instances == 0 );
 
-        BOOST_TEST( p.get() == 0 );
+        BOOST_TEST( p.get() == nullptr );
         BOOST_TEST( p.use_count() == 0 );
 
         BOOST_TEST( p == nullptr );

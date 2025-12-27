@@ -40,7 +40,7 @@ int main()
     {
         boost::shared_array<int> p( nullptr );
 
-        BOOST_TEST( p.get() == 0 );
+        BOOST_TEST( p.get() == nullptr );
         BOOST_TEST( p.use_count() == 0 );
 
         BOOST_TEST( p == nullptr );
@@ -52,7 +52,7 @@ int main()
     {
         boost::shared_array<int> p( new int[ 1 ] );
 
-        BOOST_TEST( p.get() != 0 );
+        BOOST_TEST( p.get() != nullptr );
         BOOST_TEST( p.use_count() == 1 );
 
         BOOST_TEST( p != nullptr );
@@ -62,7 +62,7 @@ int main()
 
         p = nullptr;
 
-        BOOST_TEST( p.get() == 0 );
+        BOOST_TEST( p.get() == nullptr );
         BOOST_TEST( p.use_count() == 0 );
 
         BOOST_TEST( p == nullptr );
@@ -77,7 +77,7 @@ int main()
         boost::shared_array<X> p( new X[ 2 ] );
         BOOST_TEST( X::instances == 2 );
 
-        BOOST_TEST( p.get() != 0 );
+        BOOST_TEST( p.get() != nullptr );
         BOOST_TEST( p.use_count() == 1 );
 
         BOOST_TEST( p != nullptr );
@@ -88,7 +88,7 @@ int main()
         p = nullptr;
         BOOST_TEST( X::instances == 0 );
 
-        BOOST_TEST( p.get() == 0 );
+        BOOST_TEST( p.get() == nullptr );
         BOOST_TEST( p.use_count() == 0 );
 
         BOOST_TEST( p == nullptr );

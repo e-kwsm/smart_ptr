@@ -13,7 +13,7 @@ int main()
 {
     std::unordered_set< boost::shared_ptr<void>, boost::owner_hash< boost::shared_ptr<void> >, boost::owner_equal_to< boost::shared_ptr<void> > > set;
 
-    boost::shared_ptr<int> p1( (int*)0 );
+    boost::shared_ptr<int> p1( (int*)nullptr );
     boost::shared_ptr<int> p2( p1 );
     boost::shared_ptr<void> p3( p1 );
 
@@ -23,7 +23,7 @@ int main()
 
     BOOST_TEST_EQ( set.size(), 1 );
 
-    boost::shared_ptr<int> p4( (int*)0 );
+    boost::shared_ptr<int> p4( (int*)nullptr );
 
     set.insert( p4 );
 
@@ -34,7 +34,7 @@ int main()
     BOOST_TEST_EQ( set.count( p3 ), 1 );
     BOOST_TEST_EQ( set.count( p4 ), 1 );
 
-    boost::shared_ptr<int> p5( (int*)0 );
+    boost::shared_ptr<int> p5( (int*)nullptr );
 
     BOOST_TEST_EQ( set.count( p5 ), 0 );
 

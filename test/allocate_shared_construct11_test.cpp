@@ -100,7 +100,7 @@ int main()
         boost::weak_ptr<X> wp( pi );
 
         BOOST_TEST( X::instances == 1 );
-        BOOST_TEST( pi.get() != 0 );
+        BOOST_TEST( pi.get() != nullptr );
         BOOST_TEST( pi->v == 0 );
 
         pi.reset();
@@ -113,7 +113,7 @@ int main()
         boost::weak_ptr<X> wp( pi );
 
         BOOST_TEST( X::instances == 1 );
-        BOOST_TEST( pi.get() != 0 );
+        BOOST_TEST( pi.get() != nullptr );
         BOOST_TEST( pi->v == 1 );
 
         pi.reset();
@@ -126,7 +126,7 @@ int main()
         boost::weak_ptr<X> wp( pi );
 
         BOOST_TEST( X::instances == 1 );
-        BOOST_TEST( pi.get() != 0 );
+        BOOST_TEST( pi.get() != nullptr );
         BOOST_TEST( pi->v == 1+2 );
 
         pi.reset();
@@ -139,7 +139,7 @@ int main()
         boost::weak_ptr<X> wp( pi );
 
         BOOST_TEST( X::instances == 1 );
-        BOOST_TEST( pi.get() != 0 );
+        BOOST_TEST( pi.get() != nullptr );
         BOOST_TEST( pi->v == 1+2+3 );
 
         pi.reset();
@@ -152,7 +152,7 @@ int main()
         boost::weak_ptr<X> wp( pi );
 
         BOOST_TEST( X::instances == 1 );
-        BOOST_TEST( pi.get() != 0 );
+        BOOST_TEST( pi.get() != nullptr );
         BOOST_TEST( pi->v == 1+2+3+4 );
 
         pi.reset();
@@ -165,7 +165,7 @@ int main()
         boost::weak_ptr<X> wp( pi );
 
         BOOST_TEST( X::instances == 1 );
-        BOOST_TEST( pi.get() != 0 );
+        BOOST_TEST( pi.get() != nullptr );
         BOOST_TEST( pi->v == 1+2+3+4+5 );
 
         pi.reset();
@@ -178,7 +178,7 @@ int main()
         boost::weak_ptr<X> wp( pi );
 
         BOOST_TEST( X::instances == 1 );
-        BOOST_TEST( pi.get() != 0 );
+        BOOST_TEST( pi.get() != nullptr );
         BOOST_TEST( pi->v == 1+2+3+4+5+6 );
 
         pi.reset();
@@ -191,7 +191,7 @@ int main()
         boost::weak_ptr<X> wp( pi );
 
         BOOST_TEST( X::instances == 1 );
-        BOOST_TEST( pi.get() != 0 );
+        BOOST_TEST( pi.get() != nullptr );
         BOOST_TEST( pi->v == 1+2+3+4+5+6+7 );
 
         pi.reset();
@@ -204,7 +204,7 @@ int main()
         boost::weak_ptr<X> wp( pi );
 
         BOOST_TEST( X::instances == 1 );
-        BOOST_TEST( pi.get() != 0 );
+        BOOST_TEST( pi.get() != nullptr );
         BOOST_TEST( pi->v == 1+2+3+4+5+6+7+8 );
 
         pi.reset();
@@ -217,7 +217,7 @@ int main()
         boost::weak_ptr<X> wp( pi );
 
         BOOST_TEST( X::instances == 1 );
-        BOOST_TEST( pi.get() != 0 );
+        BOOST_TEST( pi.get() != nullptr );
         BOOST_TEST( pi->v == 1+2+3+4+5+6+7+8+9 );
 
         pi.reset();

@@ -185,7 +185,7 @@ template< class T, std::size_t N > struct sp_if_not_array< T[N] >
 
 template< class T > typename boost::detail::sp_if_not_array< T >::type make_shared_noinit()
 {
-    boost::shared_ptr< T > pt( static_cast< T* >( 0 ), BOOST_SP_MSD( T ) );
+    boost::shared_ptr< T > pt( static_cast< T* >( nullptr ), BOOST_SP_MSD( T ) );
 
     boost::detail::sp_ms_deleter< T > * pd = static_cast<boost::detail::sp_ms_deleter< T > *>( pt._internal_get_untyped_deleter() );
 
@@ -202,7 +202,7 @@ template< class T > typename boost::detail::sp_if_not_array< T >::type make_shar
 
 template< class T, class A > typename boost::detail::sp_if_not_array< T >::type allocate_shared_noinit( A const & a )
 {
-    boost::shared_ptr< T > pt( static_cast< T* >( 0 ), BOOST_SP_MSD( T ), a );
+    boost::shared_ptr< T > pt( static_cast< T* >( nullptr ), BOOST_SP_MSD( T ), a );
 
     boost::detail::sp_ms_deleter< T > * pd = static_cast<boost::detail::sp_ms_deleter< T > *>( pt._internal_get_untyped_deleter() );
 
@@ -221,7 +221,7 @@ template< class T, class A > typename boost::detail::sp_if_not_array< T >::type 
 
 template< class T, class... Args > typename boost::detail::sp_if_not_array< T >::type make_shared( Args && ... args )
 {
-    boost::shared_ptr< T > pt( static_cast< T* >( 0 ), BOOST_SP_MSD( T ) );
+    boost::shared_ptr< T > pt( static_cast< T* >( nullptr ), BOOST_SP_MSD( T ) );
 
     boost::detail::sp_ms_deleter< T > * pd = static_cast<boost::detail::sp_ms_deleter< T > *>( pt._internal_get_untyped_deleter() );
 
@@ -243,7 +243,7 @@ template< class T, class A, class... Args > typename boost::detail::sp_if_not_ar
 
     typedef boost::detail::sp_as_deleter< T, A2 > D;
 
-    boost::shared_ptr< T > pt( static_cast< T* >( 0 ), boost::detail::sp_inplace_tag<D>(), a2 );
+    boost::shared_ptr< T > pt( static_cast< T* >( nullptr ), boost::detail::sp_inplace_tag<D>(), a2 );
 
     D * pd = static_cast< D* >( pt._internal_get_untyped_deleter() );
     void * pv = pd->address();

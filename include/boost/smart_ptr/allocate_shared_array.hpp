@@ -203,16 +203,16 @@ public:
     }
 
     void* get_deleter(const sp_typeinfo_&) noexcept override {
-        return 0;
+        return nullptr;
     }
 
     void* get_local_deleter(const sp_typeinfo_&)
         noexcept override {
-        return 0;
+        return nullptr;
     }
 
     void* get_untyped_deleter() noexcept override {
-        return 0;
+        return nullptr;
     }
 
 private:
@@ -238,7 +238,7 @@ public:
     }
 
     void release() noexcept {
-        result_ = 0;
+        result_ = nullptr;
     }
 
 private:

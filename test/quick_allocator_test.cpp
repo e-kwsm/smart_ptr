@@ -55,7 +55,7 @@ int main()
         BOOST_TEST_EQ( *static_cast<unsigned char*>( p1 ), 0xCC );
         BOOST_TEST_EQ( *static_cast<unsigned char*>( p2 ), 0xDD );
 
-        quick_allocator<X>::dealloc( 0 );
+        quick_allocator<X>::dealloc( nullptr );
         BOOST_TEST_EQ( *static_cast<unsigned char*>( p1 ), 0xCC );
         BOOST_TEST_EQ( *static_cast<unsigned char*>( p2 ), 0xDD );
 
@@ -76,21 +76,21 @@ int main()
         BOOST_TEST_EQ( *static_cast<unsigned char*>( p1 ), 0xCC );
         BOOST_TEST_EQ( *static_cast<unsigned char*>( p2 ), 0xDD );
 
-        quick_allocator<X>::dealloc( 0, sizeof(X) );
+        quick_allocator<X>::dealloc( nullptr, sizeof(X) );
         BOOST_TEST_EQ( *static_cast<unsigned char*>( p1 ), 0xCC );
         BOOST_TEST_EQ( *static_cast<unsigned char*>( p2 ), 0xDD );
 
         quick_allocator<X>::dealloc( p1, sizeof(X) );
         BOOST_TEST_EQ( *static_cast<unsigned char*>( p2 ), 0xDD );
 
-        quick_allocator<X>::dealloc( 0, sizeof(Y) );
+        quick_allocator<X>::dealloc( nullptr, sizeof(Y) );
         BOOST_TEST_EQ( *static_cast<unsigned char*>( p2 ), 0xDD );
 
         quick_allocator<X>::dealloc( p2, sizeof(Y) );
     }
 
     BOOST_TEST_EQ( *static_cast<unsigned char*>( p ), 0xAA );
-    quick_allocator<Y>::dealloc( 0 );
+    quick_allocator<Y>::dealloc( nullptr );
 
     BOOST_TEST_EQ( *static_cast<unsigned char*>( p ), 0xAA );
     quick_allocator<Y>::dealloc( p );

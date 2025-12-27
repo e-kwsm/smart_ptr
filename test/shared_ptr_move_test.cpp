@@ -44,11 +44,11 @@ int main()
 
         boost::shared_ptr<X> p2( std::move( p ) );
         BOOST_TEST( X::instances == 1 );
-        BOOST_TEST( p.get() == 0 );
+        BOOST_TEST( p.get() == nullptr );
 
         boost::shared_ptr<void> p3( std::move( p2 ) );
         BOOST_TEST( X::instances == 1 );
-        BOOST_TEST( p2.get() == 0 );
+        BOOST_TEST( p2.get() == nullptr );
 
         p3.reset();
         BOOST_TEST( X::instances == 0 );
@@ -61,12 +61,12 @@ int main()
         boost::shared_ptr<X> p2;
         p2 = std::move( p );
         BOOST_TEST( X::instances == 1 );
-        BOOST_TEST( p.get() == 0 );
+        BOOST_TEST( p.get() == nullptr );
 
         boost::shared_ptr<void> p3;
         p3 = std::move( p2 );
         BOOST_TEST( X::instances == 1 );
-        BOOST_TEST( p2.get() == 0 );
+        BOOST_TEST( p2.get() == nullptr );
 
         p3.reset();
         BOOST_TEST( X::instances == 0 );
@@ -80,13 +80,13 @@ int main()
         BOOST_TEST( X::instances == 2 );
         p2 = std::move( p );
         BOOST_TEST( X::instances == 1 );
-        BOOST_TEST( p.get() == 0 );
+        BOOST_TEST( p.get() == nullptr );
 
         boost::shared_ptr<void> p3( new X );
         BOOST_TEST( X::instances == 2 );
         p3 = std::move( p2 );
         BOOST_TEST( X::instances == 1 );
-        BOOST_TEST( p2.get() == 0 );
+        BOOST_TEST( p2.get() == nullptr );
 
         p3.reset();
         BOOST_TEST( X::instances == 0 );

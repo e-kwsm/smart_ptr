@@ -188,10 +188,10 @@ int main()
         BOOST_TEST( X::allocations == 0 );
         BOOST_TEST( X::instances == 0 );
 
-        BOOST_TEST( wp2.lock() == 0 );
-        BOOST_TEST( wp3.lock() == 0 );
-        BOOST_TEST( wp4.lock() == 0 );
-        BOOST_TEST( wp5.lock() == 0 );
+        BOOST_TEST( wp2.lock() == nullptr );
+        BOOST_TEST( wp3.lock() == nullptr );
+        BOOST_TEST( wp4.lock() == nullptr );
+        BOOST_TEST( wp5.lock() == nullptr );
     }
 
     {

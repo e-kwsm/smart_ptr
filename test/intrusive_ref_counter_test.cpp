@@ -106,12 +106,12 @@ int main()
     // The test check that ADL works
     {
         boost::intrusive_ptr< N1::my_class > p = new N1::my_class();
-        p = NULL;
+        p = nullptr;
         BOOST_TEST(N1::my_class::destructor_count == 1);
     }
     {
         boost::intrusive_ptr< N2::my_class > p = new N2::my_class();
-        p = NULL;
+        p = nullptr;
         BOOST_TEST(N2::my_class::destructor_count == 1);
     }
     {
@@ -129,9 +129,9 @@ int main()
         boost::intrusive_ptr< N3::root > p2 = p1;
         BOOST_TEST(p1->use_count() == 2);
         BOOST_TEST(N6::Z::destructor_count == 0);
-        p1 = NULL;
+        p1 = nullptr;
         BOOST_TEST(N6::Z::destructor_count == 0);
-        p2 = NULL;
+        p2 = nullptr;
         BOOST_TEST(N6::Z::destructor_count == 1);
     }
 

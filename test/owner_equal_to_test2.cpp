@@ -31,7 +31,7 @@ int main()
         BOOST_TEST( !eq( p4, p3 ) );
         BOOST_TEST( !eq( p3, p4 ) );
 
-        boost::local_shared_ptr<int> p6( static_cast<int*>(0) );
+        boost::local_shared_ptr<int> p6( static_cast<int*>(nullptr) );
 
         BOOST_TEST( !eq( p4, p6 ) );
         BOOST_TEST( !eq( p6, p4 ) );

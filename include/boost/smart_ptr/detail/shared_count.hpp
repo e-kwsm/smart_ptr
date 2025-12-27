@@ -109,7 +109,7 @@ private:
 
 public:
 
-    constexpr shared_count() noexcept: pi_(0)
+    constexpr shared_count() noexcept: pi_(nullptr)
     {
     }
 
@@ -117,7 +117,7 @@ public:
     {
     }
 
-    template<class Y> explicit shared_count( Y * p ): pi_( 0 )
+    template<class Y> explicit shared_count( Y * p ): pi_( nullptr )
     {
 #ifndef BOOST_NO_EXCEPTIONS
 
@@ -144,7 +144,7 @@ public:
 #endif
     }
 
-    template<class P, class D> shared_count( P p, D d ): pi_(0)
+    template<class P, class D> shared_count( P p, D d ): pi_(nullptr)
     {
 #ifndef BOOST_NO_EXCEPTIONS
 
@@ -171,7 +171,7 @@ public:
 #endif
     }
 
-    template< class P, class D > shared_count( P p, sp_inplace_tag<D> ): pi_( 0 )
+    template< class P, class D > shared_count( P p, sp_inplace_tag<D> ): pi_( nullptr )
     {
 #ifndef BOOST_NO_EXCEPTIONS
 
@@ -198,7 +198,7 @@ public:
 #endif // #ifndef BOOST_NO_EXCEPTIONS
     }
 
-    template<class P, class D, class A> shared_count( P p, D d, A a ): pi_( 0 )
+    template<class P, class D, class A> shared_count( P p, D d, A a ): pi_( nullptr )
     {
         typedef sp_counted_impl_pda<P, D, A> impl_type;
 
@@ -217,7 +217,7 @@ public:
         {
             d( p );
 
-            if( pi_ != 0 )
+            if( pi_ != nullptr )
             {
                 a2.deallocate( static_cast< impl_type* >( pi_ ), 1 );
             }
@@ -242,7 +242,7 @@ public:
 #endif
     }
 
-    template< class P, class D, class A > shared_count( P p, sp_inplace_tag< D >, A a ): pi_( 0 )
+    template< class P, class D, class A > shared_count( P p, sp_inplace_tag< D >, A a ): pi_( nullptr )
     {
         typedef sp_counted_impl_pda< P, D, A > impl_type;
 
@@ -261,7 +261,7 @@ public:
         {
             D::operator_fn( p );
 
-            if( pi_ != 0 )
+            if( pi_ != nullptr )
             {
                 a2.deallocate( static_cast< impl_type* >( pi_ ), 1 );
             }
@@ -308,7 +308,7 @@ public:
 #endif 
 
     template<class Y, class D>
-    explicit shared_count( std::unique_ptr<Y, D> & r ): pi_( 0 )
+    explicit shared_count( std::unique_ptr<Y, D> & r ): pi_( nullptr )
     {
         typedef typename sp_convert_reference<D>::type D2;
 
@@ -328,7 +328,7 @@ public:
     }
 
     template<class Y, class D>
-    explicit shared_count( boost::movelib::unique_ptr<Y, D> & r ): pi_( 0 )
+    explicit shared_count( boost::movelib::unique_ptr<Y, D> & r ): pi_( nullptr )
     {
         typedef typename sp_convert_reference<D>::type D2;
 
@@ -349,17 +349,17 @@ public:
 
     ~shared_count() /*noexcept*/
     {
-        if( pi_ != 0 ) pi_->release();
+        if( pi_ != nullptr ) pi_->release();
     }
 
     shared_count(shared_count const & r) noexcept: pi_(r.pi_)
     {
-        if( pi_ != 0 ) pi_->add_ref_copy();
+        if( pi_ != nullptr ) pi_->add_ref_copy();
     }
 
     shared_count(shared_count && r) noexcept: pi_(r.pi_)
     {
-        r.pi_ = 0;
+        r.pi_ = nullptr;
     }
 
     explicit shared_count(weak_count const & r); // throws bad_weak_ptr when r.use_count() == 0
@@ -371,8 +371,8 @@ public:
 
         if( tmp != pi_ )
         {
-            if( tmp != 0 ) tmp->add_ref_copy();
-            if( pi_ != 0 ) pi_->release();
+            if( tmp != nullptr ) tmp->add_ref_copy();
+            if( pi_ != nullptr ) pi_->release();
             pi_ = tmp;
         }
 
@@ -388,7 +388,7 @@ public:
 
     long use_count() const noexcept
     {
-        return pi_ != 0? pi_->use_count(): 0;
+        return pi_ != nullptr? pi_->use_count(): 0;
     }
 
     bool unique() const noexcept
@@ -398,7 +398,7 @@ public:
 
     bool empty() const noexcept
     {
-        return pi_ == 0;
+        return pi_ == nullptr;
     }
 
     bool operator==( shared_count const & r ) const noexcept
@@ -417,17 +417,17 @@ public:
 
     void * get_deleter( sp_typeinfo_ const & ti ) const noexcept
     {
-        return pi_? pi_->get_deleter( ti ): 0;
+        return pi_? pi_->get_deleter( ti ): nullptr;
     }
 
     void * get_local_deleter( sp_typeinfo_ const & ti ) const noexcept
     {
-        return pi_? pi_->get_local_deleter( ti ): 0;
+        return pi_? pi_->get_local_deleter( ti ): nullptr;
     }
 
     void * get_untyped_deleter() const noexcept
     {
-        return pi_? pi_->get_untyped_deleter(): 0;
+        return pi_? pi_->get_untyped_deleter(): nullptr;
     }
 
     std::size_t hash_value() const noexcept
@@ -447,30 +447,30 @@ private:
 
 public:
 
-    constexpr weak_count() noexcept: pi_(0)
+    constexpr weak_count() noexcept: pi_(nullptr)
     {
     }
 
     weak_count(shared_count const & r) noexcept: pi_(r.pi_)
     {
-        if(pi_ != 0) pi_->weak_add_ref();
+        if(pi_ != nullptr) pi_->weak_add_ref();
     }
 
     weak_count(weak_count const & r) noexcept: pi_(r.pi_)
     {
-        if(pi_ != 0) pi_->weak_add_ref();
+        if(pi_ != nullptr) pi_->weak_add_ref();
     }
 
 // Move support
 
     weak_count(weak_count && r) noexcept: pi_(r.pi_)
     {
-        r.pi_ = 0;
+        r.pi_ = nullptr;
     }
 
     ~weak_count() /*noexcept*/
     {
-        if(pi_ != 0) pi_->weak_release();
+        if(pi_ != nullptr) pi_->weak_release();
     }
 
     weak_count & operator= (shared_count const & r) noexcept
@@ -479,8 +479,8 @@ public:
 
         if( tmp != pi_ )
         {
-            if(tmp != 0) tmp->weak_add_ref();
-            if(pi_ != 0) pi_->weak_release();
+            if(tmp != nullptr) tmp->weak_add_ref();
+            if(pi_ != nullptr) pi_->weak_release();
             pi_ = tmp;
         }
 
@@ -493,8 +493,8 @@ public:
 
         if( tmp != pi_ )
         {
-            if(tmp != 0) tmp->weak_add_ref();
-            if(pi_ != 0) pi_->weak_release();
+            if(tmp != nullptr) tmp->weak_add_ref();
+            if(pi_ != nullptr) pi_->weak_release();
             pi_ = tmp;
         }
 
@@ -510,12 +510,12 @@ public:
 
     long use_count() const noexcept
     {
-        return pi_ != 0? pi_->use_count(): 0;
+        return pi_ != nullptr? pi_->use_count(): 0;
     }
 
     bool empty() const noexcept
     {
-        return pi_ == 0;
+        return pi_ == nullptr;
     }
 
     bool operator==( weak_count const & r ) const noexcept
@@ -546,7 +546,7 @@ public:
 
 inline shared_count::shared_count( weak_count const & r ): pi_( r.pi_ )
 {
-    if( pi_ == 0 || !pi_->add_ref_lock() )
+    if( pi_ == nullptr || !pi_->add_ref_lock() )
     {
         boost::throw_exception( boost::bad_weak_ptr() );
     }
@@ -554,9 +554,9 @@ inline shared_count::shared_count( weak_count const & r ): pi_( r.pi_ )
 
 inline shared_count::shared_count( weak_count const & r, sp_nothrow_tag ) noexcept: pi_( r.pi_ )
 {
-    if( pi_ != 0 && !pi_->add_ref_lock() )
+    if( pi_ != nullptr && !pi_->add_ref_lock() )
     {
-        pi_ = 0;
+        pi_ = nullptr;
     }
 }
 

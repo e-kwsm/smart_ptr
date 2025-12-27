@@ -26,7 +26,7 @@ int main()
     BOOST_TEST(!(comp(x, w) || comp(w, x)));
   }
   {
-    boost::shared_ptr<int> z((int*)0);
+    boost::shared_ptr<int> z((int*)nullptr);
     boost::weak_ptr<int> w;
     BOOST_TEST(comp(z, w) || comp(w, z));
     {
@@ -39,12 +39,12 @@ int main()
   }
   {
     boost::shared_ptr<int> x;
-    boost::shared_ptr<int> z((int*)0);
+    boost::shared_ptr<int> z((int*)nullptr);
     BOOST_TEST(comp(x, z) || comp(z, x));
   }
   {
-    boost::shared_ptr<int> a((int*)0);
-    boost::shared_ptr<int> b((int*)0);
+    boost::shared_ptr<int> a((int*)nullptr);
+    boost::shared_ptr<int> b((int*)nullptr);
     BOOST_TEST(comp(a, b) || comp(b, a));
     boost::weak_ptr<int> w(a);
     BOOST_TEST(!(comp(a, w) || comp(w, a)));
@@ -53,9 +53,9 @@ int main()
 
   boost::owner_less<boost::weak_ptr<int> > weak_comp;
   {
-    boost::shared_ptr<int> a((int*)0);
+    boost::shared_ptr<int> a((int*)nullptr);
     boost::weak_ptr<int> wa(a);
-    boost::shared_ptr<int> b((int*)0);
+    boost::shared_ptr<int> b((int*)nullptr);
     boost::weak_ptr<int> wb(b);
     BOOST_TEST(!(weak_comp(a, wa) || weak_comp(wa, a)));
     BOOST_TEST(!(weak_comp(b, wb) || weak_comp(wb, b)));

@@ -138,11 +138,11 @@ public:
 
     // constructors
 
-    constexpr local_shared_ptr() noexcept : px( 0 ), pn( 0 )
+    constexpr local_shared_ptr() noexcept : px( nullptr ), pn( nullptr )
     {
     }
 
-    constexpr local_shared_ptr( std::nullptr_t ) noexcept : px( 0 ), pn( 0 )
+    constexpr local_shared_ptr( std::nullptr_t ) noexcept : px( nullptr ), pn( nullptr )
     {
     }
 
@@ -152,27 +152,27 @@ public:
     }
 
     template<class Y>
-    explicit local_shared_ptr( Y * p ): px( p ), pn( 0 )
+    explicit local_shared_ptr( Y * p ): px( p ), pn( nullptr )
     {
         boost::detail::lsp_pointer_construct( this, p, pn );
     }
 
-    template<class Y, class D> local_shared_ptr( Y * p, D d ): px( p ), pn( 0 )
+    template<class Y, class D> local_shared_ptr( Y * p, D d ): px( p ), pn( nullptr )
     {
         boost::detail::lsp_deleter_construct( this, p, d, pn );
     }
 
-    template<class D> local_shared_ptr( std::nullptr_t p, D d ): px( p ), pn( 0 )
+    template<class D> local_shared_ptr( std::nullptr_t p, D d ): px( p ), pn( nullptr )
     {
         boost::detail::lsp_deleter_construct( this, p, d, pn );
     }
 
-    template<class Y, class D, class A> local_shared_ptr( Y * p, D d, A a ): px( p ), pn( 0 )
+    template<class Y, class D, class A> local_shared_ptr( Y * p, D d, A a ): px( p ), pn( nullptr )
     {
         boost::detail::lsp_allocator_construct( this, p, d, a, pn );
     }
 
-    template<class D, class A> local_shared_ptr( std::nullptr_t p, D d, A a ): px( p ), pn( 0 )
+    template<class D, class A> local_shared_ptr( std::nullptr_t p, D d, A a ): px( p ), pn( nullptr )
     {
         boost::detail::lsp_allocator_construct( this, p, d, a, pn );
     }
@@ -181,7 +181,7 @@ public:
 
     template<class Y> local_shared_ptr( shared_ptr<Y> const & r,
         typename boost::detail::sp_enable_if_convertible<Y, T>::type = boost::detail::sp_empty() )
-        : px( r.get() ), pn( 0 )
+        : px( r.get() ), pn( nullptr )
     {
         boost::detail::sp_assert_convertible< Y, T >();
 
@@ -193,7 +193,7 @@ public:
 
     template<class Y> local_shared_ptr( shared_ptr<Y> && r,
         typename boost::detail::sp_enable_if_convertible<Y, T>::type = boost::detail::sp_empty() )
-        : px( r.get() ), pn( 0 )
+        : px( r.get() ), pn( nullptr )
     {
         boost::detail::sp_assert_convertible< Y, T >();
 
@@ -209,7 +209,7 @@ public:
     template< class Y, class D >
     local_shared_ptr( std::unique_ptr< Y, D > && r,
         typename boost::detail::sp_enable_if_convertible<Y, T>::type = boost::detail::sp_empty() )
-        : px( r.get() ), pn( 0 )
+        : px( r.get() ), pn( nullptr )
     {
         boost::detail::sp_assert_convertible< Y, T >();
 
@@ -240,8 +240,8 @@ public:
 
     local_shared_ptr( local_shared_ptr && r ) noexcept : px( r.px ), pn( r.pn )
     {
-        r.px = 0;
-        r.pn = 0;
+        r.px = nullptr;
+        r.pn = nullptr;
     }
 
     // converting copy constructor
@@ -266,8 +266,8 @@ public:
     {
         boost::detail::sp_assert_convertible< Y, T >();
 
-        r.px = 0;
-        r.pn = 0;
+        r.px = nullptr;
+        r.pn = nullptr;
     }
 
     // aliasing
@@ -284,8 +284,8 @@ public:
     template<class Y>
     local_shared_ptr( local_shared_ptr<Y> && r, element_type * p ) noexcept : px( p ), pn( r.pn )
     {
-        r.px = 0;
-        r.pn = 0;
+        r.px = nullptr;
+        r.pn = nullptr;
     }
 
     // assignment
@@ -377,7 +377,7 @@ public:
 
     typename boost::detail::sp_array_access< T >::type operator[] ( std::ptrdiff_t i ) const BOOST_SP_NOEXCEPT_WITH_ASSERT
     {
-        BOOST_ASSERT( px != 0 );
+        BOOST_ASSERT( px != nullptr );
         BOOST_ASSERT( i >= 0 && ( i < boost::detail::sp_extent< T >::value || boost::detail::sp_extent< T >::value == 0 ) );
 
         return static_cast< typename boost::detail::sp_array_access< T >::type >( px[ i ] );
@@ -390,7 +390,7 @@ public:
 
     explicit operator bool () const noexcept
     {
-        return px != 0;
+        return px != nullptr;
     }
 
     long local_use_count() const noexcept
@@ -513,7 +513,7 @@ template<class T> inline void swap( local_shared_ptr<T> & a, local_shared_ptr<T>
 
 template<class T, class U> local_shared_ptr<T> static_pointer_cast( local_shared_ptr<U> const & r ) noexcept
 {
-    (void) static_cast< T* >( static_cast< U* >( 0 ) );
+    (void) static_cast< T* >( static_cast< U* >( nullptr ) );
 
     typedef typename local_shared_ptr<T>::element_type E;
 
@@ -523,7 +523,7 @@ template<class T, class U> local_shared_ptr<T> static_pointer_cast( local_shared
 
 template<class T, class U> local_shared_ptr<T> const_pointer_cast( local_shared_ptr<U> const & r ) noexcept
 {
-    (void) const_cast< T* >( static_cast< U* >( 0 ) );
+    (void) const_cast< T* >( static_cast< U* >( nullptr ) );
 
     typedef typename local_shared_ptr<T>::element_type E;
 
@@ -533,7 +533,7 @@ template<class T, class U> local_shared_ptr<T> const_pointer_cast( local_shared_
 
 template<class T, class U> local_shared_ptr<T> dynamic_pointer_cast( local_shared_ptr<U> const & r ) noexcept
 {
-    (void) dynamic_cast< T* >( static_cast< U* >( 0 ) );
+    (void) dynamic_cast< T* >( static_cast< U* >( nullptr ) );
 
     typedef typename local_shared_ptr<T>::element_type E;
 
@@ -543,7 +543,7 @@ template<class T, class U> local_shared_ptr<T> dynamic_pointer_cast( local_share
 
 template<class T, class U> local_shared_ptr<T> reinterpret_pointer_cast( local_shared_ptr<U> const & r ) noexcept
 {
-    (void) reinterpret_cast< T* >( static_cast< U* >( 0 ) );
+    (void) reinterpret_cast< T* >( static_cast< U* >( nullptr ) );
 
     typedef typename local_shared_ptr<T>::element_type E;
 
@@ -553,7 +553,7 @@ template<class T, class U> local_shared_ptr<T> reinterpret_pointer_cast( local_s
 
 template<class T, class U> local_shared_ptr<T> static_pointer_cast( local_shared_ptr<U> && r ) noexcept
 {
-    (void) static_cast< T* >( static_cast< U* >( 0 ) );
+    (void) static_cast< T* >( static_cast< U* >( nullptr ) );
 
     typedef typename local_shared_ptr<T>::element_type E;
 
@@ -563,7 +563,7 @@ template<class T, class U> local_shared_ptr<T> static_pointer_cast( local_shared
 
 template<class T, class U> local_shared_ptr<T> const_pointer_cast( local_shared_ptr<U> && r ) noexcept
 {
-    (void) const_cast< T* >( static_cast< U* >( 0 ) );
+    (void) const_cast< T* >( static_cast< U* >( nullptr ) );
 
     typedef typename local_shared_ptr<T>::element_type E;
 
@@ -573,7 +573,7 @@ template<class T, class U> local_shared_ptr<T> const_pointer_cast( local_shared_
 
 template<class T, class U> local_shared_ptr<T> dynamic_pointer_cast( local_shared_ptr<U> && r ) noexcept
 {
-    (void) dynamic_cast< T* >( static_cast< U* >( 0 ) );
+    (void) dynamic_cast< T* >( static_cast< U* >( nullptr ) );
 
     typedef typename local_shared_ptr<T>::element_type E;
 
@@ -583,7 +583,7 @@ template<class T, class U> local_shared_ptr<T> dynamic_pointer_cast( local_share
 
 template<class T, class U> local_shared_ptr<T> reinterpret_pointer_cast( local_shared_ptr<U> && r ) noexcept
 {
-    (void) reinterpret_cast< T* >( static_cast< U* >( 0 ) );
+    (void) reinterpret_cast< T* >( static_cast< U* >( nullptr ) );
 
     typedef typename local_shared_ptr<T>::element_type E;
 

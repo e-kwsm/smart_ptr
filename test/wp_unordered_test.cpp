@@ -12,7 +12,7 @@ int main()
 {
     std::unordered_set< boost::weak_ptr<void> > set;
 
-    boost::shared_ptr<int> p1( (int*)0 );
+    boost::shared_ptr<int> p1( (int*)nullptr );
     boost::shared_ptr<int> p2( p1 );
     boost::shared_ptr<void> p3( p1 );
 
@@ -36,7 +36,7 @@ int main()
 
     BOOST_TEST_EQ( set.size(), 1 );
 
-    boost::shared_ptr<int> p6( (int*)0 );
+    boost::shared_ptr<int> p6( (int*)nullptr );
 
     set.insert( p6 );
 
@@ -55,7 +55,7 @@ int main()
     BOOST_TEST_EQ( set.count( q5 ), 1 );
     BOOST_TEST_EQ( set.count( q6 ), 1 );
 
-    boost::shared_ptr<int> p7( (int*)0 );
+    boost::shared_ptr<int> p7( (int*)nullptr );
     boost::weak_ptr<int> q7( p7 );
 
     BOOST_TEST_EQ( set.count( q7 ), 0 );

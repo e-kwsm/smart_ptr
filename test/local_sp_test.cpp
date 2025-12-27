@@ -44,21 +44,21 @@ static void default_constructor()
     {
         boost::local_shared_ptr<int> p;
 
-        BOOST_TEST_EQ( p.get(), static_cast<void*>(0) );
+        BOOST_TEST_EQ( p.get(), static_cast<void*>(nullptr) );
         BOOST_TEST_EQ( p.local_use_count(), 0 );
     }
 
     {
         boost::local_shared_ptr<void> p;
 
-        BOOST_TEST_EQ( p.get(), static_cast<void*>(0) );
+        BOOST_TEST_EQ( p.get(), static_cast<void*>(nullptr) );
         BOOST_TEST_EQ( p.local_use_count(), 0 );
     }
 
     {
         boost::local_shared_ptr<incomplete> p;
 
-        BOOST_TEST_EQ( p.get(), static_cast<void*>(0) );
+        BOOST_TEST_EQ( p.get(), static_cast<void*>(nullptr) );
         BOOST_TEST_EQ( p.local_use_count(), 0 );
     }
 
@@ -69,7 +69,7 @@ static void default_constructor()
 
         BOOST_TEST( X::instances == 0 );
 
-        BOOST_TEST_EQ( p.get(), static_cast<void*>(0) );
+        BOOST_TEST_EQ( p.get(), static_cast<void*>(nullptr) );
         BOOST_TEST_EQ( p.local_use_count(), 0 );
     }
 }
@@ -81,21 +81,21 @@ static void nullptr_constructor()
     {
         boost::local_shared_ptr<int> p( nullptr );
 
-        BOOST_TEST_EQ( p.get(), static_cast<void*>(0) );
+        BOOST_TEST_EQ( p.get(), static_cast<void*>(nullptr) );
         BOOST_TEST_EQ( p.local_use_count(), 0 );
     }
 
     {
         boost::local_shared_ptr<void> p( nullptr );
 
-        BOOST_TEST_EQ( p.get(), static_cast<void*>(0) );
+        BOOST_TEST_EQ( p.get(), static_cast<void*>(nullptr) );
         BOOST_TEST_EQ( p.local_use_count(), 0 );
     }
 
     {
         boost::local_shared_ptr<incomplete> p( nullptr );
 
-        BOOST_TEST_EQ( p.get(), static_cast<void*>(0) );
+        BOOST_TEST_EQ( p.get(), static_cast<void*>(nullptr) );
         BOOST_TEST_EQ( p.local_use_count(), 0 );
     }
 
@@ -107,7 +107,7 @@ static void nullptr_constructor()
         BOOST_TEST( X::instances == 0 );
 
 
-        BOOST_TEST_EQ( p.get(), static_cast<void*>(0) );
+        BOOST_TEST_EQ( p.get(), static_cast<void*>(nullptr) );
         BOOST_TEST_EQ( p.local_use_count(), 0 );
     }
 }
@@ -116,11 +116,11 @@ static void nullptr_constructor()
 
 template<class T, class U> static void pc0_test_()
 {
-    boost::local_shared_ptr<T> p( static_cast<U*>( 0 ) );
+    boost::local_shared_ptr<T> p( static_cast<U*>( nullptr ) );
 
     BOOST_TEST( p? false: true );
     BOOST_TEST( !p );
-    BOOST_TEST( p.get() == 0 );
+    BOOST_TEST( p.get() == nullptr );
     BOOST_TEST( p.local_use_count() == 1 );
 }
 
@@ -147,7 +147,7 @@ template<class T, class U> static void pc1_test_()
 
     BOOST_TEST( p? true: false );
     BOOST_TEST( !!p );
-    BOOST_TEST( p.get() != 0 );
+    BOOST_TEST( p.get() != nullptr );
     BOOST_TEST( p.local_use_count() == 1 );
 }
 
@@ -234,7 +234,7 @@ template<class T> static void deleter3_test_()
         boost::local_shared_ptr<T> p( nullptr, deleter3 );
 
         BOOST_TEST( !p );
-        BOOST_TEST( p.get() == 0 );
+        BOOST_TEST( p.get() == nullptr );
         BOOST_TEST( p.local_use_count() == 1 );
     }
 
@@ -293,7 +293,7 @@ template<class T> static void allocator3_test_()
         boost::local_shared_ptr<T> p( nullptr, deleter3, std::allocator<void>() );
 
         BOOST_TEST( !p );
-        BOOST_TEST( p.get() == 0 );
+        BOOST_TEST( p.get() == nullptr );
         BOOST_TEST( p.local_use_count() == 1 );
     }
 
@@ -319,27 +319,27 @@ template<class T> static void empty_copy_test()
 {
     boost::local_shared_ptr<T> p1;
 
-    BOOST_TEST_EQ( p1.get(), static_cast<void*>(0) );
+    BOOST_TEST_EQ( p1.get(), static_cast<void*>(nullptr) );
     BOOST_TEST_EQ( p1.local_use_count(), 0 );
 
     boost::local_shared_ptr<T> p2( p1 );
 
-    BOOST_TEST_EQ( p2.get(), static_cast<void*>(0) );
+    BOOST_TEST_EQ( p2.get(), static_cast<void*>(nullptr) );
     BOOST_TEST_EQ( p2.local_use_count(), 0 );
 
     boost::local_shared_ptr<T const> p3( p1 );
 
-    BOOST_TEST_EQ( p3.get(), static_cast<void*>(0) );
+    BOOST_TEST_EQ( p3.get(), static_cast<void*>(nullptr) );
     BOOST_TEST_EQ( p3.local_use_count(), 0 );
 
     boost::local_shared_ptr<void> p4( p1 );
 
-    BOOST_TEST_EQ( p4.get(), static_cast<void*>(0) );
+    BOOST_TEST_EQ( p4.get(), static_cast<void*>(nullptr) );
     BOOST_TEST_EQ( p4.local_use_count(), 0 );
 
     boost::local_shared_ptr<void const> p5( p3 );
 
-    BOOST_TEST_EQ( p5.get(), static_cast<void*>(0) );
+    BOOST_TEST_EQ( p5.get(), static_cast<void*>(nullptr) );
     BOOST_TEST_EQ( p5.local_use_count(), 0 );
 }
 
@@ -360,7 +360,7 @@ template<class T, class U> static void test_nonempty_copy( boost::local_shared_p
 
 template<class T> static void null_copy_test()
 {
-    boost::local_shared_ptr<T> p1( static_cast<T*>(0) );
+    boost::local_shared_ptr<T> p1( static_cast<T*>(nullptr) );
 
     test_nonempty_copy<T>( p1 );
     test_nonempty_copy<T const>( p1 );
@@ -411,22 +411,22 @@ template<class T> static void empty_move_test()
 {
     boost::local_shared_ptr<T> p2(( boost::local_shared_ptr<T>() ));
 
-    BOOST_TEST_EQ( p2.get(), static_cast<void*>(0) );
+    BOOST_TEST_EQ( p2.get(), static_cast<void*>(nullptr) );
     BOOST_TEST_EQ( p2.local_use_count(), 0 );
 
     boost::local_shared_ptr<T const> p3(( boost::local_shared_ptr<T>() ));
 
-    BOOST_TEST_EQ( p3.get(), static_cast<void*>(0) );
+    BOOST_TEST_EQ( p3.get(), static_cast<void*>(nullptr) );
     BOOST_TEST_EQ( p3.local_use_count(), 0 );
 
     boost::local_shared_ptr<void> p4(( boost::local_shared_ptr<T>() ));
 
-    BOOST_TEST_EQ( p4.get(), static_cast<void*>(0) );
+    BOOST_TEST_EQ( p4.get(), static_cast<void*>(nullptr) );
     BOOST_TEST_EQ( p4.local_use_count(), 0 );
 
     boost::local_shared_ptr<void const> p5( std::move(p3) );
 
-    BOOST_TEST_EQ( p5.get(), static_cast<void*>(0) );
+    BOOST_TEST_EQ( p5.get(), static_cast<void*>(nullptr) );
     BOOST_TEST_EQ( p5.local_use_count(), 0 );
 }
 
@@ -440,20 +440,20 @@ template<class T, class U> static void test_nonempty_move( boost::local_shared_p
     BOOST_TEST( p2.get() == q );
     BOOST_TEST( p2.local_use_count() == k );
 
-    BOOST_TEST( p1.get() == 0 );
+    BOOST_TEST( p1.get() == nullptr );
     BOOST_TEST( p1.local_use_count() == 0 );
 }
 
 template<class T> static void null_move_test()
 {
-    test_nonempty_move<T>( boost::local_shared_ptr<T>( static_cast<T*>(0) ) );
-    test_nonempty_move<T const>( boost::local_shared_ptr<T>( static_cast<T*>(0) ) );
-    test_nonempty_move<T volatile>( boost::local_shared_ptr<T>( static_cast<T*>(0) ) );
-    test_nonempty_move<T const volatile>( boost::local_shared_ptr<T>( static_cast<T*>(0) ) );
-    test_nonempty_move<void>( boost::local_shared_ptr<T>( static_cast<T*>(0) ) );
-    test_nonempty_move<void const>( boost::local_shared_ptr<T>( static_cast<T*>(0) ) );
-    test_nonempty_move<void volatile>( boost::local_shared_ptr<T>( static_cast<T*>(0) ) );
-    test_nonempty_move<void const volatile>( boost::local_shared_ptr<T>( static_cast<T*>(0) ) );
+    test_nonempty_move<T>( boost::local_shared_ptr<T>( static_cast<T*>(nullptr) ) );
+    test_nonempty_move<T const>( boost::local_shared_ptr<T>( static_cast<T*>(nullptr) ) );
+    test_nonempty_move<T volatile>( boost::local_shared_ptr<T>( static_cast<T*>(nullptr) ) );
+    test_nonempty_move<T const volatile>( boost::local_shared_ptr<T>( static_cast<T*>(nullptr) ) );
+    test_nonempty_move<void>( boost::local_shared_ptr<T>( static_cast<T*>(nullptr) ) );
+    test_nonempty_move<void const>( boost::local_shared_ptr<T>( static_cast<T*>(nullptr) ) );
+    test_nonempty_move<void volatile>( boost::local_shared_ptr<T>( static_cast<T*>(nullptr) ) );
+    test_nonempty_move<void const volatile>( boost::local_shared_ptr<T>( static_cast<T*>(nullptr) ) );
 }
 
 template<class T> static void new_move_test()
@@ -522,7 +522,7 @@ template<class T, class U> void test_01_aliasing()
 template<class T, class U> void test_10_aliasing_()
 {
     boost::local_shared_ptr<T> p1( new T() );
-    test_aliasing_( p1, static_cast<U*>(0) );
+    test_aliasing_( p1, static_cast<U*>(nullptr) );
 }
 
 template<class T, class U> void test_10_aliasing()
@@ -626,22 +626,22 @@ template<class T> static void empty_shared_ptr_copy_test()
 
     boost::local_shared_ptr<T> p2( p1 );
 
-    BOOST_TEST_EQ( p2.get(), static_cast<void*>(0) );
+    BOOST_TEST_EQ( p2.get(), static_cast<void*>(nullptr) );
     BOOST_TEST_EQ( p2.local_use_count(), 0 );
 
     boost::local_shared_ptr<T const> p3( p1 );
 
-    BOOST_TEST_EQ( p3.get(), static_cast<void*>(0) );
+    BOOST_TEST_EQ( p3.get(), static_cast<void*>(nullptr) );
     BOOST_TEST_EQ( p3.local_use_count(), 0 );
 
     boost::local_shared_ptr<void> p4( p1 );
 
-    BOOST_TEST_EQ( p4.get(), static_cast<void*>(0) );
+    BOOST_TEST_EQ( p4.get(), static_cast<void*>(nullptr) );
     BOOST_TEST_EQ( p4.local_use_count(), 0 );
 
     boost::local_shared_ptr<void const> p5( p3 );
 
-    BOOST_TEST_EQ( p5.get(), static_cast<void*>(0) );
+    BOOST_TEST_EQ( p5.get(), static_cast<void*>(nullptr) );
     BOOST_TEST_EQ( p5.local_use_count(), 0 );
 }
 
@@ -663,7 +663,7 @@ template<class T, class U> static void test_nonempty_shared_ptr_copy( boost::sha
 
 template<class T> static void null_shared_ptr_copy_test()
 {
-    boost::shared_ptr<T> p1( static_cast<T*>(0) );
+    boost::shared_ptr<T> p1( static_cast<T*>(nullptr) );
 
     test_nonempty_shared_ptr_copy<T>( p1 );
     test_nonempty_shared_ptr_copy<T const>( p1 );
@@ -714,22 +714,22 @@ template<class T> static void empty_shared_ptr_move_test()
 {
     boost::local_shared_ptr<T> p2(( boost::shared_ptr<T>() ));
 
-    BOOST_TEST_EQ( p2.get(), static_cast<void*>(0) );
+    BOOST_TEST_EQ( p2.get(), static_cast<void*>(nullptr) );
     BOOST_TEST_EQ( p2.local_use_count(), 0 );
 
     boost::local_shared_ptr<T const> p3(( boost::shared_ptr<T>() ));
 
-    BOOST_TEST_EQ( p3.get(), static_cast<void*>(0) );
+    BOOST_TEST_EQ( p3.get(), static_cast<void*>(nullptr) );
     BOOST_TEST_EQ( p3.local_use_count(), 0 );
 
     boost::local_shared_ptr<void> p4(( boost::shared_ptr<T>() ));
 
-    BOOST_TEST_EQ( p4.get(), static_cast<void*>(0) );
+    BOOST_TEST_EQ( p4.get(), static_cast<void*>(nullptr) );
     BOOST_TEST_EQ( p4.local_use_count(), 0 );
 
     boost::local_shared_ptr<void const> p5( std::move(p3) );
 
-    BOOST_TEST_EQ( p5.get(), static_cast<void*>(0) );
+    BOOST_TEST_EQ( p5.get(), static_cast<void*>(nullptr) );
     BOOST_TEST_EQ( p5.local_use_count(), 0 );
 }
 
@@ -742,20 +742,20 @@ template<class T, class U> static void test_nonempty_shared_ptr_move( boost::sha
     BOOST_TEST( p2.get() == q );
     BOOST_TEST( p2.local_use_count() == 1 );
 
-    BOOST_TEST( p1.get() == 0 );
+    BOOST_TEST( p1.get() == nullptr );
     BOOST_TEST( p1.use_count() == 0 );
 }
 
 template<class T> static void null_shared_ptr_move_test()
 {
-    test_nonempty_shared_ptr_move<T>( boost::shared_ptr<T>( static_cast<T*>(0) ) );
-    test_nonempty_shared_ptr_move<T const>( boost::shared_ptr<T>( static_cast<T*>(0) ) );
-    test_nonempty_shared_ptr_move<T volatile>( boost::shared_ptr<T>( static_cast<T*>(0) ) );
-    test_nonempty_shared_ptr_move<T const volatile>( boost::shared_ptr<T>( static_cast<T*>(0) ) );
-    test_nonempty_shared_ptr_move<void>( boost::shared_ptr<T>( static_cast<T*>(0) ) );
-    test_nonempty_shared_ptr_move<void const>( boost::shared_ptr<T>( static_cast<T*>(0) ) );
-    test_nonempty_shared_ptr_move<void volatile>( boost::shared_ptr<T>( static_cast<T*>(0) ) );
-    test_nonempty_shared_ptr_move<void const volatile>( boost::shared_ptr<T>( static_cast<T*>(0) ) );
+    test_nonempty_shared_ptr_move<T>( boost::shared_ptr<T>( static_cast<T*>(nullptr) ) );
+    test_nonempty_shared_ptr_move<T const>( boost::shared_ptr<T>( static_cast<T*>(nullptr) ) );
+    test_nonempty_shared_ptr_move<T volatile>( boost::shared_ptr<T>( static_cast<T*>(nullptr) ) );
+    test_nonempty_shared_ptr_move<T const volatile>( boost::shared_ptr<T>( static_cast<T*>(nullptr) ) );
+    test_nonempty_shared_ptr_move<void>( boost::shared_ptr<T>( static_cast<T*>(nullptr) ) );
+    test_nonempty_shared_ptr_move<void const>( boost::shared_ptr<T>( static_cast<T*>(nullptr) ) );
+    test_nonempty_shared_ptr_move<void volatile>( boost::shared_ptr<T>( static_cast<T*>(nullptr) ) );
+    test_nonempty_shared_ptr_move<void const volatile>( boost::shared_ptr<T>( static_cast<T*>(nullptr) ) );
 }
 
 template<class T> static void new_shared_ptr_move_test()
@@ -795,9 +795,9 @@ template<class T, class U> static void test_null_unique_ptr( std::unique_ptr<U> 
 {
     boost::local_shared_ptr<T> p2( std::move( p1 ) );
 
-    BOOST_TEST( p1.get() == 0 );
+    BOOST_TEST( p1.get() == nullptr );
 
-    BOOST_TEST( p2.get() == 0 );
+    BOOST_TEST( p2.get() == nullptr );
     BOOST_TEST( p2.local_use_count() == 0 );
 }
 
@@ -833,7 +833,7 @@ template<class T, class U, class D> static void test_nonempty_unique_ptr( std::u
     BOOST_TEST( p2.get() == q );
     BOOST_TEST( p2.local_use_count() == 1 );
 
-    BOOST_TEST( p1.get() == 0 );
+    BOOST_TEST( p1.get() == nullptr );
 }
 
 template<class T> static void new_unique_ptr_test()
@@ -898,35 +898,35 @@ template<class T> static void empty_copy_assign_test()
 {
     boost::local_shared_ptr<T> p1;
 
-    BOOST_TEST_EQ( p1.get(), static_cast<void*>(0) );
+    BOOST_TEST_EQ( p1.get(), static_cast<void*>(nullptr) );
     BOOST_TEST_EQ( p1.local_use_count(), 0 );
 
     boost::local_shared_ptr<T> p2;
 
     p2 = p1;
 
-    BOOST_TEST_EQ( p2.get(), static_cast<void*>(0) );
+    BOOST_TEST_EQ( p2.get(), static_cast<void*>(nullptr) );
     BOOST_TEST_EQ( p2.local_use_count(), 0 );
 
     boost::local_shared_ptr<T const> p3;
 
     p3 = p1;
 
-    BOOST_TEST_EQ( p3.get(), static_cast<void*>(0) );
+    BOOST_TEST_EQ( p3.get(), static_cast<void*>(nullptr) );
     BOOST_TEST_EQ( p3.local_use_count(), 0 );
 
     boost::local_shared_ptr<void> p4;
 
     p4 = p1;
 
-    BOOST_TEST_EQ( p4.get(), static_cast<void*>(0) );
+    BOOST_TEST_EQ( p4.get(), static_cast<void*>(nullptr) );
     BOOST_TEST_EQ( p4.local_use_count(), 0 );
 
     boost::local_shared_ptr<void const> p5;
 
     p5 = p3;
 
-    BOOST_TEST_EQ( p5.get(), static_cast<void*>(0) );
+    BOOST_TEST_EQ( p5.get(), static_cast<void*>(nullptr) );
     BOOST_TEST_EQ( p5.local_use_count(), 0 );
 }
 
@@ -934,35 +934,35 @@ template<class T> static void empty_copy_assign_test_()
 {
     boost::local_shared_ptr<T> p1;
 
-    BOOST_TEST_EQ( p1.get(), static_cast<void*>(0) );
+    BOOST_TEST_EQ( p1.get(), static_cast<void*>(nullptr) );
     BOOST_TEST_EQ( p1.local_use_count(), 0 );
 
-    boost::local_shared_ptr<T> p2( static_cast<T*>(0) );
+    boost::local_shared_ptr<T> p2( static_cast<T*>(nullptr) );
 
     p2 = p1;
 
-    BOOST_TEST_EQ( p2.get(), static_cast<void*>(0) );
+    BOOST_TEST_EQ( p2.get(), static_cast<void*>(nullptr) );
     BOOST_TEST_EQ( p2.local_use_count(), 0 );
 
-    boost::local_shared_ptr<T const> p3( static_cast<T const*>(0) );
+    boost::local_shared_ptr<T const> p3( static_cast<T const*>(nullptr) );
 
     p3 = p1;
 
-    BOOST_TEST_EQ( p3.get(), static_cast<void*>(0) );
+    BOOST_TEST_EQ( p3.get(), static_cast<void*>(nullptr) );
     BOOST_TEST_EQ( p3.local_use_count(), 0 );
 
-    boost::local_shared_ptr<void> p4( static_cast<T*>(0) );
+    boost::local_shared_ptr<void> p4( static_cast<T*>(nullptr) );
 
     p4 = p1;
 
-    BOOST_TEST_EQ( p4.get(), static_cast<void*>(0) );
+    BOOST_TEST_EQ( p4.get(), static_cast<void*>(nullptr) );
     BOOST_TEST_EQ( p4.local_use_count(), 0 );
 
-    boost::local_shared_ptr<void const> p5( static_cast<T const*>(0) );
+    boost::local_shared_ptr<void const> p5( static_cast<T const*>(nullptr) );
 
     p5 = p3;
 
-    BOOST_TEST_EQ( p5.get(), static_cast<void*>(0) );
+    BOOST_TEST_EQ( p5.get(), static_cast<void*>(nullptr) );
     BOOST_TEST_EQ( p5.local_use_count(), 0 );
 }
 
@@ -983,17 +983,17 @@ template<class T, class U> static void test_nonempty_copy_assign( boost::local_s
 
 template<class T> static void null_copy_assign_test()
 {
-    boost::local_shared_ptr<T> p1( static_cast<T*>(0) );
+    boost::local_shared_ptr<T> p1( static_cast<T*>(nullptr) );
 
     test_nonempty_copy_assign( boost::local_shared_ptr<T>(), p1 );
     test_nonempty_copy_assign( boost::local_shared_ptr<T const>(), p1 );
     test_nonempty_copy_assign( boost::local_shared_ptr<T volatile>(), p1 );
     test_nonempty_copy_assign( boost::local_shared_ptr<T const volatile>(), p1 );
 
-    test_nonempty_copy_assign( boost::local_shared_ptr<T>( static_cast<T*>(0) ), p1 );
-    test_nonempty_copy_assign( boost::local_shared_ptr<T const>( static_cast<T const*>(0) ), p1 );
-    test_nonempty_copy_assign( boost::local_shared_ptr<T volatile>( static_cast<T volatile*>(0) ), p1 );
-    test_nonempty_copy_assign( boost::local_shared_ptr<T const volatile>( static_cast<T const volatile*>(0) ), p1 );
+    test_nonempty_copy_assign( boost::local_shared_ptr<T>( static_cast<T*>(nullptr) ), p1 );
+    test_nonempty_copy_assign( boost::local_shared_ptr<T const>( static_cast<T const*>(nullptr) ), p1 );
+    test_nonempty_copy_assign( boost::local_shared_ptr<T volatile>( static_cast<T volatile*>(nullptr) ), p1 );
+    test_nonempty_copy_assign( boost::local_shared_ptr<T const volatile>( static_cast<T const volatile*>(nullptr) ), p1 );
 
     test_nonempty_copy_assign( boost::local_shared_ptr<void>(), p1 );
     test_nonempty_copy_assign( boost::local_shared_ptr<void const>(), p1 );
@@ -1010,10 +1010,10 @@ template<class T> static void new_copy_assign_test()
     test_nonempty_copy_assign( boost::local_shared_ptr<T volatile>(), p1 );
     test_nonempty_copy_assign( boost::local_shared_ptr<T const volatile>(), p1 );
 
-    test_nonempty_copy_assign( boost::local_shared_ptr<T>( static_cast<T*>(0) ), p1 );
-    test_nonempty_copy_assign( boost::local_shared_ptr<T const>( static_cast<T const*>(0) ), p1 );
-    test_nonempty_copy_assign( boost::local_shared_ptr<T volatile>( static_cast<T volatile*>(0) ), p1 );
-    test_nonempty_copy_assign( boost::local_shared_ptr<T const volatile>( static_cast<T const volatile*>(0) ), p1 );
+    test_nonempty_copy_assign( boost::local_shared_ptr<T>( static_cast<T*>(nullptr) ), p1 );
+    test_nonempty_copy_assign( boost::local_shared_ptr<T const>( static_cast<T const*>(nullptr) ), p1 );
+    test_nonempty_copy_assign( boost::local_shared_ptr<T volatile>( static_cast<T volatile*>(nullptr) ), p1 );
+    test_nonempty_copy_assign( boost::local_shared_ptr<T const volatile>( static_cast<T const volatile*>(nullptr) ), p1 );
 
     test_nonempty_copy_assign( boost::local_shared_ptr<T>( new T() ), p1 );
     test_nonempty_copy_assign( boost::local_shared_ptr<T const>( new T const() ), p1 );
@@ -1055,59 +1055,59 @@ template<class T> static void empty_move_assign_test()
 
     p2 = boost::local_shared_ptr<T>();
 
-    BOOST_TEST_EQ( p2.get(), static_cast<void*>(0) );
+    BOOST_TEST_EQ( p2.get(), static_cast<void*>(nullptr) );
     BOOST_TEST_EQ( p2.local_use_count(), 0 );
 
     boost::local_shared_ptr<T const> p3;
 
     p3 = boost::local_shared_ptr<T>();
 
-    BOOST_TEST_EQ( p3.get(), static_cast<void*>(0) );
+    BOOST_TEST_EQ( p3.get(), static_cast<void*>(nullptr) );
     BOOST_TEST_EQ( p3.local_use_count(), 0 );
 
     boost::local_shared_ptr<void> p4;
 
     p4 = boost::local_shared_ptr<T>();
 
-    BOOST_TEST_EQ( p4.get(), static_cast<void*>(0) );
+    BOOST_TEST_EQ( p4.get(), static_cast<void*>(nullptr) );
     BOOST_TEST_EQ( p4.local_use_count(), 0 );
 
     boost::local_shared_ptr<void const> p5;
 
     p5 = std::move( p3 );
 
-    BOOST_TEST_EQ( p5.get(), static_cast<void*>(0) );
+    BOOST_TEST_EQ( p5.get(), static_cast<void*>(nullptr) );
     BOOST_TEST_EQ( p5.local_use_count(), 0 );
 }
 
 template<class T> static void empty_move_assign_test_()
 {
-    boost::local_shared_ptr<T> p2( static_cast<T*>(0) );
+    boost::local_shared_ptr<T> p2( static_cast<T*>(nullptr) );
 
     p2 = boost::local_shared_ptr<T>();
 
-    BOOST_TEST_EQ( p2.get(), static_cast<void*>(0) );
+    BOOST_TEST_EQ( p2.get(), static_cast<void*>(nullptr) );
     BOOST_TEST_EQ( p2.local_use_count(), 0 );
 
-    boost::local_shared_ptr<T const> p3( static_cast<T const*>(0) );
+    boost::local_shared_ptr<T const> p3( static_cast<T const*>(nullptr) );
 
     p3 = boost::local_shared_ptr<T>();
 
-    BOOST_TEST_EQ( p3.get(), static_cast<void*>(0) );
+    BOOST_TEST_EQ( p3.get(), static_cast<void*>(nullptr) );
     BOOST_TEST_EQ( p3.local_use_count(), 0 );
 
-    boost::local_shared_ptr<void> p4( static_cast<T*>(0) );
+    boost::local_shared_ptr<void> p4( static_cast<T*>(nullptr) );
 
     p4 = boost::local_shared_ptr<T>();
 
-    BOOST_TEST_EQ( p4.get(), static_cast<void*>(0) );
+    BOOST_TEST_EQ( p4.get(), static_cast<void*>(nullptr) );
     BOOST_TEST_EQ( p4.local_use_count(), 0 );
 
-    boost::local_shared_ptr<void const> p5( static_cast<T const*>(0) );
+    boost::local_shared_ptr<void const> p5( static_cast<T const*>(nullptr) );
 
     p5 = std::move( p3 );
 
-    BOOST_TEST_EQ( p5.get(), static_cast<void*>(0) );
+    BOOST_TEST_EQ( p5.get(), static_cast<void*>(nullptr) );
     BOOST_TEST_EQ( p5.local_use_count(), 0 );
 }
 
@@ -1121,26 +1121,26 @@ template<class T, class U> static void test_nonempty_move_assign( boost::local_s
     BOOST_TEST( p2.get() == q );
     BOOST_TEST( p2.local_use_count() == k );
 
-    BOOST_TEST( p1.get() == 0 );
+    BOOST_TEST( p1.get() == nullptr );
     BOOST_TEST( p1.local_use_count() == 0 );
 }
 
 template<class T> static void null_move_assign_test()
 {
-    test_nonempty_move_assign( boost::local_shared_ptr<T>(), boost::local_shared_ptr<T>( static_cast<T*>(0) ) );
-    test_nonempty_move_assign( boost::local_shared_ptr<T const>(), boost::local_shared_ptr<T>( static_cast<T*>(0) ) );
-    test_nonempty_move_assign( boost::local_shared_ptr<T volatile>(), boost::local_shared_ptr<T>( static_cast<T*>(0) ) );
-    test_nonempty_move_assign( boost::local_shared_ptr<T const volatile>(), boost::local_shared_ptr<T>( static_cast<T*>(0) ) );
+    test_nonempty_move_assign( boost::local_shared_ptr<T>(), boost::local_shared_ptr<T>( static_cast<T*>(nullptr) ) );
+    test_nonempty_move_assign( boost::local_shared_ptr<T const>(), boost::local_shared_ptr<T>( static_cast<T*>(nullptr) ) );
+    test_nonempty_move_assign( boost::local_shared_ptr<T volatile>(), boost::local_shared_ptr<T>( static_cast<T*>(nullptr) ) );
+    test_nonempty_move_assign( boost::local_shared_ptr<T const volatile>(), boost::local_shared_ptr<T>( static_cast<T*>(nullptr) ) );
 
-    test_nonempty_move_assign( boost::local_shared_ptr<T>( static_cast<T*>(0) ), boost::local_shared_ptr<T>( static_cast<T*>(0) ) );
-    test_nonempty_move_assign( boost::local_shared_ptr<T const>( static_cast<T const*>(0) ), boost::local_shared_ptr<T>( static_cast<T*>(0) ) );
-    test_nonempty_move_assign( boost::local_shared_ptr<T volatile>( static_cast<T volatile*>(0) ), boost::local_shared_ptr<T>( static_cast<T*>(0) ) );
-    test_nonempty_move_assign( boost::local_shared_ptr<T const volatile>( static_cast<T const volatile*>(0) ), boost::local_shared_ptr<T>( static_cast<T*>(0) ) );
+    test_nonempty_move_assign( boost::local_shared_ptr<T>( static_cast<T*>(nullptr) ), boost::local_shared_ptr<T>( static_cast<T*>(nullptr) ) );
+    test_nonempty_move_assign( boost::local_shared_ptr<T const>( static_cast<T const*>(nullptr) ), boost::local_shared_ptr<T>( static_cast<T*>(nullptr) ) );
+    test_nonempty_move_assign( boost::local_shared_ptr<T volatile>( static_cast<T volatile*>(nullptr) ), boost::local_shared_ptr<T>( static_cast<T*>(nullptr) ) );
+    test_nonempty_move_assign( boost::local_shared_ptr<T const volatile>( static_cast<T const volatile*>(nullptr) ), boost::local_shared_ptr<T>( static_cast<T*>(nullptr) ) );
 
-    test_nonempty_move_assign( boost::local_shared_ptr<void>(), boost::local_shared_ptr<T>( static_cast<T*>(0) ) );
-    test_nonempty_move_assign( boost::local_shared_ptr<void const>(), boost::local_shared_ptr<T>( static_cast<T*>(0) ) );
-    test_nonempty_move_assign( boost::local_shared_ptr<void volatile>(), boost::local_shared_ptr<T>( static_cast<T*>(0) ) );
-    test_nonempty_move_assign( boost::local_shared_ptr<void const volatile>(), boost::local_shared_ptr<T>( static_cast<T*>(0) ) );
+    test_nonempty_move_assign( boost::local_shared_ptr<void>(), boost::local_shared_ptr<T>( static_cast<T*>(nullptr) ) );
+    test_nonempty_move_assign( boost::local_shared_ptr<void const>(), boost::local_shared_ptr<T>( static_cast<T*>(nullptr) ) );
+    test_nonempty_move_assign( boost::local_shared_ptr<void volatile>(), boost::local_shared_ptr<T>( static_cast<T*>(nullptr) ) );
+    test_nonempty_move_assign( boost::local_shared_ptr<void const volatile>(), boost::local_shared_ptr<T>( static_cast<T*>(nullptr) ) );
 }
 
 template<class T> static void new_move_assign_test()
@@ -1150,10 +1150,10 @@ template<class T> static void new_move_assign_test()
     test_nonempty_move_assign( boost::local_shared_ptr<T volatile>(), boost::local_shared_ptr<T>( new T() ) );
     test_nonempty_move_assign( boost::local_shared_ptr<T const volatile>(), boost::local_shared_ptr<T>( new T() ) );
 
-    test_nonempty_move_assign( boost::local_shared_ptr<T>( static_cast<T*>(0) ), boost::local_shared_ptr<T>( new T() ) );
-    test_nonempty_move_assign( boost::local_shared_ptr<T const>( static_cast<T const*>(0) ), boost::local_shared_ptr<T>( new T() ) );
-    test_nonempty_move_assign( boost::local_shared_ptr<T volatile>( static_cast<T volatile*>(0) ), boost::local_shared_ptr<T>( new T() ) );
-    test_nonempty_move_assign( boost::local_shared_ptr<T const volatile>( static_cast<T const volatile*>(0) ), boost::local_shared_ptr<T>( new T() ) );
+    test_nonempty_move_assign( boost::local_shared_ptr<T>( static_cast<T*>(nullptr) ), boost::local_shared_ptr<T>( new T() ) );
+    test_nonempty_move_assign( boost::local_shared_ptr<T const>( static_cast<T const*>(nullptr) ), boost::local_shared_ptr<T>( new T() ) );
+    test_nonempty_move_assign( boost::local_shared_ptr<T volatile>( static_cast<T volatile*>(nullptr) ), boost::local_shared_ptr<T>( new T() ) );
+    test_nonempty_move_assign( boost::local_shared_ptr<T const volatile>( static_cast<T const volatile*>(nullptr) ), boost::local_shared_ptr<T>( new T() ) );
 
     test_nonempty_move_assign( boost::local_shared_ptr<T>( new T() ), boost::local_shared_ptr<T>( new T() ) );
     test_nonempty_move_assign( boost::local_shared_ptr<T const>( new T const() ), boost::local_shared_ptr<T>( new T() ) );
@@ -1193,7 +1193,7 @@ template<class T> static void test_nullptr_assign( boost::local_shared_ptr<T> p1
 {
     p1 = nullptr;
 
-    BOOST_TEST( p1.get() == 0 );
+    BOOST_TEST( p1.get() == nullptr );
     BOOST_TEST( p1.local_use_count() == 0 );
 }
 
@@ -1207,10 +1207,10 @@ template<class T> static void empty_nullptr_assign_test()
 
 template<class T> static void null_nullptr_assign_test()
 {
-    test_nullptr_assign( boost::local_shared_ptr<T>( static_cast<T*>(0) ) );
-    test_nullptr_assign( boost::local_shared_ptr<T const>( static_cast<T const*>(0) ) );
-    test_nullptr_assign( boost::local_shared_ptr<T volatile>( static_cast<T volatile*>(0) ) );
-    test_nullptr_assign( boost::local_shared_ptr<T const volatile>( static_cast<T const volatile*>(0) ) );
+    test_nullptr_assign( boost::local_shared_ptr<T>( static_cast<T*>(nullptr) ) );
+    test_nullptr_assign( boost::local_shared_ptr<T const>( static_cast<T const*>(nullptr) ) );
+    test_nullptr_assign( boost::local_shared_ptr<T volatile>( static_cast<T volatile*>(nullptr) ) );
+    test_nullptr_assign( boost::local_shared_ptr<T const volatile>( static_cast<T const volatile*>(nullptr) ) );
 }
 
 template<class T> static void new_nullptr_assign_test()
@@ -1247,7 +1247,7 @@ template<class T> static void test_default_reset( boost::local_shared_ptr<T> p1 
 {
     p1.reset();
 
-    BOOST_TEST( p1.get() == 0 );
+    BOOST_TEST( p1.get() == nullptr );
     BOOST_TEST( p1.local_use_count() == 0 );
 }
 
@@ -1261,10 +1261,10 @@ template<class T> static void empty_default_reset_test()
 
 template<class T> static void null_default_reset_test()
 {
-    test_default_reset( boost::local_shared_ptr<T>( static_cast<T*>(0) ) );
-    test_default_reset( boost::local_shared_ptr<T const>( static_cast<T const*>(0) ) );
-    test_default_reset( boost::local_shared_ptr<T volatile>( static_cast<T volatile*>(0) ) );
-    test_default_reset( boost::local_shared_ptr<T const volatile>( static_cast<T const volatile*>(0) ) );
+    test_default_reset( boost::local_shared_ptr<T>( static_cast<T*>(nullptr) ) );
+    test_default_reset( boost::local_shared_ptr<T const>( static_cast<T const*>(nullptr) ) );
+    test_default_reset( boost::local_shared_ptr<T volatile>( static_cast<T volatile*>(nullptr) ) );
+    test_default_reset( boost::local_shared_ptr<T const volatile>( static_cast<T const volatile*>(nullptr) ) );
 }
 
 template<class T> static void new_default_reset_test()
@@ -1301,28 +1301,28 @@ template<class T> static void empty_shared_ptr_copy_assign_test()
 {
     boost::shared_ptr<T> sp1;
 
-    BOOST_TEST_EQ( sp1.get(), static_cast<void*>(0) );
+    BOOST_TEST_EQ( sp1.get(), static_cast<void*>(nullptr) );
     BOOST_TEST_EQ( sp1.use_count(), 0 );
 
     boost::local_shared_ptr<T> p2;
 
     p2 = sp1;
 
-    BOOST_TEST_EQ( p2.get(), static_cast<void*>(0) );
+    BOOST_TEST_EQ( p2.get(), static_cast<void*>(nullptr) );
     BOOST_TEST_EQ( p2.local_use_count(), 0 );
 
     boost::local_shared_ptr<T const> p3;
 
     p3 = sp1;
 
-    BOOST_TEST_EQ( p3.get(), static_cast<void*>(0) );
+    BOOST_TEST_EQ( p3.get(), static_cast<void*>(nullptr) );
     BOOST_TEST_EQ( p3.local_use_count(), 0 );
 
     boost::local_shared_ptr<void> p4;
 
     p4 = sp1;
 
-    BOOST_TEST_EQ( p4.get(), static_cast<void*>(0) );
+    BOOST_TEST_EQ( p4.get(), static_cast<void*>(nullptr) );
     BOOST_TEST_EQ( p4.local_use_count(), 0 );
 
     boost::shared_ptr<T const> sp2( sp1 );
@@ -1330,7 +1330,7 @@ template<class T> static void empty_shared_ptr_copy_assign_test()
 
     p5 = sp2;
 
-    BOOST_TEST_EQ( p5.get(), static_cast<void*>(0) );
+    BOOST_TEST_EQ( p5.get(), static_cast<void*>(nullptr) );
     BOOST_TEST_EQ( p5.local_use_count(), 0 );
 }
 
@@ -1338,36 +1338,36 @@ template<class T> static void empty_shared_ptr_copy_assign_test_()
 {
     boost::shared_ptr<T> sp1;
 
-    BOOST_TEST_EQ( sp1.get(), static_cast<void*>(0) );
+    BOOST_TEST_EQ( sp1.get(), static_cast<void*>(nullptr) );
     BOOST_TEST_EQ( sp1.use_count(), 0 );
 
-    boost::local_shared_ptr<T> p2( static_cast<T*>(0) );
+    boost::local_shared_ptr<T> p2( static_cast<T*>(nullptr) );
 
     p2 = sp1;
 
-    BOOST_TEST_EQ( p2.get(), static_cast<void*>(0) );
+    BOOST_TEST_EQ( p2.get(), static_cast<void*>(nullptr) );
     BOOST_TEST_EQ( p2.local_use_count(), 0 );
 
-    boost::local_shared_ptr<T const> p3( static_cast<T const*>(0) );
+    boost::local_shared_ptr<T const> p3( static_cast<T const*>(nullptr) );
 
     p3 = sp1;
 
-    BOOST_TEST_EQ( p3.get(), static_cast<void*>(0) );
+    BOOST_TEST_EQ( p3.get(), static_cast<void*>(nullptr) );
     BOOST_TEST_EQ( p3.local_use_count(), 0 );
 
-    boost::local_shared_ptr<void> p4( static_cast<T*>(0) );
+    boost::local_shared_ptr<void> p4( static_cast<T*>(nullptr) );
 
     p4 = sp1;
 
-    BOOST_TEST_EQ( p4.get(), static_cast<void*>(0) );
+    BOOST_TEST_EQ( p4.get(), static_cast<void*>(nullptr) );
     BOOST_TEST_EQ( p4.local_use_count(), 0 );
 
     boost::shared_ptr<T const> sp2( sp1 );
-    boost::local_shared_ptr<void const> p5( static_cast<T const*>(0) );
+    boost::local_shared_ptr<void const> p5( static_cast<T const*>(nullptr) );
 
     p5 = sp2;
 
-    BOOST_TEST_EQ( p5.get(), static_cast<void*>(0) );
+    BOOST_TEST_EQ( p5.get(), static_cast<void*>(nullptr) );
     BOOST_TEST_EQ( p5.local_use_count(), 0 );
 }
 
@@ -1388,17 +1388,17 @@ template<class T, class U> static void test_nonempty_shared_ptr_copy_assign( boo
 
 template<class T> static void null_shared_ptr_copy_assign_test()
 {
-    boost::shared_ptr<T> p1( static_cast<T*>(0) );
+    boost::shared_ptr<T> p1( static_cast<T*>(nullptr) );
 
     test_nonempty_shared_ptr_copy_assign( boost::local_shared_ptr<T>(), p1 );
     test_nonempty_shared_ptr_copy_assign( boost::local_shared_ptr<T const>(), p1 );
     test_nonempty_shared_ptr_copy_assign( boost::local_shared_ptr<T volatile>(), p1 );
     test_nonempty_shared_ptr_copy_assign( boost::local_shared_ptr<T const volatile>(), p1 );
 
-    test_nonempty_shared_ptr_copy_assign( boost::local_shared_ptr<T>( static_cast<T*>(0) ), p1 );
-    test_nonempty_shared_ptr_copy_assign( boost::local_shared_ptr<T const>( static_cast<T const*>(0) ), p1 );
-    test_nonempty_shared_ptr_copy_assign( boost::local_shared_ptr<T volatile>( static_cast<T volatile*>(0) ), p1 );
-    test_nonempty_shared_ptr_copy_assign( boost::local_shared_ptr<T const volatile>( static_cast<T const volatile*>(0) ), p1 );
+    test_nonempty_shared_ptr_copy_assign( boost::local_shared_ptr<T>( static_cast<T*>(nullptr) ), p1 );
+    test_nonempty_shared_ptr_copy_assign( boost::local_shared_ptr<T const>( static_cast<T const*>(nullptr) ), p1 );
+    test_nonempty_shared_ptr_copy_assign( boost::local_shared_ptr<T volatile>( static_cast<T volatile*>(nullptr) ), p1 );
+    test_nonempty_shared_ptr_copy_assign( boost::local_shared_ptr<T const volatile>( static_cast<T const volatile*>(nullptr) ), p1 );
 
     test_nonempty_shared_ptr_copy_assign( boost::local_shared_ptr<void>(), p1 );
     test_nonempty_shared_ptr_copy_assign( boost::local_shared_ptr<void const>(), p1 );
@@ -1415,10 +1415,10 @@ template<class T> static void new_shared_ptr_copy_assign_test()
     test_nonempty_shared_ptr_copy_assign( boost::local_shared_ptr<T volatile>(), p1 );
     test_nonempty_shared_ptr_copy_assign( boost::local_shared_ptr<T const volatile>(), p1 );
 
-    test_nonempty_shared_ptr_copy_assign( boost::local_shared_ptr<T>( static_cast<T*>(0) ), p1 );
-    test_nonempty_shared_ptr_copy_assign( boost::local_shared_ptr<T const>( static_cast<T const*>(0) ), p1 );
-    test_nonempty_shared_ptr_copy_assign( boost::local_shared_ptr<T volatile>( static_cast<T volatile*>(0) ), p1 );
-    test_nonempty_shared_ptr_copy_assign( boost::local_shared_ptr<T const volatile>( static_cast<T const volatile*>(0) ), p1 );
+    test_nonempty_shared_ptr_copy_assign( boost::local_shared_ptr<T>( static_cast<T*>(nullptr) ), p1 );
+    test_nonempty_shared_ptr_copy_assign( boost::local_shared_ptr<T const>( static_cast<T const*>(nullptr) ), p1 );
+    test_nonempty_shared_ptr_copy_assign( boost::local_shared_ptr<T volatile>( static_cast<T volatile*>(nullptr) ), p1 );
+    test_nonempty_shared_ptr_copy_assign( boost::local_shared_ptr<T const volatile>( static_cast<T const volatile*>(nullptr) ), p1 );
 
     test_nonempty_shared_ptr_copy_assign( boost::local_shared_ptr<T>( new T() ), p1 );
     test_nonempty_shared_ptr_copy_assign( boost::local_shared_ptr<T const>( new T const() ), p1 );
@@ -1460,59 +1460,59 @@ template<class T> static void empty_shared_ptr_move_assign_test()
 
     p2 = boost::shared_ptr<T>();
 
-    BOOST_TEST_EQ( p2.get(), static_cast<void*>(0) );
+    BOOST_TEST_EQ( p2.get(), static_cast<void*>(nullptr) );
     BOOST_TEST_EQ( p2.local_use_count(), 0 );
 
     boost::local_shared_ptr<T const> p3;
 
     p3 = boost::shared_ptr<T>();
 
-    BOOST_TEST_EQ( p3.get(), static_cast<void*>(0) );
+    BOOST_TEST_EQ( p3.get(), static_cast<void*>(nullptr) );
     BOOST_TEST_EQ( p3.local_use_count(), 0 );
 
     boost::local_shared_ptr<void> p4;
 
     p4 = boost::shared_ptr<T>();
 
-    BOOST_TEST_EQ( p4.get(), static_cast<void*>(0) );
+    BOOST_TEST_EQ( p4.get(), static_cast<void*>(nullptr) );
     BOOST_TEST_EQ( p4.local_use_count(), 0 );
 
     boost::local_shared_ptr<void const> p5;
 
     p5 = boost::shared_ptr<T const>();
 
-    BOOST_TEST_EQ( p5.get(), static_cast<void*>(0) );
+    BOOST_TEST_EQ( p5.get(), static_cast<void*>(nullptr) );
     BOOST_TEST_EQ( p5.local_use_count(), 0 );
 }
 
 template<class T> static void empty_shared_ptr_move_assign_test_()
 {
-    boost::local_shared_ptr<T> p2( static_cast<T*>(0) );
+    boost::local_shared_ptr<T> p2( static_cast<T*>(nullptr) );
 
     p2 = boost::shared_ptr<T>();
 
-    BOOST_TEST_EQ( p2.get(), static_cast<void*>(0) );
+    BOOST_TEST_EQ( p2.get(), static_cast<void*>(nullptr) );
     BOOST_TEST_EQ( p2.local_use_count(), 0 );
 
-    boost::local_shared_ptr<T const> p3( static_cast<T const*>(0) );
+    boost::local_shared_ptr<T const> p3( static_cast<T const*>(nullptr) );
 
     p3 = boost::shared_ptr<T>();
 
-    BOOST_TEST_EQ( p3.get(), static_cast<void*>(0) );
+    BOOST_TEST_EQ( p3.get(), static_cast<void*>(nullptr) );
     BOOST_TEST_EQ( p3.local_use_count(), 0 );
 
-    boost::local_shared_ptr<void> p4( static_cast<T*>(0) );
+    boost::local_shared_ptr<void> p4( static_cast<T*>(nullptr) );
 
     p4 = boost::shared_ptr<T>();
 
-    BOOST_TEST_EQ( p4.get(), static_cast<void*>(0) );
+    BOOST_TEST_EQ( p4.get(), static_cast<void*>(nullptr) );
     BOOST_TEST_EQ( p4.local_use_count(), 0 );
 
-    boost::local_shared_ptr<void const> p5( static_cast<T const*>(0) );
+    boost::local_shared_ptr<void const> p5( static_cast<T const*>(nullptr) );
 
     p5 = boost::shared_ptr<T const>();
 
-    BOOST_TEST_EQ( p5.get(), static_cast<void*>(0) );
+    BOOST_TEST_EQ( p5.get(), static_cast<void*>(nullptr) );
     BOOST_TEST_EQ( p5.local_use_count(), 0 );
 }
 
@@ -1526,7 +1526,7 @@ template<class T, class U> static void test_nonempty_shared_ptr_move_assign( boo
     BOOST_TEST_EQ( p2.get(), q );
     BOOST_TEST_EQ( p2.local_use_count(), 1 );
 
-    BOOST_TEST( p1.get() == 0 );
+    BOOST_TEST( p1.get() == nullptr );
     BOOST_TEST( p1.use_count() == 0 );
 
     boost::shared_ptr<T> p3( p2 );
@@ -1537,20 +1537,20 @@ template<class T, class U> static void test_nonempty_shared_ptr_move_assign( boo
 
 template<class T> static void null_shared_ptr_move_assign_test()
 {
-    test_nonempty_shared_ptr_move_assign( boost::local_shared_ptr<T>(), boost::shared_ptr<T>( static_cast<T*>(0) ) );
-    test_nonempty_shared_ptr_move_assign( boost::local_shared_ptr<T const>(), boost::shared_ptr<T>( static_cast<T*>(0) ) );
-    test_nonempty_shared_ptr_move_assign( boost::local_shared_ptr<T volatile>(), boost::shared_ptr<T>( static_cast<T*>(0) ) );
-    test_nonempty_shared_ptr_move_assign( boost::local_shared_ptr<T const volatile>(), boost::shared_ptr<T>( static_cast<T*>(0) ) );
+    test_nonempty_shared_ptr_move_assign( boost::local_shared_ptr<T>(), boost::shared_ptr<T>( static_cast<T*>(nullptr) ) );
+    test_nonempty_shared_ptr_move_assign( boost::local_shared_ptr<T const>(), boost::shared_ptr<T>( static_cast<T*>(nullptr) ) );
+    test_nonempty_shared_ptr_move_assign( boost::local_shared_ptr<T volatile>(), boost::shared_ptr<T>( static_cast<T*>(nullptr) ) );
+    test_nonempty_shared_ptr_move_assign( boost::local_shared_ptr<T const volatile>(), boost::shared_ptr<T>( static_cast<T*>(nullptr) ) );
 
-    test_nonempty_shared_ptr_move_assign( boost::local_shared_ptr<T>( static_cast<T*>(0) ), boost::shared_ptr<T>( static_cast<T*>(0) ) );
-    test_nonempty_shared_ptr_move_assign( boost::local_shared_ptr<T const>( static_cast<T const*>(0) ), boost::shared_ptr<T>( static_cast<T*>(0) ) );
-    test_nonempty_shared_ptr_move_assign( boost::local_shared_ptr<T volatile>( static_cast<T volatile*>(0) ), boost::shared_ptr<T>( static_cast<T*>(0) ) );
-    test_nonempty_shared_ptr_move_assign( boost::local_shared_ptr<T const volatile>( static_cast<T const volatile*>(0) ), boost::shared_ptr<T>( static_cast<T*>(0) ) );
+    test_nonempty_shared_ptr_move_assign( boost::local_shared_ptr<T>( static_cast<T*>(nullptr) ), boost::shared_ptr<T>( static_cast<T*>(nullptr) ) );
+    test_nonempty_shared_ptr_move_assign( boost::local_shared_ptr<T const>( static_cast<T const*>(nullptr) ), boost::shared_ptr<T>( static_cast<T*>(nullptr) ) );
+    test_nonempty_shared_ptr_move_assign( boost::local_shared_ptr<T volatile>( static_cast<T volatile*>(nullptr) ), boost::shared_ptr<T>( static_cast<T*>(nullptr) ) );
+    test_nonempty_shared_ptr_move_assign( boost::local_shared_ptr<T const volatile>( static_cast<T const volatile*>(nullptr) ), boost::shared_ptr<T>( static_cast<T*>(nullptr) ) );
 
-    test_nonempty_shared_ptr_move_assign( boost::local_shared_ptr<void>(), boost::shared_ptr<T>( static_cast<T*>(0) ) );
-    test_nonempty_shared_ptr_move_assign( boost::local_shared_ptr<void const>(), boost::shared_ptr<T>( static_cast<T*>(0) ) );
-    test_nonempty_shared_ptr_move_assign( boost::local_shared_ptr<void volatile>(), boost::shared_ptr<T>( static_cast<T*>(0) ) );
-    test_nonempty_shared_ptr_move_assign( boost::local_shared_ptr<void const volatile>(), boost::shared_ptr<T>( static_cast<T*>(0) ) );
+    test_nonempty_shared_ptr_move_assign( boost::local_shared_ptr<void>(), boost::shared_ptr<T>( static_cast<T*>(nullptr) ) );
+    test_nonempty_shared_ptr_move_assign( boost::local_shared_ptr<void const>(), boost::shared_ptr<T>( static_cast<T*>(nullptr) ) );
+    test_nonempty_shared_ptr_move_assign( boost::local_shared_ptr<void volatile>(), boost::shared_ptr<T>( static_cast<T*>(nullptr) ) );
+    test_nonempty_shared_ptr_move_assign( boost::local_shared_ptr<void const volatile>(), boost::shared_ptr<T>( static_cast<T*>(nullptr) ) );
 }
 
 template<class T> static void new_shared_ptr_move_assign_test()
@@ -1560,10 +1560,10 @@ template<class T> static void new_shared_ptr_move_assign_test()
     test_nonempty_shared_ptr_move_assign( boost::local_shared_ptr<T volatile>(), boost::shared_ptr<T>( new T() ) );
     test_nonempty_shared_ptr_move_assign( boost::local_shared_ptr<T const volatile>(), boost::shared_ptr<T>( new T() ) );
 
-    test_nonempty_shared_ptr_move_assign( boost::local_shared_ptr<T>( static_cast<T*>(0) ), boost::shared_ptr<T>( new T() ) );
-    test_nonempty_shared_ptr_move_assign( boost::local_shared_ptr<T const>( static_cast<T const*>(0) ), boost::shared_ptr<T>( new T() ) );
-    test_nonempty_shared_ptr_move_assign( boost::local_shared_ptr<T volatile>( static_cast<T volatile*>(0) ), boost::shared_ptr<T>( new T() ) );
-    test_nonempty_shared_ptr_move_assign( boost::local_shared_ptr<T const volatile>( static_cast<T const volatile*>(0) ), boost::shared_ptr<T>( new T() ) );
+    test_nonempty_shared_ptr_move_assign( boost::local_shared_ptr<T>( static_cast<T*>(nullptr) ), boost::shared_ptr<T>( new T() ) );
+    test_nonempty_shared_ptr_move_assign( boost::local_shared_ptr<T const>( static_cast<T const*>(nullptr) ), boost::shared_ptr<T>( new T() ) );
+    test_nonempty_shared_ptr_move_assign( boost::local_shared_ptr<T volatile>( static_cast<T volatile*>(nullptr) ), boost::shared_ptr<T>( new T() ) );
+    test_nonempty_shared_ptr_move_assign( boost::local_shared_ptr<T const volatile>( static_cast<T const volatile*>(nullptr) ), boost::shared_ptr<T>( new T() ) );
 
     test_nonempty_shared_ptr_move_assign( boost::local_shared_ptr<T>( new T() ), boost::shared_ptr<T>( new T() ) );
     test_nonempty_shared_ptr_move_assign( boost::local_shared_ptr<T const>( new T const() ), boost::shared_ptr<T>( new T() ) );
@@ -1605,59 +1605,59 @@ template<class T> static void empty_unique_ptr_assign_test()
 
     p2 = std::unique_ptr<T>();
 
-    BOOST_TEST_EQ( p2.get(), static_cast<void*>(0) );
+    BOOST_TEST_EQ( p2.get(), static_cast<void*>(nullptr) );
     BOOST_TEST_EQ( p2.local_use_count(), 0 );
 
     boost::local_shared_ptr<T const> p3;
 
     p3 = std::unique_ptr<T>();
 
-    BOOST_TEST_EQ( p3.get(), static_cast<void*>(0) );
+    BOOST_TEST_EQ( p3.get(), static_cast<void*>(nullptr) );
     BOOST_TEST_EQ( p3.local_use_count(), 0 );
 
     boost::local_shared_ptr<void> p4;
 
     p4 = std::unique_ptr<T>();
 
-    BOOST_TEST_EQ( p4.get(), static_cast<void*>(0) );
+    BOOST_TEST_EQ( p4.get(), static_cast<void*>(nullptr) );
     BOOST_TEST_EQ( p4.local_use_count(), 0 );
 
     boost::local_shared_ptr<void const> p5;
 
     p5 = std::unique_ptr<T const>();
 
-    BOOST_TEST_EQ( p5.get(), static_cast<void*>(0) );
+    BOOST_TEST_EQ( p5.get(), static_cast<void*>(nullptr) );
     BOOST_TEST_EQ( p5.local_use_count(), 0 );
 }
 
 template<class T> static void empty_unique_ptr_assign_test_()
 {
-    boost::local_shared_ptr<T> p2( static_cast<T*>(0) );
+    boost::local_shared_ptr<T> p2( static_cast<T*>(nullptr) );
 
     p2 = std::unique_ptr<T>();
 
-    BOOST_TEST_EQ( p2.get(), static_cast<void*>(0) );
+    BOOST_TEST_EQ( p2.get(), static_cast<void*>(nullptr) );
     BOOST_TEST_EQ( p2.local_use_count(), 0 );
 
-    boost::local_shared_ptr<T const> p3( static_cast<T const*>(0) );
+    boost::local_shared_ptr<T const> p3( static_cast<T const*>(nullptr) );
 
     p3 = std::unique_ptr<T>();
 
-    BOOST_TEST_EQ( p3.get(), static_cast<void*>(0) );
+    BOOST_TEST_EQ( p3.get(), static_cast<void*>(nullptr) );
     BOOST_TEST_EQ( p3.local_use_count(), 0 );
 
-    boost::local_shared_ptr<void> p4( static_cast<T*>(0) );
+    boost::local_shared_ptr<void> p4( static_cast<T*>(nullptr) );
 
     p4 = std::unique_ptr<T>();
 
-    BOOST_TEST_EQ( p4.get(), static_cast<void*>(0) );
+    BOOST_TEST_EQ( p4.get(), static_cast<void*>(nullptr) );
     BOOST_TEST_EQ( p4.local_use_count(), 0 );
 
-    boost::local_shared_ptr<void const> p5( static_cast<T const*>(0) );
+    boost::local_shared_ptr<void const> p5( static_cast<T const*>(nullptr) );
 
     p5 = std::unique_ptr<T const>();
 
-    BOOST_TEST_EQ( p5.get(), static_cast<void*>(0) );
+    BOOST_TEST_EQ( p5.get(), static_cast<void*>(nullptr) );
     BOOST_TEST_EQ( p5.local_use_count(), 0 );
 }
 
@@ -1670,7 +1670,7 @@ template<class T, class U, class D> static void test_nonempty_unique_ptr_assign(
     BOOST_TEST_EQ( p2.get(), q );
     BOOST_TEST_EQ( p2.local_use_count(), 1 );
 
-    BOOST_TEST( p1.get() == 0 );
+    BOOST_TEST( p1.get() == nullptr );
 }
 
 template<class T> static void new_unique_ptr_assign_test()
@@ -1680,10 +1680,10 @@ template<class T> static void new_unique_ptr_assign_test()
     test_nonempty_unique_ptr_assign( boost::local_shared_ptr<T volatile>(), std::unique_ptr<T>( new T() ) );
     test_nonempty_unique_ptr_assign( boost::local_shared_ptr<T const volatile>(), std::unique_ptr<T>( new T() ) );
 
-    test_nonempty_unique_ptr_assign( boost::local_shared_ptr<T>( static_cast<T*>(0) ), std::unique_ptr<T>( new T() ) );
-    test_nonempty_unique_ptr_assign( boost::local_shared_ptr<T const>( static_cast<T const*>(0) ), std::unique_ptr<T>( new T() ) );
-    test_nonempty_unique_ptr_assign( boost::local_shared_ptr<T volatile>( static_cast<T volatile*>(0) ), std::unique_ptr<T>( new T() ) );
-    test_nonempty_unique_ptr_assign( boost::local_shared_ptr<T const volatile>( static_cast<T const volatile*>(0) ), std::unique_ptr<T>( new T() ) );
+    test_nonempty_unique_ptr_assign( boost::local_shared_ptr<T>( static_cast<T*>(nullptr) ), std::unique_ptr<T>( new T() ) );
+    test_nonempty_unique_ptr_assign( boost::local_shared_ptr<T const>( static_cast<T const*>(nullptr) ), std::unique_ptr<T>( new T() ) );
+    test_nonempty_unique_ptr_assign( boost::local_shared_ptr<T volatile>( static_cast<T volatile*>(nullptr) ), std::unique_ptr<T>( new T() ) );
+    test_nonempty_unique_ptr_assign( boost::local_shared_ptr<T const volatile>( static_cast<T const volatile*>(nullptr) ), std::unique_ptr<T>( new T() ) );
 
     test_nonempty_unique_ptr_assign( boost::local_shared_ptr<T>( new T() ), std::unique_ptr<T>( new T() ) );
     test_nonempty_unique_ptr_assign( boost::local_shared_ptr<T const>( new T const() ), std::unique_ptr<T>( new T() ) );
@@ -1703,10 +1703,10 @@ template<class T> static void del_unique_ptr_assign_test()
     test_nonempty_unique_ptr_assign( boost::local_shared_ptr<T volatile>(), std::unique_ptr<T, boost::checked_deleter<T>>( new T() ) );
     test_nonempty_unique_ptr_assign( boost::local_shared_ptr<T const volatile>(), std::unique_ptr<T, boost::checked_deleter<T>>( new T() ) );
 
-    test_nonempty_unique_ptr_assign( boost::local_shared_ptr<T>( static_cast<T*>(0) ), std::unique_ptr<T, boost::checked_deleter<T>>( new T() ) );
-    test_nonempty_unique_ptr_assign( boost::local_shared_ptr<T const>( static_cast<T const*>(0) ), std::unique_ptr<T, boost::checked_deleter<T>>( new T() ) );
-    test_nonempty_unique_ptr_assign( boost::local_shared_ptr<T volatile>( static_cast<T volatile*>(0) ), std::unique_ptr<T, boost::checked_deleter<T>>( new T() ) );
-    test_nonempty_unique_ptr_assign( boost::local_shared_ptr<T const volatile>( static_cast<T const volatile*>(0) ), std::unique_ptr<T, boost::checked_deleter<T>>( new T() ) );
+    test_nonempty_unique_ptr_assign( boost::local_shared_ptr<T>( static_cast<T*>(nullptr) ), std::unique_ptr<T, boost::checked_deleter<T>>( new T() ) );
+    test_nonempty_unique_ptr_assign( boost::local_shared_ptr<T const>( static_cast<T const*>(nullptr) ), std::unique_ptr<T, boost::checked_deleter<T>>( new T() ) );
+    test_nonempty_unique_ptr_assign( boost::local_shared_ptr<T volatile>( static_cast<T volatile*>(nullptr) ), std::unique_ptr<T, boost::checked_deleter<T>>( new T() ) );
+    test_nonempty_unique_ptr_assign( boost::local_shared_ptr<T const volatile>( static_cast<T const volatile*>(nullptr) ), std::unique_ptr<T, boost::checked_deleter<T>>( new T() ) );
 
     test_nonempty_unique_ptr_assign( boost::local_shared_ptr<T>( new T() ), std::unique_ptr<T, boost::checked_deleter<T>>( new T() ) );
     test_nonempty_unique_ptr_assign( boost::local_shared_ptr<T const>( new T const() ), std::unique_ptr<T, boost::checked_deleter<T>>( new T() ) );
@@ -1766,15 +1766,15 @@ template<class T> static void empty_pointer_reset_test()
 
 template<class T> static void null_pointer_reset_test()
 {
-    test_pointer_reset<T>( boost::local_shared_ptr<T>( static_cast<T*>(0) ) );
-    test_pointer_reset<T>( boost::local_shared_ptr<T const>( static_cast<T*>(0) ) );
-    test_pointer_reset<T>( boost::local_shared_ptr<T volatile>( static_cast<T*>(0) ) );
-    test_pointer_reset<T>( boost::local_shared_ptr<T const volatile>( static_cast<T*>(0) ) );
+    test_pointer_reset<T>( boost::local_shared_ptr<T>( static_cast<T*>(nullptr) ) );
+    test_pointer_reset<T>( boost::local_shared_ptr<T const>( static_cast<T*>(nullptr) ) );
+    test_pointer_reset<T>( boost::local_shared_ptr<T volatile>( static_cast<T*>(nullptr) ) );
+    test_pointer_reset<T>( boost::local_shared_ptr<T const volatile>( static_cast<T*>(nullptr) ) );
 
-    test_pointer_reset<T>( boost::local_shared_ptr<void>( static_cast<T*>(0) ) );
-    test_pointer_reset<T>( boost::local_shared_ptr<void const>( static_cast<T*>(0) ) );
-    test_pointer_reset<T>( boost::local_shared_ptr<void volatile>( static_cast<T*>(0) ) );
-    test_pointer_reset<T>( boost::local_shared_ptr<void const volatile>( static_cast<T*>(0) ) );
+    test_pointer_reset<T>( boost::local_shared_ptr<void>( static_cast<T*>(nullptr) ) );
+    test_pointer_reset<T>( boost::local_shared_ptr<void const>( static_cast<T*>(nullptr) ) );
+    test_pointer_reset<T>( boost::local_shared_ptr<void volatile>( static_cast<T*>(nullptr) ) );
+    test_pointer_reset<T>( boost::local_shared_ptr<void const volatile>( static_cast<T*>(nullptr) ) );
 }
 
 template<class T> static void new_pointer_reset_test()
@@ -1835,7 +1835,7 @@ template<class T, class U> static void test_deleter_reset( boost::local_shared_p
 
     boost::shared_ptr<U> p3( p2 );
 
-    BOOST_TEST( boost::get_deleter< deleter<T> >( p3 ) != 0 );
+    BOOST_TEST( boost::get_deleter< deleter<T> >( p3 ) != nullptr );
 
     p3.reset();
     BOOST_TEST( !called );
@@ -1859,15 +1859,15 @@ template<class T> static void empty_deleter_reset_test()
 
 template<class T> static void null_deleter_reset_test()
 {
-    test_deleter_reset<T>( boost::local_shared_ptr<T>( static_cast<T*>(0) ) );
-    test_deleter_reset<T>( boost::local_shared_ptr<T const>( static_cast<T*>(0) ) );
-    test_deleter_reset<T>( boost::local_shared_ptr<T volatile>( static_cast<T*>(0) ) );
-    test_deleter_reset<T>( boost::local_shared_ptr<T const volatile>( static_cast<T*>(0) ) );
+    test_deleter_reset<T>( boost::local_shared_ptr<T>( static_cast<T*>(nullptr) ) );
+    test_deleter_reset<T>( boost::local_shared_ptr<T const>( static_cast<T*>(nullptr) ) );
+    test_deleter_reset<T>( boost::local_shared_ptr<T volatile>( static_cast<T*>(nullptr) ) );
+    test_deleter_reset<T>( boost::local_shared_ptr<T const volatile>( static_cast<T*>(nullptr) ) );
 
-    test_deleter_reset<T>( boost::local_shared_ptr<void>( static_cast<T*>(0) ) );
-    test_deleter_reset<T>( boost::local_shared_ptr<void const>( static_cast<T*>(0) ) );
-    test_deleter_reset<T>( boost::local_shared_ptr<void volatile>( static_cast<T*>(0) ) );
-    test_deleter_reset<T>( boost::local_shared_ptr<void const volatile>( static_cast<T*>(0) ) );
+    test_deleter_reset<T>( boost::local_shared_ptr<void>( static_cast<T*>(nullptr) ) );
+    test_deleter_reset<T>( boost::local_shared_ptr<void const>( static_cast<T*>(nullptr) ) );
+    test_deleter_reset<T>( boost::local_shared_ptr<void volatile>( static_cast<T*>(nullptr) ) );
+    test_deleter_reset<T>( boost::local_shared_ptr<void const volatile>( static_cast<T*>(nullptr) ) );
 }
 
 template<class T> static void new_deleter_reset_test()
@@ -1916,7 +1916,7 @@ template<class T, class U> static void test_allocator_reset( boost::local_shared
 
     boost::shared_ptr<U> p3( p2 );
 
-    BOOST_TEST( boost::get_deleter< deleter<T> >( p3 ) != 0 );
+    BOOST_TEST( boost::get_deleter< deleter<T> >( p3 ) != nullptr );
 
     p3.reset();
     BOOST_TEST( !called );
@@ -1940,15 +1940,15 @@ template<class T> static void empty_allocator_reset_test()
 
 template<class T> static void null_allocator_reset_test()
 {
-    test_allocator_reset<T>( boost::local_shared_ptr<T>( static_cast<T*>(0) ) );
-    test_allocator_reset<T>( boost::local_shared_ptr<T const>( static_cast<T*>(0) ) );
-    test_allocator_reset<T>( boost::local_shared_ptr<T volatile>( static_cast<T*>(0) ) );
-    test_allocator_reset<T>( boost::local_shared_ptr<T const volatile>( static_cast<T*>(0) ) );
+    test_allocator_reset<T>( boost::local_shared_ptr<T>( static_cast<T*>(nullptr) ) );
+    test_allocator_reset<T>( boost::local_shared_ptr<T const>( static_cast<T*>(nullptr) ) );
+    test_allocator_reset<T>( boost::local_shared_ptr<T volatile>( static_cast<T*>(nullptr) ) );
+    test_allocator_reset<T>( boost::local_shared_ptr<T const volatile>( static_cast<T*>(nullptr) ) );
 
-    test_allocator_reset<T>( boost::local_shared_ptr<void>( static_cast<T*>(0) ) );
-    test_allocator_reset<T>( boost::local_shared_ptr<void const>( static_cast<T*>(0) ) );
-    test_allocator_reset<T>( boost::local_shared_ptr<void volatile>( static_cast<T*>(0) ) );
-    test_allocator_reset<T>( boost::local_shared_ptr<void const volatile>( static_cast<T*>(0) ) );
+    test_allocator_reset<T>( boost::local_shared_ptr<void>( static_cast<T*>(nullptr) ) );
+    test_allocator_reset<T>( boost::local_shared_ptr<void const>( static_cast<T*>(nullptr) ) );
+    test_allocator_reset<T>( boost::local_shared_ptr<void volatile>( static_cast<T*>(nullptr) ) );
+    test_allocator_reset<T>( boost::local_shared_ptr<void const volatile>( static_cast<T*>(nullptr) ) );
 }
 
 template<class T> static void new_allocator_reset_test()
@@ -1991,7 +1991,7 @@ struct null_deleter
 
 template<class T, class U> void test_aliasing_reset_( boost::local_shared_ptr<T> const & p1, U * p2 )
 {
-    boost::local_shared_ptr<U> p3( static_cast<U*>(0), null_deleter() );
+    boost::local_shared_ptr<U> p3( static_cast<U*>(nullptr), null_deleter() );
 
     p3.reset( p1, p2 );
 
@@ -2024,7 +2024,7 @@ template<class T, class U> void test_01_aliasing_reset()
 template<class T, class U> void test_10_aliasing_reset_()
 {
     boost::local_shared_ptr<T> p1( new T() );
-    test_aliasing_reset_( p1, static_cast<U*>(0) );
+    test_aliasing_reset_( p1, static_cast<U*>(nullptr) );
 }
 
 template<class T, class U> void test_10_aliasing_reset()
@@ -2126,8 +2126,8 @@ template<class T> static void empty_element_access_()
 {
     boost::local_shared_ptr<T> p1;
 
-    BOOST_TEST_EQ( p1.operator->(), static_cast<T*>(0) );
-    BOOST_TEST_EQ( p1.get(), static_cast<T*>(0) );
+    BOOST_TEST_EQ( p1.operator->(), static_cast<T*>(nullptr) );
+    BOOST_TEST_EQ( p1.get(), static_cast<T*>(nullptr) );
     BOOST_TEST( p1? false: true );
     BOOST_TEST( !p1 );
     BOOST_TEST_EQ( p1.local_use_count(), 0 );
@@ -2217,7 +2217,7 @@ template<class T, class U> static void empty_shared_ptr_conversion_()
     boost::local_shared_ptr<T> p1;
     boost::shared_ptr<U> p2( p1 );
 
-    BOOST_TEST_EQ( p2.get(), static_cast<U*>(0) );
+    BOOST_TEST_EQ( p2.get(), static_cast<U*>(nullptr) );
     BOOST_TEST_EQ( p2.use_count(), 0 );
 }
 
@@ -2307,7 +2307,7 @@ template<class T, class U> static void empty_weak_ptr_conversion_()
     boost::local_shared_ptr<T> p1;
     boost::weak_ptr<U> p2( p1 );
 
-    BOOST_TEST_EQ( p2.lock().get(), static_cast<U*>(0) );
+    BOOST_TEST_EQ( p2.lock().get(), static_cast<U*>(nullptr) );
     BOOST_TEST_EQ( p2.use_count(), 0 );
 }
 

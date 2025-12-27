@@ -73,7 +73,7 @@ template<class D> D * get_local_deleter( local_sp_deleter<D> * p ) noexcept
 
 inline void * get_local_deleter( local_sp_deleter<void> * /*p*/ ) noexcept
 {
-    return 0;
+    return nullptr;
 }
 
 } // namespace detail

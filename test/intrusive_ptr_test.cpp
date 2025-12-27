@@ -99,19 +99,19 @@ namespace n_constructors
 void default_constructor()
 {
     boost::intrusive_ptr<X> px;
-    BOOST_TEST(px.get() == 0);
+    BOOST_TEST(px.get() == nullptr);
 }
 
 void pointer_constructor()
 {
     {
-        boost::intrusive_ptr<X> px(0);
-        BOOST_TEST(px.get() == 0);
+        boost::intrusive_ptr<X> px(nullptr);
+        BOOST_TEST(px.get() == nullptr);
     }
 
     {
-        boost::intrusive_ptr<X> px(0, false);
-        BOOST_TEST(px.get() == 0);
+        boost::intrusive_ptr<X> px(nullptr, false);
+        BOOST_TEST(px.get() == nullptr);
     }
 
     BOOST_TEST( N::base::instances == 0 );
@@ -161,25 +161,25 @@ void copy_constructor()
     }
 
     {
-        boost::intrusive_ptr<X> px(0);
+        boost::intrusive_ptr<X> px(nullptr);
         boost::intrusive_ptr<X> px2(px);
         BOOST_TEST(px2.get() == px.get());
     }
 
     {
-        boost::intrusive_ptr<Y> py(0);
+        boost::intrusive_ptr<Y> py(nullptr);
         boost::intrusive_ptr<X> px(py);
         BOOST_TEST(px.get() == py.get());
     }
 
     {
-        boost::intrusive_ptr<X> px(0, false);
+        boost::intrusive_ptr<X> px(nullptr, false);
         boost::intrusive_ptr<X> px2(px);
         BOOST_TEST(px2.get() == px.get());
     }
 
     {
-        boost::intrusive_ptr<Y> py(0, false);
+        boost::intrusive_ptr<Y> py(nullptr, false);
         boost::intrusive_ptr<X> px(py);
         BOOST_TEST(px.get() == py.get());
     }
@@ -257,7 +257,7 @@ void copy_assignment()
         BOOST_TEST(p1 == p1);
         BOOST_TEST(p1? false: true);
         BOOST_TEST(!p1);
-        BOOST_TEST(p1.get() == 0);
+        BOOST_TEST(p1.get() == nullptr);
 
         boost::intrusive_ptr<X> p2;
 
@@ -266,7 +266,7 @@ void copy_assignment()
         BOOST_TEST(p1 == p2);
         BOOST_TEST(p1? false: true);
         BOOST_TEST(!p1);
-        BOOST_TEST(p1.get() == 0);
+        BOOST_TEST(p1.get() == nullptr);
 
         boost::intrusive_ptr<X> p3(p1);
 
@@ -275,7 +275,7 @@ void copy_assignment()
         BOOST_TEST(p1 == p3);
         BOOST_TEST(p1? false: true);
         BOOST_TEST(!p1);
-        BOOST_TEST(p1.get() == 0);
+        BOOST_TEST(p1.get() == nullptr);
 
         BOOST_TEST(N::base::instances == 0);
 
@@ -317,7 +317,7 @@ void conversion_assignment()
         BOOST_TEST(p1 == p2);
         BOOST_TEST(p1? false: true);
         BOOST_TEST(!p1);
-        BOOST_TEST(p1.get() == 0);
+        BOOST_TEST(p1.get() == nullptr);
 
         BOOST_TEST(N::base::instances == 0);
 
@@ -364,7 +364,7 @@ void pointer_assignment()
         BOOST_TEST(p1 == p1);
         BOOST_TEST(p1? false: true);
         BOOST_TEST(!p1);
-        BOOST_TEST(p1.get() == 0);
+        BOOST_TEST(p1.get() == nullptr);
 
         boost::intrusive_ptr<X> p2;
 
@@ -373,7 +373,7 @@ void pointer_assignment()
         BOOST_TEST(p1 == p2);
         BOOST_TEST(p1? false: true);
         BOOST_TEST(!p1);
-        BOOST_TEST(p1.get() == 0);
+        BOOST_TEST(p1.get() == nullptr);
 
         boost::intrusive_ptr<X> p3(p1);
 
@@ -382,7 +382,7 @@ void pointer_assignment()
         BOOST_TEST(p1 == p3);
         BOOST_TEST(p1? false: true);
         BOOST_TEST(!p1);
-        BOOST_TEST(p1.get() == 0);
+        BOOST_TEST(p1.get() == nullptr);
 
         BOOST_TEST(N::base::instances == 0);
 
@@ -419,7 +419,7 @@ void pointer_assignment()
         BOOST_TEST(p1 == p2);
         BOOST_TEST(p1? false: true);
         BOOST_TEST(!p1);
-        BOOST_TEST(p1.get() == 0);
+        BOOST_TEST(p1.get() == nullptr);
 
         BOOST_TEST(N::base::instances == 0);
 
@@ -472,10 +472,10 @@ void test()
 
     {
         boost::intrusive_ptr<X> px;
-        BOOST_TEST( px.get() == 0 );
+        BOOST_TEST( px.get() == nullptr );
 
         px.reset();
-        BOOST_TEST( px.get() == 0 );
+        BOOST_TEST( px.get() == nullptr );
 
         X * p = new X;
         BOOST_TEST( p->use_count() == 0 );
@@ -486,7 +486,7 @@ void test()
         BOOST_TEST( px->use_count() == 1 );
 
         px.reset();
-        BOOST_TEST( px.get() == 0 );
+        BOOST_TEST( px.get() == nullptr );
     }
 
     BOOST_TEST( N::base::instances == 0 );
@@ -495,8 +495,8 @@ void test()
         boost::intrusive_ptr<X> px( new X );
         BOOST_TEST( N::base::instances == 1 );
 
-        px.reset( 0 );
-        BOOST_TEST( px.get() == 0 );
+        px.reset( nullptr );
+        BOOST_TEST( px.get() == nullptr );
     }
 
     BOOST_TEST( N::base::instances == 0 );
@@ -505,8 +505,8 @@ void test()
         boost::intrusive_ptr<X> px( new X );
         BOOST_TEST( N::base::instances == 1 );
 
-        px.reset( 0, false );
-        BOOST_TEST( px.get() == 0 );
+        px.reset( nullptr, false );
+        BOOST_TEST( px.get() == nullptr );
     }
 
     BOOST_TEST( N::base::instances == 0 );
@@ -515,8 +515,8 @@ void test()
         boost::intrusive_ptr<X> px( new X );
         BOOST_TEST( N::base::instances == 1 );
 
-        px.reset( 0, true );
-        BOOST_TEST( px.get() == 0 );
+        px.reset( nullptr, true );
+        BOOST_TEST( px.get() == nullptr );
     }
 
     BOOST_TEST( N::base::instances == 0 );
@@ -528,7 +528,7 @@ void test()
         BOOST_TEST( N::base::instances == 1 );
 
         boost::intrusive_ptr<X> px;
-        BOOST_TEST( px.get() == 0 );
+        BOOST_TEST( px.get() == nullptr );
 
         px.reset( p, true );
         BOOST_TEST( px.get() == p );
@@ -547,7 +547,7 @@ void test()
         BOOST_TEST( p->use_count() == 1 );
 
         boost::intrusive_ptr<X> px;
-        BOOST_TEST( px.get() == 0 );
+        BOOST_TEST( px.get() == nullptr );
 
         px.reset( p, false );
         BOOST_TEST( px.get() == p );
@@ -558,7 +558,7 @@ void test()
 
     {
         boost::intrusive_ptr<X> px( new X );
-        BOOST_TEST( px.get() != 0 );
+        BOOST_TEST( px.get() != nullptr );
         BOOST_TEST( px->use_count() == 1 );
 
         BOOST_TEST( N::base::instances == 1 );
@@ -579,7 +579,7 @@ void test()
 
     {
         boost::intrusive_ptr<X> px( new X );
-        BOOST_TEST( px.get() != 0 );
+        BOOST_TEST( px.get() != nullptr );
         BOOST_TEST( px->use_count() == 1 );
 
         BOOST_TEST( N::base::instances == 1 );
@@ -600,7 +600,7 @@ void test()
 
     {
         boost::intrusive_ptr<X> px( new X );
-        BOOST_TEST( px.get() != 0 );
+        BOOST_TEST( px.get() != nullptr );
         BOOST_TEST( px->use_count() == 1 );
 
         BOOST_TEST( N::base::instances == 1 );
@@ -639,7 +639,7 @@ void test()
     }
 
     {
-        boost::intrusive_ptr<X> px(0);
+        boost::intrusive_ptr<X> px(nullptr);
         BOOST_TEST(px? false: true);
         BOOST_TEST(!px);
 
@@ -659,8 +659,8 @@ void test()
     {
         boost::intrusive_ptr<X> px;
         X* detached = px.detach();
-        BOOST_TEST( px.get() == 0 );
-        BOOST_TEST( detached == 0 );
+        BOOST_TEST( px.get() == nullptr );
+        BOOST_TEST( detached == nullptr );
     }
 
     {
@@ -672,7 +672,7 @@ void test()
         BOOST_TEST( px->use_count() == 1 );
 
         X * detached = px.detach();
-        BOOST_TEST( px.get() == 0 );
+        BOOST_TEST( px.get() == nullptr );
 
         BOOST_TEST( detached == p );
         BOOST_TEST( detached->use_count() == 1 );
@@ -694,14 +694,14 @@ void test()
 
         px.swap(px2);
 
-        BOOST_TEST(px.get() == 0);
-        BOOST_TEST(px2.get() == 0);
+        BOOST_TEST(px.get() == nullptr);
+        BOOST_TEST(px2.get() == nullptr);
 
         using std::swap;
         swap(px, px2);
 
-        BOOST_TEST(px.get() == 0);
-        BOOST_TEST(px2.get() == 0);
+        BOOST_TEST(px.get() == nullptr);
+        BOOST_TEST(px2.get() == nullptr);
     }
 
     {
@@ -714,14 +714,14 @@ void test()
 
         BOOST_TEST(px.get() == p);
         BOOST_TEST(px->use_count() == 2);
-        BOOST_TEST(px2.get() == 0);
+        BOOST_TEST(px2.get() == nullptr);
         BOOST_TEST(px3.get() == p);
         BOOST_TEST(px3->use_count() == 2);
 
         using std::swap;
         swap(px, px2);
 
-        BOOST_TEST(px.get() == 0);
+        BOOST_TEST(px.get() == nullptr);
         BOOST_TEST(px2.get() == p);
         BOOST_TEST(px2->use_count() == 2);
         BOOST_TEST(px3.get() == p);
@@ -846,7 +846,7 @@ void test()
 
     {
         boost::intrusive_ptr<Y> py = boost::static_pointer_cast<Y>( boost::intrusive_ptr<X>(new Y) );
-        BOOST_TEST(py.get() != 0);
+        BOOST_TEST(py.get() != nullptr);
         BOOST_TEST(py->use_count() == 1);
     }
 
@@ -864,12 +864,12 @@ void test()
         boost::intrusive_ptr<X const> px;
 
         boost::intrusive_ptr<X> px2 = boost::const_pointer_cast<X>(px);
-        BOOST_TEST(px2.get() == 0);
+        BOOST_TEST(px2.get() == nullptr);
     }
 
     {
         boost::intrusive_ptr<X> px2 = boost::const_pointer_cast<X>( boost::intrusive_ptr<X const>() );
-        BOOST_TEST(px2.get() == 0);
+        BOOST_TEST(px2.get() == nullptr);
     }
 
     BOOST_TEST( N::base::instances == 0 );
@@ -887,7 +887,7 @@ void test()
 
     {
         boost::intrusive_ptr<X> px = boost::const_pointer_cast<X>( boost::intrusive_ptr<X const>(new X) );
-        BOOST_TEST(px.get() != 0);
+        BOOST_TEST(px.get() != nullptr);
         BOOST_TEST(px->use_count() == 1);
     }
 
@@ -905,38 +905,38 @@ void test()
         boost::intrusive_ptr<X> px;
 
         boost::intrusive_ptr<Y> py = boost::dynamic_pointer_cast<Y>(px);
-        BOOST_TEST(py.get() == 0);
+        BOOST_TEST(py.get() == nullptr);
     }
 
     {
         boost::intrusive_ptr<Y> py = boost::dynamic_pointer_cast<Y>( boost::intrusive_ptr<X>() );
-        BOOST_TEST(py.get() == 0);
+        BOOST_TEST(py.get() == nullptr);
     }
 
     {
-        boost::intrusive_ptr<X> px(static_cast<X*>(0));
+        boost::intrusive_ptr<X> px(static_cast<X*>(nullptr));
 
         boost::intrusive_ptr<Y> py = boost::dynamic_pointer_cast<Y>(px);
-        BOOST_TEST(py.get() == 0);
+        BOOST_TEST(py.get() == nullptr);
     }
 
     {
-        boost::intrusive_ptr<Y> py = boost::dynamic_pointer_cast<Y>( boost::intrusive_ptr<X>(static_cast<X*>(0)) );
-        BOOST_TEST(py.get() == 0);
+        boost::intrusive_ptr<Y> py = boost::dynamic_pointer_cast<Y>( boost::intrusive_ptr<X>(static_cast<X*>(nullptr)) );
+        BOOST_TEST(py.get() == nullptr);
     }
 
     {
         boost::intrusive_ptr<X> px(new X);
 
         boost::intrusive_ptr<Y> py = boost::dynamic_pointer_cast<Y>(px);
-        BOOST_TEST(py.get() == 0);
+        BOOST_TEST(py.get() == nullptr);
     }
 
     BOOST_TEST( N::base::instances == 0 );
 
     {
         boost::intrusive_ptr<Y> py = boost::dynamic_pointer_cast<Y>( boost::intrusive_ptr<X>(new X) );
-        BOOST_TEST(py.get() == 0);
+        BOOST_TEST(py.get() == nullptr);
     }
 
     BOOST_TEST( N::base::instances == 0 );
@@ -956,7 +956,7 @@ void test()
         boost::intrusive_ptr<X> px(new Y);
 
         boost::intrusive_ptr<Y> py = boost::dynamic_pointer_cast<Y>( boost::intrusive_ptr<X>(new Y) );
-        BOOST_TEST(py.get() != 0);
+        BOOST_TEST(py.get() != nullptr);
         BOOST_TEST(py->use_count() == 1);
     }
 
@@ -997,7 +997,7 @@ public:
 
     void suicide()
     {
-        m_self = 0;
+        m_self = nullptr;
     }
 
 private:

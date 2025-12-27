@@ -47,13 +47,13 @@ boost::shared_ptr<Y> createY();
 void test()
 {
     boost::shared_ptr<Y> py = createY();
-    BOOST_TEST(py.get() != 0);
+    BOOST_TEST(py.get() != nullptr);
     BOOST_TEST(py.use_count() == 1);
 
     try
     {
         boost::shared_ptr<X> px = py->getX();
-        BOOST_TEST(px.get() != 0);
+        BOOST_TEST(px.get() != nullptr);
         BOOST_TEST(py.use_count() == 2);
 
         px->f();
@@ -115,7 +115,7 @@ boost::shared_ptr<Y> createY()
 
 void test2()
 {
-    boost::shared_ptr<Y> pi(static_cast<impl2*>(0));
+    boost::shared_ptr<Y> pi(static_cast<impl2*>(nullptr));
 }
 
 //

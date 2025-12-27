@@ -37,7 +37,7 @@ int main()
     {
         deleter_called = 0;
 
-        boost::shared_ptr<void> p( static_cast<void*>( 0 ), deleter );
+        boost::shared_ptr<void> p( static_cast<void*>( nullptr ), deleter );
 
         BOOST_TEST_EQ( p.use_count(), 1 );
 
@@ -50,7 +50,7 @@ int main()
     {
         deleter_called = 0;
 
-        boost::shared_ptr<void> p1( static_cast<void*>( 0 ), deleter );
+        boost::shared_ptr<void> p1( static_cast<void*>( nullptr ), deleter );
 
         BOOST_TEST_EQ( p1.use_count(), 1 );
 

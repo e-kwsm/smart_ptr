@@ -21,7 +21,7 @@
 #include <memory>
 
 
-template<class T, class U> void assert_same_type( T** pt = 0, U** pu = 0 )
+template<class T, class U> void assert_same_type( T** pt = nullptr, U** pu = nullptr )
 {
     pt = pu;
 }

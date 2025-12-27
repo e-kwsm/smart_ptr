@@ -50,30 +50,30 @@ public:
 
     typedef T element_type;
 
-    constexpr intrusive_ptr() noexcept : px( 0 )
+    constexpr intrusive_ptr() noexcept : px( nullptr )
     {
     }
 
     BOOST_SP_CXX20_CONSTEXPR intrusive_ptr( T * p, bool add_ref = true ): px( p )
     {
-        if( px != 0 && add_ref ) intrusive_ptr_add_ref( px );
+        if( px != nullptr && add_ref ) intrusive_ptr_add_ref( px );
     }
 
     template<class U>
     BOOST_SP_CXX20_CONSTEXPR intrusive_ptr( intrusive_ptr<U> const & rhs, typename boost::detail::sp_enable_if_convertible<U,T>::type = boost::detail::sp_empty() )
     : px( rhs.get() )
     {
-        if( px != 0 ) intrusive_ptr_add_ref( px );
+        if( px != nullptr ) intrusive_ptr_add_ref( px );
     }
 
     BOOST_SP_CXX20_CONSTEXPR intrusive_ptr(intrusive_ptr const & rhs): px( rhs.px )
     {
-        if( px != 0 ) intrusive_ptr_add_ref( px );
+        if( px != nullptr ) intrusive_ptr_add_ref( px );
     }
 
     BOOST_SP_CXX20_CONSTEXPR ~intrusive_ptr()
     {
-        if( px != 0 ) intrusive_ptr_release( px );
+        if( px != nullptr ) intrusive_ptr_release( px );
     }
 
     template<class U> BOOST_SP_CXX20_CONSTEXPR intrusive_ptr & operator=(intrusive_ptr<U> const & rhs)
@@ -86,7 +86,7 @@ public:
 
     BOOST_SP_CXX20_CONSTEXPR intrusive_ptr(intrusive_ptr && rhs) noexcept : px( rhs.px )
     {
-        rhs.px = 0;
+        rhs.px = nullptr;
     }
 
     BOOST_SP_CXX20_CONSTEXPR intrusive_ptr & operator=(intrusive_ptr && rhs) noexcept
@@ -101,7 +101,7 @@ public:
     BOOST_SP_CXX20_CONSTEXPR intrusive_ptr(intrusive_ptr<U> && rhs, typename boost::detail::sp_enable_if_convertible<U,T>::type = boost::detail::sp_empty())
     : px( rhs.px )
     {
-        rhs.px = 0;
+        rhs.px = nullptr;
     }
 
     template<class U>
@@ -146,25 +146,25 @@ public:
     BOOST_SP_CXX20_CONSTEXPR T * detach() noexcept
     {
         T * ret = px;
-        px = 0;
+        px = nullptr;
         return ret;
     }
 
     BOOST_SP_CXX20_CONSTEXPR T & operator*() const BOOST_SP_NOEXCEPT_WITH_ASSERT
     {
-        BOOST_ASSERT( px != 0 );
+        BOOST_ASSERT( px != nullptr );
         return *px;
     }
 
     BOOST_SP_CXX20_CONSTEXPR T * operator->() const BOOST_SP_NOEXCEPT_WITH_ASSERT
     {
-        BOOST_ASSERT( px != 0 );
+        BOOST_ASSERT( px != nullptr );
         return px;
     }
 
     BOOST_SP_CXX20_CONSTEXPR explicit operator bool () const noexcept
     {
-        return px != 0;
+        return px != nullptr;
     }
 
     BOOST_SP_CXX20_CONSTEXPR void swap(intrusive_ptr & rhs) noexcept
@@ -211,22 +211,22 @@ template<class T, class U> BOOST_SP_CXX20_CONSTEXPR inline bool operator!=(T * a
 
 template<class T> BOOST_SP_CXX20_CONSTEXPR inline bool operator==( intrusive_ptr<T> const & p, std::nullptr_t ) noexcept
 {
-    return p.get() == 0;
+    return p.get() == nullptr;
 }
 
 template<class T> BOOST_SP_CXX20_CONSTEXPR inline bool operator==( std::nullptr_t, intrusive_ptr<T> const & p ) noexcept
 {
-    return p.get() == 0;
+    return p.get() == nullptr;
 }
 
 template<class T> BOOST_SP_CXX20_CONSTEXPR inline bool operator!=( intrusive_ptr<T> const & p, std::nullptr_t ) noexcept
 {
-    return p.get() != 0;
+    return p.get() != nullptr;
 }
 
 template<class T> BOOST_SP_CXX20_CONSTEXPR inline bool operator!=( std::nullptr_t, intrusive_ptr<T> const & p ) noexcept
 {
-    return p.get() != 0;
+    return p.get() != nullptr;
 }
 
 template<class T> BOOST_SP_CXX20_CONSTEXPR inline bool operator<(intrusive_ptr<T> const & a, intrusive_ptr<T> const & b) noexcept

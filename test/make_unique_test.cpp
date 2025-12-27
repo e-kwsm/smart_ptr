@@ -32,20 +32,20 @@ int main()
 {
     {
         std::unique_ptr<int> result = boost::make_unique<int>();
-        BOOST_TEST(result.get() != 0);
+        BOOST_TEST(result.get() != nullptr);
         BOOST_TEST(*result == 0);
     }
     {
         std::unique_ptr<const int> result =
             boost::make_unique<const int>();
-        BOOST_TEST(result.get() != 0);
+        BOOST_TEST(result.get() != nullptr);
         BOOST_TEST(*result == 0);
     }
     BOOST_TEST(type::instances == 0);
     {
         std::unique_ptr<type> result =
             boost::make_unique<type>();
-        BOOST_TEST(result.get() != 0);
+        BOOST_TEST(result.get() != nullptr);
         BOOST_TEST(type::instances == 1);
         result.reset();
         BOOST_TEST(type::instances == 0);
@@ -54,7 +54,7 @@ int main()
     {
         std::unique_ptr<const type> result =
             boost::make_unique<const type>();
-        BOOST_TEST(result.get() != 0);
+        BOOST_TEST(result.get() != nullptr);
         BOOST_TEST(type::instances == 1);
         result.reset();
         BOOST_TEST(type::instances == 0);

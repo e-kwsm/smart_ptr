@@ -38,7 +38,7 @@ template<class T> struct quick_allocator
 
     static void dealloc( void* p )
     {
-        if( p != 0 ) // 18.4.1.1/13
+        if( p != nullptr ) // 18.4.1.1/13
         {
             std::allocator<T>().deallocate( static_cast<T*>( p ), 1 );
         }

@@ -99,7 +99,7 @@ template<class T> void test_is_Y(boost::shared_ptr<T> const & p)
 template<class T> void test_is_Y(boost::weak_ptr<T> const & p)
 {
     boost::shared_ptr<T> q = p.lock();
-    BOOST_TEST(q.get() != 0);
+    BOOST_TEST(q.get() != nullptr);
     BOOST_TEST(q->id() == 2);
 }
 
@@ -146,7 +146,7 @@ template<class T, class U> void test_ne2(T const & a, U const & b)
 template<class T> void test_is_zero(boost::shared_ptr<T> const & p)
 {
     BOOST_TEST(!p);
-    BOOST_TEST(p.get() == 0);
+    BOOST_TEST(p.get() == nullptr);
 }
 
 template<class T> void test_is_nonzero(boost::shared_ptr<T> const & p)
@@ -155,7 +155,7 @@ template<class T> void test_is_nonzero(boost::shared_ptr<T> const & p)
     // BOOST_TEST(p) is not guaranteed to test the conversion,
     // as the macro might test !!p instead.
     BOOST_TEST(p? true: false);
-    BOOST_TEST(p.get() != 0);
+    BOOST_TEST(p.get() != nullptr);
 }
 
 int main()

@@ -49,11 +49,11 @@ public:
 
     typedef T element_type;
 
-    shared_array() noexcept : px( 0 ), pn()
+    shared_array() noexcept : px( nullptr ), pn()
     {
     }
 
-    shared_array( std::nullptr_t ) noexcept : px( 0 ), pn()
+    shared_array( std::nullptr_t ) noexcept : px( nullptr ), pn()
     {
     }
 
@@ -91,7 +91,7 @@ public:
     shared_array( shared_array && r ) noexcept : px( r.px ), pn()
     {
         pn.swap( r.pn );
-        r.px = 0;
+        r.px = nullptr;
     }
 
     // conversion
@@ -166,7 +166,7 @@ public:
 
     T & operator[] (std::ptrdiff_t i) const BOOST_SP_NOEXCEPT_WITH_ASSERT
     {
-        BOOST_ASSERT(px != 0);
+        BOOST_ASSERT(px != nullptr);
         BOOST_ASSERT(i >= 0);
         return px[i];
     }
@@ -223,22 +223,22 @@ template<class T> inline bool operator!=(shared_array<T> const & a, shared_array
 
 template<class T> inline bool operator==( shared_array<T> const & p, std::nullptr_t ) noexcept
 {
-    return p.get() == 0;
+    return p.get() == nullptr;
 }
 
 template<class T> inline bool operator==( std::nullptr_t, shared_array<T> const & p ) noexcept
 {
-    return p.get() == 0;
+    return p.get() == nullptr;
 }
 
 template<class T> inline bool operator!=( shared_array<T> const & p, std::nullptr_t ) noexcept
 {
-    return p.get() != 0;
+    return p.get() != nullptr;
 }
 
 template<class T> inline bool operator!=( std::nullptr_t, shared_array<T> const & p ) noexcept
 {
-    return p.get() != 0;
+    return p.get() != nullptr;
 }
 
 template<class T> inline bool operator<(shared_array<T> const & a, shared_array<T> const & b) noexcept

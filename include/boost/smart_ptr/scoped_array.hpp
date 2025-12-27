@@ -44,7 +44,7 @@ public:
 
     typedef T element_type;
 
-    explicit scoped_array( T * p = 0 ) noexcept : px( p )
+    explicit scoped_array( T * p = nullptr ) noexcept : px( p )
     {
     }
 
@@ -53,15 +53,15 @@ public:
         boost::checked_array_delete( px );
     }
 
-    void reset(T * p = 0) BOOST_SP_NOEXCEPT_WITH_ASSERT
+    void reset(T * p = nullptr) BOOST_SP_NOEXCEPT_WITH_ASSERT
     {
-        BOOST_ASSERT( p == 0 || p != px ); // catch self-reset errors
+        BOOST_ASSERT( p == nullptr || p != px ); // catch self-reset errors
         this_type(p).swap(*this);
     }
 
     T & operator[](std::ptrdiff_t i) const BOOST_SP_NOEXCEPT_WITH_ASSERT
     {
-        BOOST_ASSERT( px != 0 );
+        BOOST_ASSERT( px != nullptr );
         BOOST_ASSERT( i >= 0 );
         return px[i];
     }
@@ -86,22 +86,22 @@ public:
 
 template<class T> inline bool operator==( scoped_array<T> const & p, std::nullptr_t ) noexcept
 {
-    return p.get() == 0;
+    return p.get() == nullptr;
 }
 
 template<class T> inline bool operator==( std::nullptr_t, scoped_array<T> const & p ) noexcept
 {
-    return p.get() == 0;
+    return p.get() == nullptr;
 }
 
 template<class T> inline bool operator!=( scoped_array<T> const & p, std::nullptr_t ) noexcept
 {
-    return p.get() != 0;
+    return p.get() != nullptr;
 }
 
 template<class T> inline bool operator!=( std::nullptr_t, scoped_array<T> const & p ) noexcept
 {
-    return p.get() != 0;
+    return p.get() != nullptr;
 }
 
 template<class T> inline void swap(scoped_array<T> & a, scoped_array<T> & b) noexcept

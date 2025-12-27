@@ -32,46 +32,46 @@ int main()
     {
         boost::scoped_ptr<int> p;
 
-        BOOST_TEST( p == 0 );
-        BOOST_TEST( 0 == p );
-        BOOST_TEST( !( p != 0 ) );
-        BOOST_TEST( !( 0 != p ) );
+        BOOST_TEST( p == nullptr );
+        BOOST_TEST( nullptr == p );
+        BOOST_TEST( !( p != nullptr ) );
+        BOOST_TEST( !( nullptr != p ) );
     }
 
     {
         boost::scoped_array<int> p;
 
-        BOOST_TEST( p == 0 );
-        BOOST_TEST( 0 == p );
-        BOOST_TEST( !( p != 0 ) );
-        BOOST_TEST( !( 0 != p ) );
+        BOOST_TEST( p == nullptr );
+        BOOST_TEST( nullptr == p );
+        BOOST_TEST( !( p != nullptr ) );
+        BOOST_TEST( !( nullptr != p ) );
     }
 
     {
         boost::shared_ptr<int> p;
 
-        BOOST_TEST( p == 0 );
-        BOOST_TEST( 0 == p );
-        BOOST_TEST( !( p != 0 ) );
-        BOOST_TEST( !( 0 != p ) );
+        BOOST_TEST( p == nullptr );
+        BOOST_TEST( nullptr == p );
+        BOOST_TEST( !( p != nullptr ) );
+        BOOST_TEST( !( nullptr != p ) );
     }
 
     {
         boost::shared_array<int> p;
 
-        BOOST_TEST( p == 0 );
-        BOOST_TEST( 0 == p );
-        BOOST_TEST( !( p != 0 ) );
-        BOOST_TEST( !( 0 != p ) );
+        BOOST_TEST( p == nullptr );
+        BOOST_TEST( nullptr == p );
+        BOOST_TEST( !( p != nullptr ) );
+        BOOST_TEST( !( nullptr != p ) );
     }
 
     {
         boost::intrusive_ptr<W> p;
 
-        BOOST_TEST( p == 0 );
-        BOOST_TEST( 0 == p );
-        BOOST_TEST( !( p != 0 ) );
-        BOOST_TEST( !( 0 != p ) );
+        BOOST_TEST( p == nullptr );
+        BOOST_TEST( nullptr == p );
+        BOOST_TEST( !( p != nullptr ) );
+        BOOST_TEST( !( nullptr != p ) );
     }
 
     return boost::report_errors();

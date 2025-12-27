@@ -45,8 +45,8 @@ int main()
 
         deleter * q = boost::get_deleter<deleter>( p );
 
-        BOOST_TEST( q != 0 );
-        BOOST_TEST( q != 0 && q->data == 17041 );
+        BOOST_TEST( q != nullptr );
+        BOOST_TEST( q != nullptr && q->data == 17041 );
     }
 
     {
@@ -54,8 +54,8 @@ int main()
 
         deleter * q = boost::get_deleter<deleter>( p );
 
-        BOOST_TEST( q != 0 );
-        BOOST_TEST( q != 0 && q->data == 17041 );
+        BOOST_TEST( q != nullptr );
+        BOOST_TEST( q != nullptr && q->data == 17041 );
     }
 
     return boost::report_errors();

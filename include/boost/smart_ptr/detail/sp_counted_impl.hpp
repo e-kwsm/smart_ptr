@@ -39,7 +39,7 @@ template<class D> class local_sp_deleter;
 
 template<class D> D * get_local_deleter( D * /*p*/ ) noexcept
 {
-    return 0;
+    return nullptr;
 }
 
 template<class D> D * get_local_deleter( local_sp_deleter<D> * p ) noexcept;
@@ -70,17 +70,17 @@ public:
 
     void * get_deleter( sp_typeinfo_ const & ) noexcept override
     {
-        return 0;
+        return nullptr;
     }
 
     void * get_local_deleter( sp_typeinfo_ const & ) noexcept override
     {
-        return 0;
+        return nullptr;
     }
 
     void * get_untyped_deleter() noexcept override
     {
-        return 0;
+        return nullptr;
     }
 };
 
@@ -115,12 +115,12 @@ public:
 
     void * get_deleter( sp_typeinfo_ const & ti ) noexcept override
     {
-        return ti == BOOST_SP_TYPEID_(D)? &reinterpret_cast<char&>( del ): 0;
+        return ti == BOOST_SP_TYPEID_(D)? &reinterpret_cast<char&>( del ): nullptr;
     }
 
     void * get_local_deleter( sp_typeinfo_ const & ti ) noexcept override
     {
-        return ti == BOOST_SP_TYPEID_(D)? boost::detail::get_local_deleter( boost::addressof( del ) ): 0;
+        return ti == BOOST_SP_TYPEID_(D)? boost::detail::get_local_deleter( boost::addressof( del ) ): nullptr;
     }
 
     void * get_untyped_deleter() noexcept override
@@ -172,12 +172,12 @@ public:
 
     void * get_deleter( sp_typeinfo_ const & ti ) noexcept override
     {
-        return ti == BOOST_SP_TYPEID_( D )? &reinterpret_cast<char&>( d_ ): 0;
+        return ti == BOOST_SP_TYPEID_( D )? &reinterpret_cast<char&>( d_ ): nullptr;
     }
 
     void * get_local_deleter( sp_typeinfo_ const & ti ) noexcept override
     {
-        return ti == BOOST_SP_TYPEID_( D )? boost::detail::get_local_deleter( boost::addressof( d_ ) ): 0;
+        return ti == BOOST_SP_TYPEID_( D )? boost::detail::get_local_deleter( boost::addressof( d_ ) ): nullptr;
     }
 
     void * get_untyped_deleter() noexcept override

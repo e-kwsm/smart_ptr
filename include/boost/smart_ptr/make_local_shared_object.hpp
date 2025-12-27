@@ -111,7 +111,7 @@ template<class T, class A, class... Args> typename boost::detail::lsp_if_not_arr
 
     typedef boost::detail::lsp_ms_deleter<T, A2> D;
 
-    boost::shared_ptr<T> pt( static_cast< T* >( 0 ), boost::detail::sp_inplace_tag<D>(), a2 );
+    boost::shared_ptr<T> pt( static_cast< T* >( nullptr ), boost::detail::sp_inplace_tag<D>(), a2 );
 
     D * pd = static_cast< D* >( pt._internal_get_untyped_deleter() );
     void * pv = pd->address();
@@ -136,7 +136,7 @@ template<class T, class A> typename boost::detail::lsp_if_not_array<T>::type all
 
     typedef boost::detail::lsp_ms_deleter< T, std::allocator<T> > D;
 
-    boost::shared_ptr<T> pt( static_cast< T* >( 0 ), boost::detail::sp_inplace_tag<D>(), a2 );
+    boost::shared_ptr<T> pt( static_cast< T* >( nullptr ), boost::detail::sp_inplace_tag<D>(), a2 );
 
     D * pd = static_cast< D* >( pt._internal_get_untyped_deleter() );
     void * pv = pd->address();

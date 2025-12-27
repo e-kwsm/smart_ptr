@@ -39,5 +39,5 @@ boost::shared_ptr<void> abi_test_2( boost::shared_ptr<void> const & p )
 
 boost::shared_ptr<void> abi_test_3()
 {
-    return boost::shared_ptr<void>( static_cast<int*>( 0 ) );
+    return boost::shared_ptr<void>( static_cast<int*>( nullptr ) );
 }

@@ -29,7 +29,7 @@ int main()
     BOOST_TEST_EQ( hash_( p4 ), hash_( p5 ) );
     BOOST_TEST_NE( hash_( p4 ), hash_( p3 ) );
 
-    boost::shared_ptr<int> p6( static_cast<int*>(0) );
+    boost::shared_ptr<int> p6( static_cast<int*>(nullptr) );
 
     BOOST_TEST_NE( hash_( p4 ), hash_( p6 ) );
 

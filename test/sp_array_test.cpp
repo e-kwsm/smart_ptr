@@ -188,10 +188,10 @@ int main()
         BOOST_TEST( X::allocations == 0 );
         BOOST_TEST( X::instances == 0 );
 
-        BOOST_TEST( wp2.lock() == 0 );
-        BOOST_TEST( wp3.lock() == 0 );
-        BOOST_TEST( wp4.lock() == 0 );
-        BOOST_TEST( wp5.lock() == 0 );
+        BOOST_TEST( wp2.lock() == nullptr );
+        BOOST_TEST( wp3.lock() == nullptr );
+        BOOST_TEST( wp4.lock() == nullptr );
+        BOOST_TEST( wp5.lock() == nullptr );
     }
 
     {
@@ -202,7 +202,7 @@ int main()
         boost::shared_ptr<X[]> px2( std::move( px ) );
         BOOST_TEST( X::allocations == 1 );
         BOOST_TEST( X::instances == 4 );
-        BOOST_TEST( px.get() == 0 );
+        BOOST_TEST( px.get() == nullptr );
 
         try
         {
@@ -232,7 +232,7 @@ int main()
         px2 = std::move( px );
         BOOST_TEST( X::allocations == 1 );
         BOOST_TEST( X::instances == 4 );
-        BOOST_TEST( px.get() == 0 );
+        BOOST_TEST( px.get() == nullptr );
 
         try
         {

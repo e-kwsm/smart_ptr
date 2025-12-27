@@ -82,7 +82,7 @@ int main()
 
         boost::intrusive_ptr<X> p2( std::move( p ) );
         BOOST_TEST( N::base::instances == 1 );
-        BOOST_TEST( p.get() == 0 );
+        BOOST_TEST( p.get() == nullptr );
 
         p2.reset();
         BOOST_TEST( N::base::instances == 0 );
@@ -94,7 +94,7 @@ int main()
 
         boost::intrusive_ptr<X> p2( std::move( p ) );
         BOOST_TEST( N::base::instances == 1 );
-        BOOST_TEST( p.get() == 0 );
+        BOOST_TEST( p.get() == nullptr );
 
         p2.reset();
         BOOST_TEST( N::base::instances == 0 );
@@ -107,7 +107,7 @@ int main()
         boost::intrusive_ptr<X> p2;
         p2 = std::move( p );
         BOOST_TEST( N::base::instances == 1 );
-        BOOST_TEST( p.get() == 0 );
+        BOOST_TEST( p.get() == nullptr );
 
         p2.reset();
         BOOST_TEST( N::base::instances == 0 );
@@ -121,7 +121,7 @@ int main()
         BOOST_TEST( N::base::instances == 2 );
         p2 = std::move( p );
         BOOST_TEST( N::base::instances == 1 );
-        BOOST_TEST( p.get() == 0 );
+        BOOST_TEST( p.get() == nullptr );
 
         p2.reset();
         BOOST_TEST( N::base::instances == 0 );
@@ -134,7 +134,7 @@ int main()
         boost::intrusive_ptr<X> p2;
         p2 = std::move( p );
         BOOST_TEST( N::base::instances == 1 );
-        BOOST_TEST( p.get() == 0 );
+        BOOST_TEST( p.get() == nullptr );
 
         p2.reset();
         BOOST_TEST( N::base::instances == 0 );
@@ -148,7 +148,7 @@ int main()
         BOOST_TEST( N::base::instances == 2 );
         p2 = std::move( p );
         BOOST_TEST( N::base::instances == 1 );
-        BOOST_TEST( p.get() == 0 );
+        BOOST_TEST( p.get() == nullptr );
 
         p2.reset();
         BOOST_TEST( N::base::instances == 0 );
@@ -161,7 +161,7 @@ int main()
 
         boost::intrusive_ptr<Y> py = boost::static_pointer_cast<Y>( std::move( px ) );
         BOOST_TEST( py.get() == px2 );
-        BOOST_TEST( px.get() == 0 );
+        BOOST_TEST( px.get() == nullptr );
         BOOST_TEST( py->use_count() == 1 );
     }
 
@@ -174,7 +174,7 @@ int main()
 
         boost::intrusive_ptr<X> px3 = boost::const_pointer_cast<X>( std::move( px ) );
         BOOST_TEST( px3.get() == px2 );
-        BOOST_TEST( px.get() == 0 );
+        BOOST_TEST( px.get() == nullptr );
         BOOST_TEST( px3->use_count() == 1 );
     }
 
@@ -187,7 +187,7 @@ int main()
 
         boost::intrusive_ptr<Y> py = boost::dynamic_pointer_cast<Y>( std::move( px ) );
         BOOST_TEST( py.get() == px2 );
-        BOOST_TEST( px.get() == 0 );
+        BOOST_TEST( px.get() == nullptr );
         BOOST_TEST( py->use_count() == 1 );
     }
 
@@ -199,7 +199,7 @@ int main()
         X * px2 = px.get();
 
         boost::intrusive_ptr<Y> py = boost::dynamic_pointer_cast<Y>( std::move( px ) );
-        BOOST_TEST( py.get() == 0 );
+        BOOST_TEST( py.get() == nullptr );
         BOOST_TEST( px.get() == px2 );
         BOOST_TEST( px->use_count() == 1 );
     }

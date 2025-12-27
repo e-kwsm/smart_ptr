@@ -24,7 +24,7 @@ int main()
         BOOST_TEST_EQ( p4.owner_hash_value(), p5.owner_hash_value() );
         BOOST_TEST_NE( p4.owner_hash_value(), p3.owner_hash_value() );
 
-        boost::shared_ptr<int> p6( static_cast<int*>(0) );
+        boost::shared_ptr<int> p6( static_cast<int*>(nullptr) );
 
         BOOST_TEST_NE( p4.owner_hash_value(), p6.owner_hash_value() );
 

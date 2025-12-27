@@ -58,7 +58,7 @@ int main()
         std::unique_ptr<type,
             boost::alloc_deleter<type, creator<type> > > result =
             boost::allocate_unique<type>(creator<type>(), { 1, 2 });
-        BOOST_TEST(result.get() != 0);
+        BOOST_TEST(result.get() != nullptr);
         BOOST_TEST(result->x == 1);
         BOOST_TEST(result->y == 2);
     }
@@ -66,7 +66,7 @@ int main()
         std::unique_ptr<const type,
             boost::alloc_deleter<const type, creator<> > > result =
             boost::allocate_unique<const type>(creator<>(), { 1, 2 });
-        BOOST_TEST(result.get() != 0);
+        BOOST_TEST(result.get() != nullptr);
         BOOST_TEST(result->x == 1);
         BOOST_TEST(result->y == 2);
     }

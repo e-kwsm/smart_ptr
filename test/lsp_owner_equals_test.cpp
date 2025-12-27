@@ -28,7 +28,7 @@ int main()
         BOOST_TEST( !p4.owner_equals( p3 ) );
         BOOST_TEST( !p3.owner_equals( p4 ) );
 
-        boost::local_shared_ptr<int> p6( static_cast<int*>(0) );
+        boost::local_shared_ptr<int> p6( static_cast<int*>(nullptr) );
 
         BOOST_TEST( !p4.owner_equals( p6 ) );
         BOOST_TEST( !p6.owner_equals( p4 ) );

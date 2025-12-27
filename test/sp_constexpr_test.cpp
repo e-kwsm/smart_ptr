@@ -63,13 +63,13 @@ Z::Z()
 
 int main()
 {
-    BOOST_TEST( p1.get() != 0 );
+    BOOST_TEST( p1.get() != nullptr );
     BOOST_TEST_EQ( p1.use_count(), 1 );
 
     BOOST_TEST_EQ( p2.use_count(), 1 );
     BOOST_TEST_EQ( p2.lock(), p1 );
 
-    BOOST_TEST( p3.get() != 0 );
+    BOOST_TEST( p3.get() != nullptr );
     BOOST_TEST_EQ( p3.use_count(), 1 );
 
     return boost::report_errors();

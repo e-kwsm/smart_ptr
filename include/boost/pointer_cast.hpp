@@ -55,7 +55,7 @@ using std::const_pointer_cast;
 //reinterpret_pointer_cast overload for std::shared_ptr
 template<class T, class U> std::shared_ptr<T> reinterpret_pointer_cast(const std::shared_ptr<U> & r ) noexcept
 {
-    (void) reinterpret_cast< T* >( static_cast< U* >( 0 ) );
+    (void) reinterpret_cast< T* >( static_cast< U* >( nullptr ) );
 
     typedef typename std::shared_ptr<T>::element_type E;
 
@@ -66,7 +66,7 @@ template<class T, class U> std::shared_ptr<T> reinterpret_pointer_cast(const std
 //static_pointer_cast overload for std::unique_ptr
 template<class T, class U> std::unique_ptr<T> static_pointer_cast( std::unique_ptr<U> && r ) noexcept
 {
-    (void) static_cast< T* >( static_cast< U* >( 0 ) );
+    (void) static_cast< T* >( static_cast< U* >( nullptr ) );
 
     typedef typename std::unique_ptr<T>::element_type E;
 
@@ -76,7 +76,7 @@ template<class T, class U> std::unique_ptr<T> static_pointer_cast( std::unique_p
 //dynamic_pointer_cast overload for std::unique_ptr
 template<class T, class U> std::unique_ptr<T> dynamic_pointer_cast( std::unique_ptr<U> && r ) noexcept
 {
-    (void) dynamic_cast< T* >( static_cast< U* >( 0 ) );
+    (void) dynamic_cast< T* >( static_cast< U* >( nullptr ) );
 
     static_assert( std::has_virtual_destructor<T>::value, "The target of dynamic_pointer_cast must have a virtual destructor." );
 
@@ -88,7 +88,7 @@ template<class T, class U> std::unique_ptr<T> dynamic_pointer_cast( std::unique_
 //const_pointer_cast overload for std::unique_ptr
 template<class T, class U> std::unique_ptr<T> const_pointer_cast( std::unique_ptr<U> && r ) noexcept
 {
-    (void) const_cast< T* >( static_cast< U* >( 0 ) );
+    (void) const_cast< T* >( static_cast< U* >( nullptr ) );
 
     typedef typename std::unique_ptr<T>::element_type E;
 
@@ -98,7 +98,7 @@ template<class T, class U> std::unique_ptr<T> const_pointer_cast( std::unique_pt
 //reinterpret_pointer_cast overload for std::unique_ptr
 template<class T, class U> std::unique_ptr<T> reinterpret_pointer_cast( std::unique_ptr<U> && r ) noexcept
 {
-    (void) reinterpret_cast< T* >( static_cast< U* >( 0 ) );
+    (void) reinterpret_cast< T* >( static_cast< U* >( nullptr ) );
 
     typedef typename std::unique_ptr<T>::element_type E;
 

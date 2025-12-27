@@ -29,7 +29,7 @@ int main()
 
         BOOST_TEST( lt( p4, p3 ) || lt( p3, p4 ) );
 
-        boost::local_shared_ptr<int> p6( static_cast<int*>(0) );
+        boost::local_shared_ptr<int> p6( static_cast<int*>(nullptr) );
 
         BOOST_TEST( lt( p4, p6 ) || lt( p6, p4 ) );
 
