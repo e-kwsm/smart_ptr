@@ -16,7 +16,7 @@ struct counters {
 template<class T = void>
 class creator {
 public:
-    typedef T value_type;
+    using value_type = T;
 
     creator(counters* state)
         : state_(state) { }

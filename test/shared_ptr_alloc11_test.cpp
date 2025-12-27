@@ -20,7 +20,7 @@ template< class T > class cxx11_allocator
 {
 public:
 
-    typedef T value_type;
+    using value_type = T;
 
     cxx11_allocator()
     {
