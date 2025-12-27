@@ -46,7 +46,7 @@ struct sp_alloc_result {
 
 template<class T, std::size_t N>
 struct sp_alloc_result<T[N]> {
-    typedef T type[];
+    using type = T[];
 };
 
 template<class T>
