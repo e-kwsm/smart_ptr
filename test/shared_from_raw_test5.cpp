@@ -53,7 +53,7 @@ public:
         --instances;
     }
 
-    typedef void (*deleter_type)( X* );
+    using deleter_type = void (*)( X* );
 
     static void deleter( X * px )
     {

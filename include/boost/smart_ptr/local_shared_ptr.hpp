@@ -27,7 +27,7 @@ template< class E, class Y > inline void lsp_pointer_construct( boost::local_sha
 {
     boost::detail::sp_assert_convertible< Y, E >();
 
-    typedef boost::detail::local_sp_deleter< boost::checked_deleter<Y> > D;
+    using D = boost::detail::local_sp_deleter< boost::checked_deleter<Y> >;
 
     boost::shared_ptr<E> p2( p, D() );
 
@@ -42,7 +42,7 @@ template< class E, class Y > inline void lsp_pointer_construct( boost::local_sha
 {
     boost::detail::sp_assert_convertible< Y[], E[] >();
 
-    typedef boost::detail::local_sp_deleter< boost::checked_array_deleter<E> > D;
+    using D = boost::detail::local_sp_deleter< boost::checked_array_deleter<E> >;
 
     boost::shared_ptr<E[]> p2( p, D() );
 
@@ -57,7 +57,7 @@ template< class E, std::size_t N, class Y > inline void lsp_pointer_construct( b
 {
     boost::detail::sp_assert_convertible< Y[N], E[N] >();
 
-    typedef boost::detail::local_sp_deleter< boost::checked_array_deleter<E> > D;
+    using D = boost::detail::local_sp_deleter< boost::checked_array_deleter<E> >;
 
     boost::shared_ptr<E[N]> p2( p, D() );
 
@@ -70,7 +70,7 @@ template< class E, std::size_t N, class Y > inline void lsp_pointer_construct( b
 
 template< class E, class P, class D > inline void lsp_deleter_construct( boost::local_shared_ptr< E > * /*ppx*/, P p, D const& d, boost::detail::local_counted_base * & pn )
 {
-    typedef boost::detail::local_sp_deleter<D> D2;
+    using D2 = boost::detail::local_sp_deleter<D>;
 
     boost::shared_ptr<E> p2( p, D2( d ) );
 
@@ -83,7 +83,7 @@ template< class E, class P, class D > inline void lsp_deleter_construct( boost::
 
 template< class E, class P, class D, class A > inline void lsp_allocator_construct( boost::local_shared_ptr< E > * /*ppx*/, P p, D const& d, A const& a, boost::detail::local_counted_base * & pn )
 {
-    typedef boost::detail::local_sp_deleter<D> D2;
+    using D2 = boost::detail::local_sp_deleter<D>;
 
     boost::shared_ptr<E> p2( p, D2( d ), a );
 
@@ -111,11 +111,11 @@ template<class T> class local_shared_ptr
 {
 private:
 
-    typedef local_shared_ptr this_type;
+    using this_type = local_shared_ptr;
 
 public:
 
-    typedef typename boost::detail::sp_element<T>::type element_type;
+    using element_type = typename boost::detail::sp_element<T>::type;
 
 private:
 
@@ -515,7 +515,7 @@ template<class T, class U> local_shared_ptr<T> static_pointer_cast( local_shared
 {
     (void) static_cast< T* >( static_cast< U* >( 0 ) );
 
-    typedef typename local_shared_ptr<T>::element_type E;
+    using E = typename local_shared_ptr<T>::element_type;
 
     E * p = static_cast< E* >( r.get() );
     return local_shared_ptr<T>( r, p );
@@ -525,7 +525,7 @@ template<class T, class U> local_shared_ptr<T> const_pointer_cast( local_shared_
 {
     (void) const_cast< T* >( static_cast< U* >( 0 ) );
 
-    typedef typename local_shared_ptr<T>::element_type E;
+    using E = typename local_shared_ptr<T>::element_type;
 
     E * p = const_cast< E* >( r.get() );
     return local_shared_ptr<T>( r, p );
@@ -535,7 +535,7 @@ template<class T, class U> local_shared_ptr<T> dynamic_pointer_cast( local_share
 {
     (void) dynamic_cast< T* >( static_cast< U* >( 0 ) );
 
-    typedef typename local_shared_ptr<T>::element_type E;
+    using E = typename local_shared_ptr<T>::element_type;
 
     E * p = dynamic_cast< E* >( r.get() );
     return p? local_shared_ptr<T>( r, p ): local_shared_ptr<T>();
@@ -545,7 +545,7 @@ template<class T, class U> local_shared_ptr<T> reinterpret_pointer_cast( local_s
 {
     (void) reinterpret_cast< T* >( static_cast< U* >( 0 ) );
 
-    typedef typename local_shared_ptr<T>::element_type E;
+    using E = typename local_shared_ptr<T>::element_type;
 
     E * p = reinterpret_cast< E* >( r.get() );
     return local_shared_ptr<T>( r, p );
@@ -555,7 +555,7 @@ template<class T, class U> local_shared_ptr<T> static_pointer_cast( local_shared
 {
     (void) static_cast< T* >( static_cast< U* >( 0 ) );
 
-    typedef typename local_shared_ptr<T>::element_type E;
+    using E = typename local_shared_ptr<T>::element_type;
 
     E * p = static_cast< E* >( r.get() );
     return local_shared_ptr<T>( std::move(r), p );
@@ -565,7 +565,7 @@ template<class T, class U> local_shared_ptr<T> const_pointer_cast( local_shared_
 {
     (void) const_cast< T* >( static_cast< U* >( 0 ) );
 
-    typedef typename local_shared_ptr<T>::element_type E;
+    using E = typename local_shared_ptr<T>::element_type;
 
     E * p = const_cast< E* >( r.get() );
     return local_shared_ptr<T>( std::move(r), p );
@@ -575,7 +575,7 @@ template<class T, class U> local_shared_ptr<T> dynamic_pointer_cast( local_share
 {
     (void) dynamic_cast< T* >( static_cast< U* >( 0 ) );
 
-    typedef typename local_shared_ptr<T>::element_type E;
+    using E = typename local_shared_ptr<T>::element_type;
 
     E * p = dynamic_cast< E* >( r.get() );
     return p? local_shared_ptr<T>( std::move(r), p ): local_shared_ptr<T>();
@@ -585,7 +585,7 @@ template<class T, class U> local_shared_ptr<T> reinterpret_pointer_cast( local_s
 {
     (void) reinterpret_cast< T* >( static_cast< U* >( 0 ) );
 
-    typedef typename local_shared_ptr<T>::element_type E;
+    using E = typename local_shared_ptr<T>::element_type;
 
     E * p = reinterpret_cast< E* >( r.get() );
     return local_shared_ptr<T>( std::move(r), p );
