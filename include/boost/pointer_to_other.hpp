@@ -27,27 +27,27 @@ template<class T, class U,
          template<class> class Sp>
 struct pointer_to_other< Sp<T>, U >
 {
-   typedef Sp<U> type;
+   using type = Sp<U>;
 };
 
 template<class T, class T2, class U, 
          template<class, class> class Sp>
 struct pointer_to_other< Sp<T, T2>, U >
 {
-   typedef Sp<U, T2> type;
+   using type = Sp<U, T2>;
 };
 
 template<class T, class T2, class T3, class U, 
          template<class, class, class> class Sp>
 struct pointer_to_other< Sp<T, T2, T3>, U >
 {
-   typedef Sp<U, T2, T3> type;
+   using type = Sp<U, T2, T3>;
 };
 
 template<class T, class U>
 struct pointer_to_other< T*, U >
 {
-   typedef U* type;
+   using type = U*;
 };
 
 } // namespace boost
