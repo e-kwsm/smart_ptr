@@ -36,7 +36,7 @@ template<class T> struct sp_is_unbounded_array< T[] >: std::true_type
 
 template<class T> struct sp_type_identity
 {
-    typedef T type;
+    using type = T;
 };
 
 // boost::type_with_alignment

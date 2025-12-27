@@ -44,11 +44,11 @@ template<class T> class intrusive_ptr
 {
 private:
 
-    typedef intrusive_ptr this_type;
+    using this_type = intrusive_ptr;
 
 public:
 
-    typedef T element_type;
+    using element_type = T;
 
     constexpr intrusive_ptr() noexcept : px( 0 )
     {

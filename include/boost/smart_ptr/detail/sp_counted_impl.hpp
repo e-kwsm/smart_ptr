@@ -55,7 +55,7 @@ private:
     sp_counted_impl_p( sp_counted_impl_p const & );
     sp_counted_impl_p & operator= ( sp_counted_impl_p const & );
 
-    typedef sp_counted_impl_p<X> this_type;
+    using this_type = sp_counted_impl_p<X>;
 
 public:
 
@@ -94,7 +94,7 @@ private:
     sp_counted_impl_pd( sp_counted_impl_pd const & );
     sp_counted_impl_pd & operator= ( sp_counted_impl_pd const & );
 
-    typedef sp_counted_impl_pd<P, D> this_type;
+    using this_type = sp_counted_impl_pd<P, D>;
 
 public:
 
@@ -140,7 +140,7 @@ private:
     sp_counted_impl_pda( sp_counted_impl_pda const & );
     sp_counted_impl_pda & operator= ( sp_counted_impl_pda const & );
 
-    typedef sp_counted_impl_pda<P, D, A> this_type;
+    using this_type = sp_counted_impl_pda<P, D, A>;
 
 public:
 
@@ -161,7 +161,7 @@ public:
 
     void destroy() noexcept override
     {
-        typedef typename std::allocator_traits<A>::template rebind_alloc< this_type > A2;
+        using A2 = typename std::allocator_traits<A>::template rebind_alloc< this_type >;
 
         A2 a2( a_ );
 

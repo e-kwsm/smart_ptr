@@ -35,14 +35,14 @@ private:
     scoped_array(scoped_array const &);
     scoped_array & operator=(scoped_array const &);
 
-    typedef scoped_array<T> this_type;
+    using this_type = scoped_array<T>;
 
     void operator==( scoped_array const& ) const;
     void operator!=( scoped_array const& ) const;
 
 public:
 
-    typedef T element_type;
+    using element_type = T;
 
     explicit scoped_array( T * p = 0 ) noexcept : px( p )
     {

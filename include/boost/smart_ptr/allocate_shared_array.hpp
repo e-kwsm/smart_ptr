@@ -20,8 +20,8 @@ namespace detail {
 
 template<class T>
 struct sp_array_element {
-    typedef typename std::remove_cv<typename
-        std::remove_extent<T>::type>::type type;
+    using type = typename std::remove_cv<typename
+        std::remove_extent<T>::type>::type;
 };
 
 template<class T>
@@ -62,7 +62,7 @@ sp_objects(std::size_t size) noexcept
 template<class A>
 class sp_array_state {
 public:
-    typedef A type;
+    using type = A;
 
     template<class U>
     sp_array_state(const U& _allocator, std::size_t _size) noexcept
@@ -85,7 +85,7 @@ private:
 template<class A, std::size_t N>
 class sp_size_array_state {
 public:
-    typedef A type;
+    using type = A;
 
     template<class U>
     sp_size_array_state(const U& _allocator, std::size_t) noexcept
@@ -130,14 +130,14 @@ sp_array_start(T* base) noexcept
 
 template<class A, class T>
 class sp_array_creator {
-    typedef typename A::value_type element;
+    using element = typename A::value_type;
 
     enum {
         offset = sp_array_offset<T, element>::value
     };
 
-    typedef typename sp_type_with_alignment<sp_array_alignment<T,
-        element>::value>::type type;
+    using type = typename sp_type_with_alignment<sp_array_alignment<T,
+        element>::value>::type;
 
 public:
     template<class U>
@@ -161,10 +161,10 @@ private:
 template<class T>
 class BOOST_SYMBOL_VISIBLE sp_array_base
     : public sp_counted_base {
-    typedef typename T::type allocator;
+    using allocator = typename T::type;
 
 public:
-    typedef typename allocator::value_type type;
+    using type = typename allocator::value_type;
 
     template<class A>
     sp_array_base(const A& other, type* start, std::size_t size)
@@ -255,10 +255,10 @@ template<class T, class A>
 inline typename std::enable_if<detail::sp_is_unbounded_array<T>::value, shared_ptr<T> >::type
 allocate_shared(const A& allocator, std::size_t count)
 {
-    typedef typename detail::sp_array_element<T>::type element;
-    typedef typename allocator_rebind<A, element>::type other;
-    typedef detail::sp_array_state<other> state;
-    typedef detail::sp_array_base<state> base;
+    using element = typename detail::sp_array_element<T>::type;
+    using other = typename allocator_rebind<A, element>::type;
+    using state = detail::sp_array_state<other>;
+    using base = detail::sp_array_base<state>;
     detail::sp_array_result<other, base> result(allocator, count);
     base* node = result.get();
     element* start = detail::sp_array_start<element>(node);
@@ -275,10 +275,10 @@ allocate_shared(const A& allocator)
     enum {
         count = std::extent<T>::value
     };
-    typedef typename detail::sp_array_element<T>::type element;
-    typedef typename allocator_rebind<A, element>::type other;
-    typedef detail::sp_size_array_state<other, std::extent<T>::value> state;
-    typedef detail::sp_array_base<state> base;
+    using element = typename detail::sp_array_element<T>::type;
+    using other = typename allocator_rebind<A, element>::type;
+    using state = detail::sp_size_array_state<other, std::extent<T>::value>;
+    using base = detail::sp_array_base<state>;
     detail::sp_array_result<other, base> result(allocator, count);
     base* node = result.get();
     element* start = detail::sp_array_start<element>(node);
@@ -293,10 +293,10 @@ inline typename std::enable_if<detail::sp_is_unbounded_array<T>::value, shared_p
 allocate_shared(const A& allocator, std::size_t count,
     const typename std::remove_extent<T>::type& value)
 {
-    typedef typename detail::sp_array_element<T>::type element;
-    typedef typename allocator_rebind<A, element>::type other;
-    typedef detail::sp_array_state<other> state;
-    typedef detail::sp_array_base<state> base;
+    using element = typename detail::sp_array_element<T>::type;
+    using other = typename allocator_rebind<A, element>::type;
+    using state = detail::sp_array_state<other>;
+    using base = detail::sp_array_base<state>;
     detail::sp_array_result<other, base> result(allocator, count);
     base* node = result.get();
     element* start = detail::sp_array_start<element>(node);
@@ -314,10 +314,10 @@ allocate_shared(const A& allocator,
     enum {
         count = std::extent<T>::value
     };
-    typedef typename detail::sp_array_element<T>::type element;
-    typedef typename allocator_rebind<A, element>::type other;
-    typedef detail::sp_size_array_state<other, std::extent<T>::value> state;
-    typedef detail::sp_array_base<state> base;
+    using element = typename detail::sp_array_element<T>::type;
+    using other = typename allocator_rebind<A, element>::type;
+    using state = detail::sp_size_array_state<other, std::extent<T>::value>;
+    using base = detail::sp_array_base<state>;
     detail::sp_array_result<other, base> result(allocator, count);
     base* node = result.get();
     element* start = detail::sp_array_start<element>(node);

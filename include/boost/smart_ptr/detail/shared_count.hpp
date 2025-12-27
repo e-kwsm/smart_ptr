@@ -81,12 +81,12 @@ private:
 
 template< class D > struct sp_convert_reference
 {
-    typedef D type;
+    using type = D;
 };
 
 template< class D > struct sp_convert_reference< D& >
 {
-    typedef sp_reference_wrapper< D > type;
+    using type = sp_reference_wrapper< D >;
 };
 
 template<class T> std::size_t sp_hash_pointer( T* p ) noexcept
@@ -200,9 +200,9 @@ public:
 
     template<class P, class D, class A> shared_count( P p, D d, A a ): pi_( 0 )
     {
-        typedef sp_counted_impl_pda<P, D, A> impl_type;
+        using impl_type = sp_counted_impl_pda<P, D, A>;
 
-        typedef typename std::allocator_traits<A>::template rebind_alloc< impl_type > A2;
+        using A2 = typename std::allocator_traits<A>::template rebind_alloc< impl_type >;
 
         A2 a2( a );
 
@@ -244,9 +244,9 @@ public:
 
     template< class P, class D, class A > shared_count( P p, sp_inplace_tag< D >, A a ): pi_( 0 )
     {
-        typedef sp_counted_impl_pda< P, D, A > impl_type;
+        using impl_type = sp_counted_impl_pda< P, D, A >;
 
-        typedef typename std::allocator_traits<A>::template rebind_alloc< impl_type > A2;
+        using A2 = typename std::allocator_traits<A>::template rebind_alloc< impl_type >;
 
         A2 a2( a );
 
@@ -310,7 +310,7 @@ public:
     template<class Y, class D>
     explicit shared_count( std::unique_ptr<Y, D> & r ): pi_( 0 )
     {
-        typedef typename sp_convert_reference<D>::type D2;
+        using D2 = typename sp_convert_reference<D>::type;
 
         D2 d2( static_cast<D&&>( r.get_deleter() ) );
         pi_ = new sp_counted_impl_pd< typename std::unique_ptr<Y, D>::pointer, D2 >( r.get(), d2 );
@@ -330,7 +330,7 @@ public:
     template<class Y, class D>
     explicit shared_count( boost::movelib::unique_ptr<Y, D> & r ): pi_( 0 )
     {
-        typedef typename sp_convert_reference<D>::type D2;
+        using D2 = typename sp_convert_reference<D>::type;
 
         D2 d2( r.get_deleter() );
         pi_ = new sp_counted_impl_pd< typename boost::movelib::unique_ptr<Y, D>::pointer, D2 >( r.get(), d2 );

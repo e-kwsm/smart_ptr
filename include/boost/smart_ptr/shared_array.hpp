@@ -42,12 +42,12 @@ template<class T> class shared_array
 private:
 
     // Borland 5.5.1 specific workarounds
-    typedef checked_array_deleter<T> deleter;
-    typedef shared_array<T> this_type;
+    using deleter = checked_array_deleter<T>;
+    using this_type = shared_array<T>;
 
 public:
 
-    typedef T element_type;
+    using element_type = T;
 
     shared_array() noexcept : px( 0 ), pn()
     {

@@ -45,14 +45,14 @@ private:
     scoped_ptr(scoped_ptr const &);
     scoped_ptr & operator=(scoped_ptr const &);
 
-    typedef scoped_ptr<T> this_type;
+    using this_type = scoped_ptr<T>;
 
     void operator==( scoped_ptr const& ) const;
     void operator!=( scoped_ptr const& ) const;
 
 public:
 
-    typedef T element_type;
+    using element_type = T;
 
     explicit scoped_ptr( T * p = 0 ) noexcept : px( p )
     {

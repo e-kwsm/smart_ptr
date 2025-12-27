@@ -37,7 +37,7 @@ template< class T > class sp_ms_deleter
 {
 private:
 
-    typedef typename sp_aligned_storage< sizeof( T ), std::alignment_of< T >::value >::type storage_type;
+    using storage_type = typename sp_aligned_storage< sizeof( T ), std::alignment_of< T >::value >::type;
 
     bool initialized_;
     storage_type storage_;
@@ -108,7 +108,7 @@ template< class T, class A > class sp_as_deleter
 {
 private:
 
-    typedef typename sp_aligned_storage< sizeof( T ), std::alignment_of< T >::value >::type storage_type;
+    using storage_type = typename sp_aligned_storage< sizeof( T ), std::alignment_of< T >::value >::type;
 
     storage_type storage_;
     A a_;
@@ -166,7 +166,7 @@ public:
 
 template< class T > struct sp_if_not_array
 {
-    typedef boost::shared_ptr< T > type;
+    using type = boost::shared_ptr< T >;
 };
 
 template< class T > struct sp_if_not_array< T[] >
@@ -238,10 +238,10 @@ template< class T, class... Args > typename boost::detail::sp_if_not_array< T >:
 
 template< class T, class A, class... Args > typename boost::detail::sp_if_not_array< T >::type allocate_shared( A const & a, Args && ... args )
 {
-    typedef typename std::allocator_traits<A>::template rebind_alloc<T> A2;
+    using A2 = typename std::allocator_traits<A>::template rebind_alloc<T>;
     A2 a2( a );
 
-    typedef boost::detail::sp_as_deleter< T, A2 > D;
+    using D = boost::detail::sp_as_deleter< T, A2 >;
 
     boost::shared_ptr< T > pt( static_cast< T* >( 0 ), boost::detail::sp_inplace_tag<D>(), a2 );
 

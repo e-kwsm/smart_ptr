@@ -45,7 +45,7 @@ namespace boost
 namespace detail
 {
 
-typedef std::type_info sp_typeinfo_;
+using sp_typeinfo_ = std::type_info;
 
 } // namespace detail
 
