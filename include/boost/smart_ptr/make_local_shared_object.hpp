@@ -28,7 +28,7 @@ namespace detail
 
 template<class T> struct lsp_if_not_array
 {
-    typedef boost::local_shared_ptr<T> type;
+    using type = boost::local_shared_ptr<T>;
 };
 
 template<class T> struct lsp_if_not_array<T[]>
@@ -45,7 +45,7 @@ template<class T, class A> class lsp_ms_deleter: public local_counted_impl_em
 {
 private:
 
-    typedef typename sp_aligned_storage<sizeof(T), std::alignment_of<T>::value>::type storage_type;
+    using storage_type = typename sp_aligned_storage<sizeof(T), std::alignment_of<T>::value>::type;
 
     storage_type storage_;
     A a_;
@@ -105,11 +105,11 @@ public:
 
 template<class T, class A, class... Args> typename boost::detail::lsp_if_not_array<T>::type allocate_local_shared( A const & a, Args&&... args )
 {
-    typedef typename std::allocator_traits<A>::template rebind_alloc<T> A2;
+    using A2 = typename std::allocator_traits<A>::template rebind_alloc<T>;
 
     A2 a2( a );
 
-    typedef boost::detail::lsp_ms_deleter<T, A2> D;
+    using D = boost::detail::lsp_ms_deleter<T, A2>;
 
     boost::shared_ptr<T> pt( static_cast< T* >( 0 ), boost::detail::sp_inplace_tag<D>(), a2 );
 
@@ -130,11 +130,11 @@ template<class T, class A, class... Args> typename boost::detail::lsp_if_not_arr
 
 template<class T, class A> typename boost::detail::lsp_if_not_array<T>::type allocate_local_shared_noinit( A const & a )
 {
-    typedef typename std::allocator_traits<A>::template rebind_alloc<T> A2;
+    using A2 = typename std::allocator_traits<A>::template rebind_alloc<T>;
 
     A2 a2( a );
 
-    typedef boost::detail::lsp_ms_deleter< T, std::allocator<T> > D;
+    using D = boost::detail::lsp_ms_deleter< T, std::allocator<T> >;
 
     boost::shared_ptr<T> pt( static_cast< T* >( 0 ), boost::detail::sp_inplace_tag<D>(), a2 );
 
@@ -155,13 +155,13 @@ template<class T, class A> typename boost::detail::lsp_if_not_array<T>::type all
 
 template<class T, class... Args> typename boost::detail::lsp_if_not_array<T>::type make_local_shared( Args&&... args )
 {
-    typedef typename std::remove_const<T>::type T2;
+    using T2 = typename std::remove_const<T>::type;
     return boost::allocate_local_shared<T2>( std::allocator<T2>(), std::forward<Args>(args)... );
 }
 
 template<class T> typename boost::detail::lsp_if_not_array<T>::type make_local_shared_noinit()
 {
-    typedef typename std::remove_const<T>::type T2;
+    using T2 = typename std::remove_const<T>::type;
     return boost::allocate_shared_noinit<T2>( std::allocator<T2>() );
 }
 

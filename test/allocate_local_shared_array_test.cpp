@@ -14,11 +14,11 @@ Distributed under the Boost Software License, Version 1.0.
 
 template<class T = void>
 struct creator {
-    typedef T value_type;
+    using value_type = T;
 
     template<class U>
     struct rebind {
-        typedef creator<U> other;
+        using other = creator<U>;
     };
 
     creator() { }

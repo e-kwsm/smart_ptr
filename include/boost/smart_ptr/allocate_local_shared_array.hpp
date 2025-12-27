@@ -75,10 +75,10 @@ inline typename std::enable_if<detail::sp_is_unbounded_array<T>::value,
     local_shared_ptr<T> >::type
 allocate_local_shared(const A& allocator, std::size_t count)
 {
-    typedef typename detail::sp_array_element<T>::type element;
-    typedef typename allocator_rebind<A, element>::type other;
-    typedef detail::lsp_array_state<other> state;
-    typedef detail::sp_array_base<state> base;
+    using element = typename detail::sp_array_element<T>::type;
+    using other = typename allocator_rebind<A, element>::type;
+    using state = detail::lsp_array_state<other>;
+    using base = detail::sp_array_base<state>;
     detail::sp_array_result<other, base> result(allocator, count);
     base* node = result.get();
     element* start = detail::sp_array_start<element>(node);
@@ -98,10 +98,10 @@ allocate_local_shared(const A& allocator)
     enum {
         count = std::extent<T>::value
     };
-    typedef typename detail::sp_array_element<T>::type element;
-    typedef typename allocator_rebind<A, element>::type other;
-    typedef detail::lsp_size_array_state<other, count> state;
-    typedef detail::sp_array_base<state> base;
+    using element = typename detail::sp_array_element<T>::type;
+    using other = typename allocator_rebind<A, element>::type;
+    using state = detail::lsp_size_array_state<other, count>;
+    using base = detail::sp_array_base<state>;
     detail::sp_array_result<other, base> result(allocator, count);
     base* node = result.get();
     element* start = detail::sp_array_start<element>(node);
@@ -119,10 +119,10 @@ inline typename std::enable_if<detail::sp_is_unbounded_array<T>::value,
 allocate_local_shared(const A& allocator, std::size_t count,
     const typename std::remove_extent<T>::type& value)
 {
-    typedef typename detail::sp_array_element<T>::type element;
-    typedef typename allocator_rebind<A, element>::type other;
-    typedef detail::lsp_array_state<other> state;
-    typedef detail::sp_array_base<state> base;
+    using element = typename detail::sp_array_element<T>::type;
+    using other = typename allocator_rebind<A, element>::type;
+    using state = detail::lsp_array_state<other>;
+    using base = detail::sp_array_base<state>;
     detail::sp_array_result<other, base> result(allocator, count);
     base* node = result.get();
     element* start = detail::sp_array_start<element>(node);
@@ -143,10 +143,10 @@ allocate_local_shared(const A& allocator,
     enum {
         count = std::extent<T>::value
     };
-    typedef typename detail::sp_array_element<T>::type element;
-    typedef typename allocator_rebind<A, element>::type other;
-    typedef detail::lsp_size_array_state<other, count> state;
-    typedef detail::sp_array_base<state> base;
+    using element = typename detail::sp_array_element<T>::type;
+    using other = typename allocator_rebind<A, element>::type;
+    using state = detail::lsp_size_array_state<other, count>;
+    using base = detail::sp_array_base<state>;
     detail::sp_array_result<other, base> result(allocator, count);
     base* node = result.get();
     element* start = detail::sp_array_start<element>(node);

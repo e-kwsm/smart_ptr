@@ -19,9 +19,9 @@ namespace boost
 
 template<class T = void> struct owner_less
 {
-    typedef bool result_type;
-    typedef T first_argument_type;
-    typedef T second_argument_type;
+    using result_type = bool;
+    using first_argument_type = T;
+    using second_argument_type = T;
 
     template<class U, class V> bool operator()( U const & u, V const & v ) const noexcept
     {
