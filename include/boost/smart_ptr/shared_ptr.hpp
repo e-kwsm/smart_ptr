@@ -62,88 +62,88 @@ namespace detail
 
 template< class T > struct sp_element
 {
-    typedef T type;
+    using type = T;
 };
 
 template< class T > struct sp_element< T[] >
 {
-    typedef T type;
+    using type = T;
 };
 
 template< class T, std::size_t N > struct sp_element< T[N] >
 {
-    typedef T type;
+    using type = T;
 };
 
 // sp_dereference, return type of operator*
 
 template< class T > struct sp_dereference
 {
-    typedef T & type;
+    using type = T &;
 };
 
 template<> struct sp_dereference< void >
 {
-    typedef void type;
+    using type = void;
 };
 
 template<> struct sp_dereference< void const >
 {
-    typedef void type;
+    using type = void;
 };
 
 template<> struct sp_dereference< void volatile >
 {
-    typedef void type;
+    using type = void;
 };
 
 template<> struct sp_dereference< void const volatile >
 {
-    typedef void type;
+    using type = void;
 };
 
 template< class T > struct sp_dereference< T[] >
 {
-    typedef void type;
+    using type = void;
 };
 
 template< class T, std::size_t N > struct sp_dereference< T[N] >
 {
-    typedef void type;
+    using type = void;
 };
 
 // sp_member_access, return type of operator->
 
 template< class T > struct sp_member_access
 {
-    typedef T * type;
+    using type = T *;
 };
 
 template< class T > struct sp_member_access< T[] >
 {
-    typedef void type;
+    using type = void;
 };
 
 template< class T, std::size_t N > struct sp_member_access< T[N] >
 {
-    typedef void type;
+    using type = void;
 };
 
 // sp_array_access, return type of operator[]
 
 template< class T > struct sp_array_access
 {
-    typedef void type;
+    using type = void;
 };
 
 template< class T > struct sp_array_access< T[] >
 {
-    typedef T & type;
+    using type = T &;
 };
 
 template< class T, std::size_t N > struct sp_array_access< T[N] >
 {
-    typedef T & type;
+    using type = T &;
 };
 
 // sp_extent, for operator[] index check
@@ -255,11 +255,11 @@ template<class T> class shared_ptr
 private:
 
     // Borland 5.5.1 specific workaround
-    typedef shared_ptr<T> this_type;
+    using this_type = shared_ptr<T>;
 
 public:
 
-    typedef typename boost::detail::sp_element< T >::type element_type;
+    using element_type = typename boost::detail::sp_element< T >::type;
 
     constexpr shared_ptr() noexcept : px( 0 ), pn()
     {
@@ -690,7 +690,7 @@ template<class T, class U> shared_ptr<T> static_pointer_cast( shared_ptr<U> cons
 {
     (void) static_cast< T* >( static_cast< U* >( 0 ) );
 
-    typedef typename shared_ptr<T>::element_type E;
+    using E = typename shared_ptr<T>::element_type;
 
     E * p = static_cast< E* >( r.get() );
     return shared_ptr<T>( r, p );
@@ -700,7 +700,7 @@ template<class T, class U> shared_ptr<T> const_pointer_cast( shared_ptr<U> const
 {
     (void) const_cast< T* >( static_cast< U* >( 0 ) );
 
-    typedef typename shared_ptr<T>::element_type E;
+    using E = typename shared_ptr<T>::element_type;
 
     E * p = const_cast< E* >( r.get() );
     return shared_ptr<T>( r, p );
@@ -710,7 +710,7 @@ template<class T, class U> shared_ptr<T> dynamic_pointer_cast( shared_ptr<U> con
 {
     (void) dynamic_cast< T* >( static_cast< U* >( 0 ) );
 
-    typedef typename shared_ptr<T>::element_type E;
+    using E = typename shared_ptr<T>::element_type;
 
     E * p = dynamic_cast< E* >( r.get() );
     return p? shared_ptr<T>( r, p ): shared_ptr<T>();
@@ -720,7 +720,7 @@ template<class T, class U> shared_ptr<T> reinterpret_pointer_cast( shared_ptr<U>
 {
     (void) reinterpret_cast< T* >( static_cast< U* >( 0 ) );
 
-    typedef typename shared_ptr<T>::element_type E;
+    using E = typename shared_ptr<T>::element_type;
 
     E * p = reinterpret_cast< E* >( r.get() );
     return shared_ptr<T>( r, p );
@@ -730,7 +730,7 @@ template<class T, class U> shared_ptr<T> static_pointer_cast( shared_ptr<U> && r
 {
     (void) static_cast< T* >( static_cast< U* >( 0 ) );
 
-    typedef typename shared_ptr<T>::element_type E;
+    using E = typename shared_ptr<T>::element_type;
 
     E * p = static_cast< E* >( r.get() );
     return shared_ptr<T>( std::move(r), p );
@@ -740,7 +740,7 @@ template<class T, class U> shared_ptr<T> const_pointer_cast( shared_ptr<U> && r 
 {
     (void) const_cast< T* >( static_cast< U* >( 0 ) );
 
-    typedef typename shared_ptr<T>::element_type E;
+    using E = typename shared_ptr<T>::element_type;
 
     E * p = const_cast< E* >( r.get() );
     return shared_ptr<T>( std::move(r), p );
@@ -750,7 +750,7 @@ template<class T, class U> shared_ptr<T> dynamic_pointer_cast( shared_ptr<U> && 
 {
     (void) dynamic_cast< T* >( static_cast< U* >( 0 ) );
 
-    typedef typename shared_ptr<T>::element_type E;
+    using E = typename shared_ptr<T>::element_type;
 
     E * p = dynamic_cast< E* >( r.get() );
     return p? shared_ptr<T>( std::move(r), p ): shared_ptr<T>();
@@ -760,7 +760,7 @@ template<class T, class U> shared_ptr<T> reinterpret_pointer_cast( shared_ptr<U>
 {
     (void) reinterpret_cast< T* >( static_cast< U* >( 0 ) );
 
-    typedef typename shared_ptr<T>::element_type E;
+    using E = typename shared_ptr<T>::element_type;
 
     E * p = reinterpret_cast< E* >( r.get() );
     return shared_ptr<T>( std::move(r), p );
