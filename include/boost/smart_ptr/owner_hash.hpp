@@ -12,8 +12,8 @@ namespace boost
 
 template<class T> struct owner_hash
 {
-    typedef std::size_t result_type;
-    typedef T argument_type;
+    using result_type = std::size_t;
+    using argument_type = T;
 
     std::size_t operator()( T const & t ) const noexcept
     {
