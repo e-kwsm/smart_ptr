@@ -43,7 +43,7 @@ namespace sp_adl_block {
  */
 struct thread_unsafe_counter
 {
-    typedef unsigned int type;
+    using type = unsigned int;
 
     static unsigned int load(unsigned int const& counter) noexcept
     {
@@ -69,7 +69,7 @@ struct thread_unsafe_counter
  */
 struct thread_safe_counter
 {
-    typedef boost::detail::atomic_count type;
+    using type = boost::detail::atomic_count;
 
     static unsigned int load(boost::detail::atomic_count const& counter) noexcept
     {
@@ -111,7 +111,7 @@ class intrusive_ref_counter
 {
 private:
     //! Reference counter type
-    typedef typename CounterPolicyT::type counter_type;
+    using counter_type = typename CounterPolicyT::type;
     //! Reference counter
     mutable counter_type m_ref_counter;
 

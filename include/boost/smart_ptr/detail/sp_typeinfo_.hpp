@@ -27,7 +27,7 @@ namespace boost
 namespace detail
 {
 
-typedef boost::core::typeinfo sp_typeinfo_;
+using sp_typeinfo_ = boost::core::typeinfo;
 
 } // namespace detail
 

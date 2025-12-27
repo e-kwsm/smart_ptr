@@ -26,11 +26,11 @@ template<class T> class weak_ptr
 private:
 
     // Borland 5.5.1 specific workarounds
-    typedef weak_ptr<T> this_type;
+    using this_type = weak_ptr<T>;
 
 public:
 
-    typedef typename boost::detail::sp_element< T >::type element_type;
+    using element_type = typename boost::detail::sp_element< T >::type;
 
     constexpr weak_ptr() noexcept : px(0), pn()
     {

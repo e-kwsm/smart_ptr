@@ -41,7 +41,7 @@ struct sp_alloc_size<T[N]> {
 
 template<class T>
 struct sp_alloc_result {
-    typedef T type;
+    using type = T;
 };
 
 template<class T, std::size_t N>
@@ -51,14 +51,14 @@ struct sp_alloc_result<T[N]> {
 
 template<class T>
 struct sp_alloc_value {
-    typedef typename std::remove_cv<typename
-        std::remove_extent<T>::type>::type type;
+    using type = typename std::remove_cv<typename
+        std::remove_extent<T>::type>::type;
 };
 
 template<class T, class P>
 class sp_alloc_ptr {
 public:
-    typedef T element_type;
+    using element_type = T;
 
     sp_alloc_ptr() noexcept
         : p_() { }
@@ -113,7 +113,7 @@ private:
 template<class T, class P>
 class sp_alloc_ptr<T[], P> {
 public:
-    typedef T element_type;
+    using element_type = T;
 
     sp_alloc_ptr() noexcept
         : p_() { }
@@ -161,7 +161,7 @@ private:
 template<class T, std::size_t N, class P>
 class sp_alloc_ptr<T[N], P> {
 public:
-    typedef T element_type;
+    using element_type = T;
 
     sp_alloc_ptr() noexcept
         : p_() { }
@@ -307,10 +307,10 @@ public:
         typename sp_alloc_value<T>::type>::type allocator;
 
 private:
-    typedef boost::alloc_deleter<T, A> deleter;
+    using deleter = boost::alloc_deleter<T, A>;
 
 public:
-    typedef std::unique_ptr<typename sp_alloc_result<T>::type, deleter> type;
+    using type = std::unique_ptr<typename sp_alloc_result<T>::type, deleter>;
 
     sp_alloc_make(const A& a, std::size_t n)
         : a_(a)
@@ -338,7 +338,7 @@ public:
     }
 
 private:
-    typedef typename boost::allocator_pointer<allocator>::type pointer;
+    using pointer = typename boost::allocator_pointer<allocator>::type;
 
     allocator a_;
     std::size_t n_;

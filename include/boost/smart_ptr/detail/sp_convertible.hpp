@@ -58,7 +58,7 @@ template< bool > struct sp_enable_if_convertible_impl;
 
 template<> struct sp_enable_if_convertible_impl<true>
 {
-    typedef sp_empty type;
+    using type = sp_empty;
 };
 
 template<> struct sp_enable_if_convertible_impl<false>
