@@ -26,8 +26,8 @@ namespace detail
 
 template< class Y, class T > struct sp_convertible
 {
-    typedef char (&yes) [1];
-    typedef char (&no)  [2];
+    using yes = char (&) [1];
+    using no = char (&)  [2];
 
     static yes f( T* );
     static no  f( ... );
