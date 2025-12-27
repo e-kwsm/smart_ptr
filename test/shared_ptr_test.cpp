@@ -32,7 +32,7 @@ void f(int &)
 
 void test()
 {
-    typedef boost::shared_ptr<int>::element_type T;
+    using T = boost::shared_ptr<int>::element_type;
     T t;
     f(t);
 }
@@ -2988,7 +2988,7 @@ template<class T> class another_ptr: private boost::shared_ptr<T>
 {
 private:
 
-    typedef boost::shared_ptr<T> base_type;
+    using base_type = boost::shared_ptr<T>;
 
 public:
 

@@ -28,7 +28,7 @@ void f(int &)
 
 void test()
 {
-    typedef boost::weak_ptr<int>::element_type T;
+    using T = boost::weak_ptr<int>::element_type;
     T t;
     f(t);
 }

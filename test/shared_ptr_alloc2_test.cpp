@@ -35,13 +35,13 @@ template<class T> class test_allocator: public test_allocator_base
 {
 public:
 
-    typedef T * pointer;
-    typedef T const * const_pointer;
-    typedef T & reference;
-    typedef T const & const_reference;
-    typedef T value_type;
-    typedef std::size_t size_type;
-    typedef std::ptrdiff_t difference_type;
+    using pointer = T *;
+    using const_pointer = T const *;
+    using reference = T &;
+    using const_reference = T const &;
+    using value_type = T;
+    using size_type = std::size_t;
+    using difference_type = std::ptrdiff_t;
 
 private:
 
@@ -53,7 +53,7 @@ public:
 
     template<class U> struct rebind
     {
-        typedef test_allocator<U> other;
+        using other = test_allocator<U>;
     };
 
     pointer address( reference r ) const
@@ -139,13 +139,13 @@ template<> class test_allocator<void>: public test_allocator_base
 {
 public:
 
-    typedef void * pointer;
-    typedef void const * const_pointer;
-    typedef void value_type;
+    using pointer = void *;
+    using const_pointer = void const *;
+    using value_type = void;
 
     template<class U> struct rebind
     {
-        typedef test_allocator<U> other;
+        using other = test_allocator<U>;
     };
 
     explicit test_allocator( int id = 0 ): test_allocator_base( id )
