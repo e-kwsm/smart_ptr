@@ -40,9 +40,9 @@ private:
 template<class T = void>
 class creator {
 public:
-    typedef T value_type;
-    typedef point<T> pointer;
-    typedef std::ptrdiff_t difference_type;
+    using value_type = T;
+    using pointer = point<T>;
+    using difference_type = std::ptrdiff_t;
 
     creator()
         : state_() { }

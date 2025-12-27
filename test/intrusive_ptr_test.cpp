@@ -86,7 +86,7 @@ void f(X &)
 
 void test()
 {
-    typedef boost::intrusive_ptr<X>::element_type T;
+    using T = boost::intrusive_ptr<X>::element_type;
     T t;
     f(t);
 }
